@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!--<link rel="icon" href="../../favicon.ico">-->
+
+	<title>Generator - Responsive Video Slider</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- MediaElement.js -->
+	<link href="//cdnjs.cloudflare.com/ajax/libs/mediaelement/2.18.1/mediaelementplayer.min.css" rel="stylesheet">
+
+	<!-- Prism -->
+	<link href="css/prism.css" rel="stylesheet">
+
+	<!-- Spectrum Colorpicker -->
+	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/spectrum/1.7.1/spectrum.min.css">
+
+	<!-- Responsive Video Slider CSS -->
+	<link href="../compiled/rvslider.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="css/docs.css" rel="stylesheet">
+	<link href="css/generator.css" rel="stylesheet">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body class="docs">
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a href="../index.html" class="navbar-brand">Responsive Video Slider</a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="getting-started.html">Getting started</a></li>
+				<li class="active"><a>Generator</a></li>
+				<li><a href="wp.html">WordPress Plugin</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="https://github.com/fooplugins/rvslider" target="_blank">GitHub</a></li>
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div>
+</nav>
+
+<!-- Header -->
+<div class="jumbotron">
+
+	<div class="container">
+		<h1>Generator</h1>
+		<h2>A simple generator to make getting started a breeze.</h2>
+	</div>
+
+</div>
+<!-- Content -->
+<div class="container">
+	<div class="docs-section">
+
+		<div class="examples">
+			<div class="example preview">
+				<button id="remove-all-videos" class="btn btn-sm btn-default" type="button">
+					<span class="glyphicon glyphicon-trash"></span> Remove All
+				</button>
+				<div id="output-preview"></div>
+				<form class="form-horizontal">
+					<div id="video-group" class="form-group">
+						<div class="col-sm-12">
+							<div class="input-group">
+								<input id="video-url" type="text" class="form-control" placeholder="Enter a Vimeo, Wistia, YouTube or other supported video url">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button" data-toggle="modal" data-target="#supported-urls">
+										<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+									</button>
+									<button id="video-add" class="btn btn-primary" type="submit">
+										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Video
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group custom-video hide">
+						<label for="custom-title" class="col-sm-2 control-label">Title</label>
+						<div class="col-sm-10">
+							<input id="custom-title" type="text" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group custom-video hide">
+						<label for="custom-credits" class="col-sm-2 control-label">Credits</label>
+						<div class="col-sm-10">
+							<input id="custom-credits" type="text" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group custom-video hide">
+						<label for="custom-background" class="col-sm-2 control-label">Background</label>
+						<div class="col-sm-10">
+							<input id="custom-background" type="url" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group custom-video hide">
+						<label for="custom-thumbnail" class="col-sm-2 control-label">Thumbnail</label>
+						<div class="col-sm-10">
+							<input id="custom-thumbnail" type="url" class="form-control" />
+						</div>
+					</div>
+					<div id="supported-urls" class="modal fade">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title">Supported Urls</h4>
+								</div>
+								<div class="modal-body">
+									<ul class="nav nav-tabs" role="tablist">
+										<li role="presentation" class="active"><a href="#vimeo" aria-controls="home" role="tab" data-toggle="tab">Vimeo</a></li>
+										<li role="presentation"><a href="#youtube" aria-controls="profile" role="tab" data-toggle="tab">YouTube</a></li>
+										<li role="presentation"><a href="#wistia" aria-controls="messages" role="tab" data-toggle="tab">Wistia</a></li>
+										<li role="presentation"><a href="#custom" aria-controls="settings" role="tab" data-toggle="tab">Custom</a></li>
+									</ul>
+									<div class="tab-content">
+										<div role="tabpanel" class="tab-pane active" id="vimeo">
+											<ul>
+												<li>
+													<code>http[s]://vimeo.com/<strong>VIDEO_ID</strong></code>
+													<button type="button" class="btn btn-xs btn-default" data-url="https://vimeo.com/132038125">Preview</button>
+												</li>
+												<li>
+													<code>http[s]://vimeo.com/channels/<strong>CHANNEL</strong>/<strong>VIDEO_ID</strong></code>
+													<button type="button" class="btn btn-xs btn-default" data-url="https://vimeo.com/channels/480431/140311923">Preview</button>
+												</li>
+												<li>
+													<code>http[s]://vimeo.com/album/<strong>ALBUM</strong>/video/<strong>VIDEO_ID</strong></code>
+													<button type="button" class="btn btn-xs btn-default" data-url="https://vimeo.com/album/3573473/video/124194551">Preview</button>
+												</li>
+												<li>
+													<code>http[s]://player.vimeo.com/video/<strong>VIDEO_ID</strong></code>
+													<button type="button" class="btn btn-xs btn-default" data-url="https://player.vimeo.com/video/140125209">Preview</button>
+												</li>
+											</ul>
+										</div>
+										<div role="tabpanel" class="tab-pane" id="youtube">
+											<ul>
+												<li>
+													<code>http[s]://www.youtube.com/watch?v=<strong>VIDEO_ID</strong></code>
+													<button type="button" class="btn btn-xs btn-default" data-url="https://www.youtube.com/watch?v=YqeW9_5kURI">Preview</button>
+												</li>
+												<li>
+													<code>http[s]://youtu.be/<strong>VIDEO_ID</strong></code>
+													<button type="button" class="btn btn-xs btn-default" data-url="https://youtu.be/KWZGAExj-es">Preview</button>
+												</li>
+												<li>
+													<code>http[s]://www.youtube.com/embed/<strong>VIDEO_ID</strong></code>
+													<button type="button" class="btn btn-xs btn-default" data-url="https://www.youtube.com/embed/09R8_2nJtjg">Preview</button>
+												</li>
+											</ul>
+										</div>
+										<div role="tabpanel" class="tab-pane" id="wistia">
+											<ul>
+												<li>
+													<code>http[s]://*.wistia.com/medias/<strong>VIDEO_ID</strong></code>
+													<button type="button" class="btn btn-xs btn-default" data-url="https://home.wistia.com/medias/e4a27b971d">Preview</button>
+												</li>
+												<li>
+													<code>http[s]://*.wistia.net/embed/iframe/<strong>VIDEO_ID</strong></code>
+													<button type="button" class="btn btn-xs btn-default" data-url="https://fast.wistia.net/embed/iframe/g5pnf59ala">Preview</button>
+												</li>
+											</ul>
+											<div class="callout callout-info">
+												<h4>Notes</h4>
+												<ul>
+													<li>
+														As per the <a href="http://wistia.com/doc/working-with-images#the_parameters" target="_blank">Wistia documentation</a>, if the image size requested
+														for a video is not available the server will respond with a 202 Accepted header and queue up the image to be created. This should only ever happen
+														once as the next time it is requested it should exist. <strong>Please keep this in mind when using the generator to add a Wistia video as the images
+														may not load the first time!</strong>
+													</li>
+													<li>
+														As per the <a href="http://wistia.com/doc/oembed#an_example" target="_blank">Wistia documentation</a> a videos author/credits are not returned along
+														with the rest of the details when using its API. At present the generator uses the <code>provider_name</code> returned which by default is
+														<code>Wistia, Inc.</code>. Either update these values in the generated HTML or use the advanced option to hide nav item credits.
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div role="tabpanel" class="tab-pane" id="custom">
+											<ul>
+												<li>
+													<code>http[s]://*<strong>.mp4</strong></code>
+													<button type="button" class="btn btn-xs btn-default"
+																	data-url="https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.mp4"
+																	data-title="Fish Frenzy - Oceans Clip (.mp4)"
+																	data-credits="DisneyNature"
+																	data-thumb-large="https://s3.amazonaws.com/fooplugins/rvs/default.jpg"
+																	data-thumb-small="https://s3.amazonaws.com/fooplugins/rvs/thumb.jpg">
+														Preview
+													</button>
+												</li>
+												<li>
+													<code>http[s]://*<strong>.webm</strong></code>
+													<button type="button" class="btn btn-xs btn-default"
+																	data-url="https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.webm"
+																	data-title="Fish Frenzy - Oceans Clip (.webm)"
+																	data-credits="DisneyNature"
+																	data-thumb-large="https://s3.amazonaws.com/fooplugins/rvs/default.jpg"
+																	data-thumb-small="https://s3.amazonaws.com/fooplugins/rvs/thumb.jpg">
+														Preview
+													</button>
+												</li>
+												<li>
+													<code>http[s]://*<strong>.ogv</strong></code>
+													<button type="button" class="btn btn-xs btn-default"
+																	data-url="https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.ogv"
+																	data-title="Fish Frenzy - Oceans Clip (.ogv)"
+																	data-credits="DisneyNature"
+																	data-thumb-large="https://s3.amazonaws.com/fooplugins/rvs/default.jpg"
+																	data-thumb-small="https://s3.amazonaws.com/fooplugins/rvs/thumb.jpg">
+														Preview
+													</button>
+												</li>
+											</ul>
+											<p>Use a comma separated string to supply multiple formats for cross browser support.</p>
+											<ul>
+												<li>
+													<code>http[s]://*<strong>.mp4</strong>, http[s]://*<strong>.webm</strong>, http[s]://*<strong>.ogv</strong></code>
+													<button type="button" class="btn btn-xs btn-default"
+																	data-url="https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.mp4, https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.webm, https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.ogv"
+																	data-title="Fish Frenzy - Oceans Clip (.mp4, .webm, .ogv)"
+																	data-credits="DisneyNature"
+																	data-thumb-large="https://s3.amazonaws.com/fooplugins/rvs/default.jpg"
+																	data-thumb-small="https://s3.amazonaws.com/fooplugins/rvs/thumb.jpg">
+														Preview
+													</button>
+												</li>
+											</ul>
+											<div class="callout callout-info">
+												<h4>Note</h4>
+												<p>When the generator detects a supported custom url, inputs to supply a title, credits and the necessary image urls to create the item will be made accessible.</p>
+											</div>
+										</div>
+									</div>
+									</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal-dialog -->
+					</div><!-- /.modal -->
+				</form>
+				<div class="callout callout-info">
+					<h4>Note</h4>
+					<p>
+						The small <span class="glyphicon glyphicon-trash"></span> icon in the bottom right corner of each item in the preview is added by the generator
+						and will not be part of the created HTML.
+					</p>
+				</div>
+			</div>
+			<div class="example options">
+				<form class="form-horizontal">
+					<div class="checkbox advanced">
+						<label>
+							<input type="checkbox" id="advanced">
+							Advanced
+						</label>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Layout</label>
+						<div class="col-sm-10">
+							<label class="radio-inline">
+								<input type="radio" name="layout" value="" checked> Vertical (Default)
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="layout" value="rvs-horizontal"> Horizontal
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Theme</label>
+						<div class="col-sm-10">
+							<label class="radio-inline">
+								<input type="radio" name="theme" value="" checked> Dark (Default)
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="theme" value="rvs-light"> Light
+							</label>
+							<label class="radio-inline advanced-option hide">
+								<input type="radio" name="theme" value="rvs-custom"> Custom
+							</label>
+						</div>
+					</div>
+					<div class="form-group custom-theme hide">
+						<div class="col-sm-offset-2 col-sm-10">
+							<label for="theme-text-color" class="col-sm-2 control-label">Text</label>
+							<div class="col-sm-2">
+								<input class="form-control color" type="text" id="theme-text-color" value="#FFFFFF">
+							</div>
+							<label for="theme-background-color" class="col-sm-2 control-label">Background</label>
+							<div class="col-sm-2">
+								<input class="form-control color" type="text" id="theme-background-color" value="#151515">
+							</div>
+							<label for="theme-hover-color" class="col-sm-2 control-label">Item Hover</label>
+							<div class="col-sm-2">
+								<input class="form-control color" type="text" id="theme-hover-color" value="#000">
+							</div>
+						</div>
+					</div>
+					<div class="form-group custom-theme hide">
+						<div class="col-sm-offset-2 col-sm-10">
+							<label for="theme-muted-color" class="col-sm-2 control-label">Muted Text</label>
+							<div class="col-sm-2">
+								<input class="form-control color" type="text" id="theme-muted-color" value="#767676">
+							</div>
+							<label for="theme-border-color" class="col-sm-offset-4 col-sm-2 control-label">Item Divider</label>
+							<div class="col-sm-2">
+								<input class="form-control color" type="text" id="theme-border-color" value="#2E2E2E">
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Highlight</label>
+						<div class="col-sm-10">
+							<label class="radio-inline">
+								<input type="radio" name="highlight" value="" checked> Purple (Default)
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="highlight" value="rvs-blue-highlight"> Blue
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="highlight" value="rvs-green-highlight"> Green
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="highlight" value="rvs-orange-highlight"> Orange
+							</label>
+							<label class="radio-inline">
+								<input type="radio" name="highlight" value="rvs-red-highlight"> Red
+							</label>
+							<label class="radio-inline advanced-option hide">
+								<input type="radio" name="highlight" value="rvs-custom-highlight"> Custom
+							</label>
+						</div>
+					</div>
+					<div class="form-group custom-highlight hide">
+						<div class="col-sm-offset-2 col-sm-10">
+							<label for="highlight-text-color" class="col-sm-2 control-label">Text</label>
+							<div class="col-sm-2">
+								<input class="form-control color" type="text" id="highlight-text-color" value="#FFFFFF">
+							</div>
+							<label for="highlight-background-color" class="col-sm-2 control-label">Background</label>
+							<div class="col-sm-2">
+								<input class="form-control color" type="text" id="highlight-background-color" value="#7816D6">
+							</div>
+						</div>
+					</div>
+					<div class="form-group custom-highlight hide">
+						<div class="col-sm-offset-2 col-sm-10">
+							<label for="highlight-muted-color" class="col-sm-2 control-label">Muted Text</label>
+							<div class="col-sm-2">
+								<input class="form-control color" type="text" id="highlight-muted-color" value="#FFFFFF">
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group advanced-option">
+						<hr/>
+						<div class="col-sm-offset-2 col-sm-10">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" id="hide_overlay" value=""> Hide the item overlay text
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" id="hide_thumb" value=""> Hide the nav item thumbnail
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" id="hide_credits" value=""> Hide the nav item credits
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" id="thumb_play" value=""> Allow videos to be played by clicking on the thumbnail
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" id="continuous_play" value=""> Allow videos to continue to play while navigating items
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" id="large_thumbs" value=""> <i>*Experimental*</i> Use large thumbnails (Not supported in horizontal layout)
+								</label>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="examples">
+			<div class="example required">
+				<button type="button" data-copy="true" class="btn btn-sm btn-default">
+					<span class="glyphicon glyphicon-copy"></span> Copy to Clipboard
+				</button>
+				<pre class="language-markup" data-lang="markup"><code>&lt;!-- jQuery --&gt;
+&lt;script src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;!-- MediaElement.js --&gt;
+&lt;link href=&quot;//cdnjs.cloudflare.com/ajax/libs/mediaelement/2.18.1/mediaelementplayer.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;script src=&quot;//cdnjs.cloudflare.com/ajax/libs/mediaelement/2.18.1/mediaelement-and-player.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;!-- Responsive Video Slider --&gt;
+&lt;link href=&quot;rvslider.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;script src=&quot;rvslider.min.js&quot;&gt;&lt;/script&gt;</code></pre>
+				<div class="callout callout-info">
+					<h4>Notes</h4>
+					<ul>
+						<li>Must be included in your page either in the <code>head</code> or bottom of the <code>body</code>.</li>
+						<li>The files must be included in the order they are shown below.</li>
+						<li>The urls to the Responsive Video Slider files will need to be updated to point to your local version of the files.</li>
+						<li>The MediaElement.js files only need to be included if you need to support custom video files.</li>
+					</ul>
+				</div>
+			</div>
+			<div class="example js">
+				<button type="button" data-copy="true" class="btn btn-sm btn-default">
+					<span class="glyphicon glyphicon-copy"></span> Copy to Clipboard
+				</button>
+				<pre class="language-markup" data-lang="markup"><code>&lt;script&gt;
+	jQuery(function($){
+		$(&quot;.rvs-container&quot;).rvslider();
+	});
+&lt;/script&gt;</code></pre>
+				<div class="callout callout-info">
+					<h4>Note</h4>
+					<p>Must be included only after all the required JavaScript files are included.</p>
+				</div>
+			</div>
+			<div class="example css hide">
+				<button type="button" data-copy="true" class="btn btn-sm btn-default">
+					<span class="glyphicon glyphicon-copy"></span> Copy to Clipboard
+				</button>
+				<pre class="language-markup" data-lang="markup"><code id="output-css"></code></pre>
+				<div class="callout callout-info">
+					<h4>Note</h4>
+					<p>Must be included in your page after all the required CSS files are included.</p>
+				</div>
+			</div>
+			<div class="example html">
+				<button type="button" data-copy="true" class="btn btn-sm btn-default">
+					<span class="glyphicon glyphicon-copy"></span> Copy to Clipboard
+				</button>
+				<pre class="language-markup" data-lang="markup"><code id="output-html"></code></pre>
+				<div class="callout callout-info">
+					<h4>Note</h4>
+					<p>The above HTML can be pasted anywhere in your page to create the slider however keep in mind it is designed to fit into a main content area.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div> <!-- /container -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mediaelement/2.18.1/mediaelement-and-player.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/spectrum/1.7.1/spectrum.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.min.js"></script>
+<script src="js/prism.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="js/ie10-viewport-bug-workaround.js"></script>
+<script src="js/docs.js"></script>
+<script src="js/clipboard.js"></script>
+<!-- Responsive Video Slider JS -->
+<script src="../compiled/rvslider.js"></script>
+<!-- Responsive Video Slider Generator JS -->
+<script src="js/generator.js"></script>
+
+<!-- HTML Template - This template provides the entire HTML for the actual slider. -->
+<script id="rvs-html-template" type="text/x-handlebars-template">
+<div class="rvs-container{{#if layout}} {{layout}}{{/if}}{{#if theme}} {{theme}}{{/if}}{{#if highlight}} {{highlight}}{{/if}}{{#if large_thumbs}} rvs-large-thumbs{{/if}}{{#if thumb_play}} rvs-thumb-play{{/if}}{{#if continuous_play}} rvs-continuous-play{{/if}}{{#if hide_credits}} rvs-hide-credits{{/if}}">
+	<div class="rvs-item-container">
+		<div class="rvs-item-stage">
+			{{#each videos}}
+			<div class="rvs-item" style="background-image: url({{{thumb_large}}})">
+				{{#unless ../hide_overlay}}<p class="rvs-item-text">{{title}} <small>by {{credits}}</small></p>
+				{{/unless}}<a href="{{{url}}}" class="rvs-play-video"></a>
+			</div>
+			{{/each}}
+		</div>
+	</div>
+	<div class="rvs-nav-container">
+		<a class="rvs-nav-prev"></a>
+		<div class="rvs-nav-stage">
+			{{#each videos}}
+			<a class="rvs-nav-item">
+				{{#unless ../hide_thumb}}<span class="rvs-nav-item-thumb" style="background-image: url({{{thumb_small}}})"></span>
+				{{/unless}}<h4 class="rvs-nav-item-title">{{title}}</h4>
+				<small class="rvs-nav-item-credits">by {{credits}}</small>
+			</a>
+			{{/each}}
+		</div>
+		<a class="rvs-nav-next"></a>
+	</div>
+</div>
+</script>
+
+<!-- Empty Template - Not an actual empty template but what is shown in the slider when there are no items. -->
+<script id="rvs-empty-template" type="text/x-handlebars-template">
+<div class="rvs-empty">
+	<div class="rvs-empty-inner">
+		<p>Enter a Vimeo, Wistia, YouTube or other supported video url below to get started or simply click the button to add some examples!</p>
+		<button type="button" class="btn btn-lg btn-default btn-block"
+						data-videos='[
+						"https://vimeo.com/132038125", "https://vimeo.com/channels/480431/140311923", "https://vimeo.com/album/3573473/video/124194551", "https://player.vimeo.com/video/140125209",
+						"https://home.wistia.com/medias/e4a27b971d", "https://fast.wistia.net/embed/iframe/g5pnf59ala",
+						"https://www.youtube.com/watch?v=YqeW9_5kURI", "https://youtu.be/KWZGAExj-es", "https://www.youtube.com/embed/09R8_2nJtjg",
+						{
+							"url": "https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.mp4, https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.webm, https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.ogv",
+							"title": "Fish Frenzy - Oceans Clip (.mp4, .webm, .ogv)",
+							"credits": "DisneyNature",
+							"thumb_small": "https://s3.amazonaws.com/fooplugins/rvs/thumb.jpg",
+							"thumb_large": "https://s3.amazonaws.com/fooplugins/rvs/default.jpg"
+						}]'>
+			Example Videos
+		</button>
+	</div>
+</div>
+</script>
+
+<!-- Remove Template - Used to create the "Remove Video" button that is injected into the slider items by the generator. -->
+<script id="rvs-remove-template" type="text/x-handlebars-template">
+<a class="rvs-remove" title="Remove Video"><span class="glyphicon glyphicon-trash"></span></a>
+</script>
+
+<!-- CSS Template - This template provides all CSS for when either a custom theme or highlight is created. -->
+<script id="rvs-css-template" type="text/x-handlebars-template">
+{{#if theme.enabled}}
+	/* Custom Theme */
+	.rvs-custom.rvs-container,
+	.rvs-custom .rvs-nav-prev,
+	.rvs-custom .rvs-nav-prev:active,
+	.rvs-custom .rvs-nav-prev:focus,
+	.rvs-custom .rvs-nav-prev:hover,
+	.rvs-custom .rvs-nav-next,
+	.rvs-custom .rvs-nav-next:active,
+	.rvs-custom .rvs-nav-next:focus,
+	.rvs-custom .rvs-nav-next:hover,
+	.rvs-custom .rvs-nav-item-title {
+		color: {{theme.text}};
+	}
+	.rvs-custom .rvs-nav-item-credits {
+		color: {{theme.muted}};
+	}
+	.rvs-custom.rvs-container,
+	.rvs-custom .rvs-nav-prev,
+	.rvs-custom .rvs-nav-next,
+	.rvs-custom .rvs-player {
+		background-color: {{theme.background}};
+	}
+	.rvs-custom .rvs-nav-item:active,
+	.rvs-custom .rvs-nav-item:focus,
+	.rvs-custom .rvs-nav-item:hover,
+	.rvs-custom .rvs-nav-prev:active,
+	.rvs-custom .rvs-nav-prev:focus,
+	.rvs-custom .rvs-nav-prev:hover,
+	.rvs-custom .rvs-nav-next:active,
+	.rvs-custom .rvs-nav-next:focus,
+	.rvs-custom .rvs-nav-next:hover {
+		background-color: {{theme.item.hover_background}};
+	}
+	.rvs-custom .rvs-nav-container,
+	.rvs-custom .rvs-nav-item,
+	.rvs-custom .rvs-nav-prev,
+	.rvs-custom .rvs-nav-next {
+		border-color: {{theme.item.divider}};
+	}
+	.rvs-custom .rvs-nav-item:first-child {
+		border-color: {{theme.background}};
+	}
+	.rvs-custom .rvs-nav-item:first-child:focus,
+	.rvs-custom .rvs-nav-item:first-child:hover {
+		border-color: {{theme.item.hover_background}};
+	}
+{{/if}}
+{{#if highlight.enabled}}
+	/* Custom Highlight */
+	.rvs-custom-highlight .rvs-close:active,
+	.rvs-custom-highlight .rvs-close:focus,
+	.rvs-custom-highlight .rvs-close:hover,
+	.rvs-custom-highlight .rvs-play-video:active,
+	.rvs-custom-highlight .rvs-play-video:focus,
+	.rvs-custom-highlight .rvs-play-video:hover,
+	.rvs-custom-highlight .rvs-nav-item.rvs-active,
+	.rvs-custom-highlight .rvs-nav-item.rvs-active:active,
+	.rvs-custom-highlight .rvs-nav-item.rvs-active:focus,
+	.rvs-custom-highlight .rvs-nav-item.rvs-active:hover,
+	.rvs-custom-highlight.rvs-thumb-play .rvs-nav-item-thumb:hover:before {
+		background-color: {{highlight.background}};
+	}
+	.rvs-custom-highlight .rvs-nav-item.rvs-active,
+	.rvs-custom-highlight .rvs-nav-item.rvs-active:active,
+	.rvs-custom-highlight .rvs-nav-item.rvs-active:focus,
+	.rvs-custom-highlight .rvs-nav-item.rvs-active:hover,
+	.rvs-custom-highlight .rvs-nav-item.rvs-active:first-child,
+	.rvs-custom-highlight .rvs-nav-item.rvs-active:first-child:active,
+	.rvs-custom-highlight .rvs-nav-item.rvs-active:first-child:focus,
+	.rvs-custom-highlight .rvs-nav-item.rvs-active:first-child:hover {
+		border-color: {{highlight.background}};
+	}
+	.rvs-custom-highlight .rvs-close:active,
+	.rvs-custom-highlight .rvs-close:focus,
+	.rvs-custom-highlight .rvs-close:hover,
+	.rvs-custom-highlight .rvs-play-video:active,
+	.rvs-custom-highlight .rvs-play-video:focus,
+	.rvs-custom-highlight .rvs-play-video:hover,
+	.rvs-custom-highlight .rvs-active .rvs-nav-item-title {
+		color: {{highlight.text}};
+	}
+	.rvs-custom-highlight .rvs-active .rvs-nav-item-credits {
+		color: {{highlight.muted}};
+	}
+{{/if}}
+</script>
+</body>
+</html>

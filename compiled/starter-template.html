@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<!-- Responsive Video Slider CSS -->
+	<link href="css/rvslider.min.css" rel="stylesheet">
+</head>
+<body>
+<!-- Responsive Video Slider HTML: START -->
+<div class="rvs-container">
+
+	<div class="rvs-item-container">
+		<div class="rvs-item-stage">
+
+			<!-- The below is a single item, simply duplicate this layout for each item -->
+			<div class="rvs-item" style="background-image: url(LARGE_IMAGE_URL)">
+				<p class="rvs-item-text">VIDEO_TITLE <small>by VIDEO_CREDITS</small></p>
+				<a href="VIDEO_URL" class="rvs-play-video"></a>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="rvs-nav-container">
+		<a class="rvs-nav-prev"></a>
+		<div class="rvs-nav-stage">
+
+			<!-- The below is the corresponding nav item for the single item, simply duplicate this layout for each item -->
+			<a class="rvs-nav-item">
+				<span class="rvs-nav-item-thumb" style="background-image: url(SMALL_IMAGE_URL)"></span>
+				<h4 class="rvs-nav-item-title">VIDEO_TITLE</h4>
+				<small class="rvs-nav-item-credits">by VIDEO_CREDITS</small>
+			</a>
+
+		</div>
+		<a class="rvs-nav-next"></a>
+	</div>
+
+</div>
+<!-- Responsive Video Slider HTML: END -->
+
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Responsive Video Slider JS -->
+<script src="js/rvslider.min.js"></script>
+<script>
+	jQuery(function($){
+		$('.rvs-container').rvslider();
+	});
+</script>
+</body>
+</html>

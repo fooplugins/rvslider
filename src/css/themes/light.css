@@ -1,0 +1,44 @@
+.rvs-light.rvs-container,
+.rvs-light .rvs-nav-prev,
+.rvs-light .rvs-nav-prev:active,
+.rvs-light .rvs-nav-prev:focus,
+.rvs-light .rvs-nav-prev:hover,
+.rvs-light .rvs-nav-next,
+.rvs-light .rvs-nav-next:active,
+.rvs-light .rvs-nav-next:focus,
+.rvs-light .rvs-nav-next:hover,
+.rvs-light .rvs-nav-item-title {
+	color: #333;
+}
+.rvs-light .rvs-nav-item-credits {
+	color: #767676;
+}
+.rvs-light.rvs-container,
+.rvs-light .rvs-nav-prev,
+.rvs-light .rvs-nav-next {
+	background-color: #FFF;
+}
+.rvs-light .rvs-nav-item:active,
+.rvs-light .rvs-nav-item:focus,
+.rvs-light .rvs-nav-item:hover,
+.rvs-light .rvs-nav-prev:active,
+.rvs-light .rvs-nav-prev:focus,
+.rvs-light .rvs-nav-prev:hover,
+.rvs-light .rvs-nav-next:active,
+.rvs-light .rvs-nav-next:focus,
+.rvs-light .rvs-nav-next:hover {
+	background-color: #F9F9F9;
+}
+.rvs-light .rvs-nav-container,
+.rvs-light .rvs-nav-item,
+.rvs-light .rvs-nav-prev,
+.rvs-light .rvs-nav-next {
+	border-color: #e2e2e2;
+}
+.rvs-light .rvs-nav-item:first-child {
+	border-color: #FFF;
+}
+.rvs-light .rvs-nav-item:first-child:focus,
+.rvs-light .rvs-nav-item:first-child:hover {
+	border-color: #F9F9F9;
+}

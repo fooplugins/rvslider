@@ -1,0 +1,24 @@
+.rvs-green-highlight .rvs-close:active,
+.rvs-green-highlight .rvs-close:focus,
+.rvs-green-highlight .rvs-close:hover,
+.rvs-green-highlight .rvs-play-video:active,
+.rvs-green-highlight .rvs-play-video:focus,
+.rvs-green-highlight .rvs-play-video:hover,
+.rvs-green-highlight .rvs-nav-item.rvs-active,
+.rvs-green-highlight .rvs-nav-item.rvs-active:active,
+.rvs-green-highlight .rvs-nav-item.rvs-active:focus,
+.rvs-green-highlight .rvs-nav-item.rvs-active:hover,
+.rvs-green-highlight.rvs-thumb-play .rvs-nav-item-thumb:hover:before,
+.rvs-green-highlight.rvs-thumb-play .rvs-video-active .rvs-nav-item-thumb:before {
+	background-color: #02874A;
+}
+.rvs-green-highlight .rvs-nav-item.rvs-active,
+.rvs-green-highlight .rvs-nav-item.rvs-active:active,
+.rvs-green-highlight .rvs-nav-item.rvs-active:focus,
+.rvs-green-highlight .rvs-nav-item.rvs-active:hover,
+.rvs-green-highlight .rvs-nav-item.rvs-active:first-child,
+.rvs-green-highlight .rvs-nav-item.rvs-active:first-child:active,
+.rvs-green-highlight .rvs-nav-item.rvs-active:first-child:focus,
+.rvs-green-highlight .rvs-nav-item.rvs-active:first-child:hover {
+	border-color: #02874A;
+}

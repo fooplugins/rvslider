@@ -1,0 +1,11 @@
+.rvs-player .mejs-container,
+.rvs-player .mejs-inner,
+.rvs-player .mejs-layers,
+.rvs-player .mejs-layer {
+	width: 100% !important;
+	height: 100% !important;
+}
+
+.rvs-player .mejs-overlay-play .mejs-overlay-button {
+	display: none;
+}

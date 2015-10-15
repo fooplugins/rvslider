@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!--<link rel="icon" href="../../favicon.ico">-->
+
+	<title>Getting started - Responsive Video Slider</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" rel="stylesheet">
+
+	<!-- Prism -->
+	<link href="css/prism.css" rel="stylesheet">
+
+	<!-- Responsive Video Slider CSS -->
+	<link href="../compiled/rvslider.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="css/docs.css" rel="stylesheet">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body class="docs">
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a href="../index.html" class="navbar-brand">Responsive Video Slider</a>
+		</div>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li class="active"><a>Getting started</a></li>
+				<li><a href="generator.html">Generator</a></li>
+				<li><a href="wp.html">WordPress Plugin</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="https://github.com/fooplugins/rvslider" target="_blank">GitHub</a></li>
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div>
+</nav>
+
+<!-- Header -->
+<div class="jumbotron">
+	<div class="container">
+		<h1>Getting started</h1>
+		<h2>An overview of Responsive Video Slider, how to download and use, and basic examples.</h2>
+	</div>
+</div>
+
+<div class="container">
+	<!-- Download -->
+	<div class="docs-section">
+		<h1 class="page-header anchored"><span id="download" class="anchor">&nbsp;</span>Download</h1>
+		<p class="lead">
+			Responsive Video Slider (currently v1.0.0) was created as a plugin for our free WordPress gallery plugin, FooGallery. Seeing as the jQuery can still be used to
+			create great looking and responsive videos galleries we have decided to put it up here on GitHub for everyone to use as they see fit.
+		</p>
+		<div class="row">
+			<div class="col-sm-4 col-sm-offset-4 align-center">
+				<div class="well">
+					<p>Compiled and minified CSS and JavaScript ready for project use.</p>
+					<p class="align-center">
+						<a class="btn btn-default btn-lg btn-block" href="../releases/rvslider.v1.0.0.zip" role="button" download>Download</a>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="callout callout-info">
+			<h4>Note</h4>
+			<p>
+				Once you've downloaded the plugin files we've created a <a href="generator.html">simple generator</a> to help you get started using the plugin. Simply supply a supported video
+				url and the generator will do the rest and provide you with the HTML, CSS and JavaScript required to create a slider.
+			</p>
+		</div>
+	</div>
+
+	<!-- What's included -->
+	<div class="docs-section">
+		<h1 class="page-header anchored"><span id="whats-included" class="anchor">&nbsp;</span>What's included</h1>
+		<p class="lead">Within the downloaded zip you'll find the following directories and files, logically grouping common resources and providing both compiled and minified variations.</p>
+
+		<div class="callout callout-warning">
+			<h4>Required files</h4>
+			<ul>
+				<li>The plugin <strong>requires <a href="http://jquery.com/">jQuery</a> to be included</strong>.</li>
+				<li>The plugin <strong>requires <a href="http://mediaelementjs.com/">MediaElement.js</a> to be included for .mp4, .ogv and .webm support</strong>.</li>
+			</ul>
+		</div>
+
+		<p>Once downloaded and unzipped you will see something like the below structure:</p>
+		<pre><code class="language-text">footable/
+├── css/
+│   ├── rvslider.css
+│   └── rvslider.min.css
+└── js/
+│   ├── rvslider.js
+│   └── rvslider.min.js
+└── starter-template.html</code></pre>
+
+		<div class="callout callout-info">
+			<h4>Note</h4>
+			<p>
+				The <code>starter-template.html</code> file contains the basic HTML structure required for the plugin to work. It contains a single generic item for you
+				to modify and then duplicate to create any additional items.
+			</p>
+		</div>
+
+	</div>
+
+	<!-- HTML -->
+	<div class="docs-section">
+		<h1 class="page-header anchored"><span id="html-structure" class="anchor">&nbsp;</span>HTML</h1>
+		<p class="lead">
+			Responsive Video Slider is designed to work with pre-existing HTML, if you don't use <a href="generator.html">the generator</a> you will need to provide the markup
+			that the plugin uses to create the slider.
+		</p>
+
+		<h2 class="anchored"><span id="main-structure" class="anchor">&nbsp;</span>Main</h2>
+		<p>
+			The HTML structure is fairly simple and comprises of two main sections, items and nav. The items section is the larger of the two containing the actual
+			videos while the nav section provides the thumbnails for each item.
+		</p>
+		<pre class="language-markup" data-lang="markup"><code>&lt;div class=&quot;rvs-container&quot;&gt;
+	&lt;div class=&quot;rvs-item-container&quot;&gt;
+		&lt;div class=&quot;rvs-item-stage&quot;&gt;
+			&lt;!-- items go here --&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;rvs-nav-container&quot;&gt;
+		&lt;a class=&quot;rvs-nav-prev&quot;&gt;&lt;/a&gt;
+		&lt;div class=&quot;rvs-nav-stage&quot;&gt;
+			&lt;!-- nav items go here --&gt;
+		&lt;/div&gt;
+		&lt;a class=&quot;rvs-nav-next&quot;&gt;&lt;/a&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+		<h2 class="anchored"><span id="item-structure" class="anchor">&nbsp;</span>Item</h2>
+		<p>
+			For every item added to the slider a corresponding nav item must exist at the same index within its parent. The nav switches items based on index, so if the thumbnail
+			is at a different index than the item it will display whatever is at that index instead of what you expect. It sounds more complicated than it is, just make sure your items
+			and nav items are added in the same order. The basic structure of the main item can be seen below.
+		</p>
+		<pre class="language-markup" data-lang="markup"><code>&lt;div class=&quot;rvs-item&quot; style=&quot;background-image: url(LARGE_VIDEO_IMAGE)&quot;&gt;
+	&lt;a href=&quot;VIDEO_URL&quot; class=&quot;rvs-play-video&quot;&gt;&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+		<h3 class="anchored"><span id="item-overlay-text" class="anchor">&nbsp;</span>Optional item overlay text</h3>
+		<p>
+			When creating items you can include a text overlay that is then transitioned into view by simply placing a <code>p</code> element with a class of <code>rvs-item-text</code> within
+			the <code>rvs-item</code> element. As this overlay text will probably contain a title and a short description or author credits you can place an optional <code>small</code> element
+			within it to provide a second line of text that has a slightly smaller font size than the first.
+		</p>
+		<pre class="language-markup" data-lang="markup"><code>&lt;div class=&quot;rvs-item&quot; style=&quot;background-image: url(LARGE_VIDEO_IMAGE)&quot;&gt;
+	&lt;p class=&quot;rvs-item-text&quot;&gt;VIDEO_TITLE &lt;small&gt;VIDEO_CREDITS&lt;/small&gt;&lt;/p&gt;
+	&lt;a href=&quot;VIDEO_URL&quot; class=&quot;rvs-play-video&quot;&gt;&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+		<p>
+			By default this overlay text is displayed in the top left corner of an item however you can change this by applying one of the below positional classes to the
+			<code>p.rvs-item-text</code> element.
+		</p>
+		<ul>
+			<li><code>rvs-top-left</code> - this is the default and is applied even if no class is supplied, text is positioned along the top of the item and is left aligned.</li>
+			<li><code>rvs-top-center</code> - text is positioned along the top of the item and is center aligned.</li>
+			<li><code>rvs-top-right</code> - text is positioned along the top of the item and is right aligned.</li>
+			<li><code>rvs-bottom-left</code> - text is positioned along the bottom of the item and is left aligned.</li>
+			<li><code>rvs-bottom-center</code> - text is positioned along the bottom of the item and is center aligned.</li>
+			<li><code>rvs-bottom-right</code> - text is positioned along the bottom of the item and is right aligned.</li>
+		</ul>
+
+		<h2 class="anchored"><span id="nav-item-structure" class="anchor">&nbsp;</span>Nav item</h2>
+		<p>
+			The nav is the smaller of the two areas the slider is divided into. It is used to display thumbnail representations of each item which must appear at the same index
+			within the <code>.rvs-nav-stage</code> element as the item appears within the <code>.rvs-item-stage</code> element. This nav item structure is as below.
+		</p>
+		<pre class="language-markup" data-lang="markup"><code>&lt;a class=&quot;rvs-nav-item&quot;&gt;
+	&lt;span style=&quot;background-image: url(SMALL_VIDEO_IMAGE)&quot;&gt;&lt;/span&gt;
+	&lt;h4&gt;VIDEO_TITLE&lt;/h4&gt;
+	&lt;small&gt;VIDEO_CREDITS&lt;/small&gt;
+&lt;/a&gt;</code></pre>
+
+		<h2 class="anchored"><span id="complete-structure" class="anchor">&nbsp;</span>All together</h2>
+		<p>Putting all the above together we get the following markup that makes up a complete, albeit simple, single item slider.</p>
+		<pre class="language-markup" data-lang="markup"><code>&lt;div class=&quot;rvs-container&quot;&gt;
+	&lt;div class=&quot;rvs-item-container&quot;&gt;
+		&lt;div class=&quot;rvs-item-stage&quot;&gt;
+			&lt;!-- items go here --&gt;
+			&lt;div class=&quot;rvs-item&quot; style=&quot;background-image: url(LARGE_VIDEO_IMAGE)&quot;&gt;
+				&lt;p class=&quot;rvs-item-text&quot;&gt;VIDEO_TITLE &lt;small&gt;VIDEO_CREDITS&lt;/small&gt;&lt;/p&gt;
+				&lt;a href=&quot;VIDEO_URL&quot; class=&quot;rvs-play-video&quot;&gt;&lt;/a&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;rvs-nav-container&quot;&gt;
+		&lt;a class=&quot;rvs-nav-prev&quot;&gt;&lt;/a&gt;
+		&lt;div class=&quot;rvs-nav-stage&quot;&gt;
+			&lt;!-- nav items go here --&gt;
+			&lt;a class=&quot;rvs-nav-item&quot;&gt;
+				&lt;span style=&quot;background-image: url(SMALL_VIDEO_IMAGE)&quot;&gt;&lt;/span&gt;
+				&lt;h4&gt;VIDEO_TITLE&lt;/h4&gt;
+				&lt;small&gt;VIDEO_CREDITS&lt;/small&gt;
+			&lt;/a&gt;
+		&lt;/div&gt;
+		&lt;a class=&quot;rvs-nav-next&quot;&gt;&lt;/a&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+	</div>
+
+	<!-- Options -->
+	<div class="docs-section">
+		<h1 class="page-header anchored"><span id="options" class="anchor">&nbsp;</span>Options</h1>
+		<p class="lead">
+			Responsive Video Slider is designed to work from an HTML first perspective and has minimal JavaScript options that need to be set when using the plugin. Most if not all of
+			the options you would change are supplied through applying CSS classes to the slider element.
+		</p>
+		<h2 class="page-header anchored"><span id="options-css" class="anchor">&nbsp;</span>CSS options</h2>
+		<p>
+			When using any of the listed CSS classes they must be applied to the root <code>.rvs-container</code> element of the slider. In the below example replace
+			<code>CSS_CLASS_NAME</code> with the name of class you want to use.
+		</p>
+		<pre class="language-markup" data-lang="markup"><code>&lt;div class=&quot;rvs-container CSS_CLASS_NAME&quot;&gt;
+	...
+&lt;/div&gt;</code></pre>
+		<p>The below CSS classes can be applied simultaneously to the root <code>.rvs-container</code> element of the slider.</p>
+		<ul>
+			<li><code>rvs-horizontal</code> - Switch the thumbnail layout from the default vertical on the right side to a horizontal layout along the bottom.</li>
+			<li><code>rvs-light</code> - Switch the theme from the default dark to the alternate light theme.</li>
+			<li><code>rvs-thumb-play</code> - Allow videos to be played by clicking on the thumbnail of the nav item.</li>
+			<li><code>rvs-continuous-play</code> - Allow videos to continue to play while navigating items.</li>
+			<li><code>rvs-large-thumbs</code> - Use large thumbnails (Not supported when using <code>rvs-horizontal</code>).</li>
+		</ul>
+		<p>
+			The below lists the default highlight styles that can be used with the plugin. The highlight color is applied to the play and close buttons
+			on hover and the nav items when the item is active.
+		</p>
+		<ul>
+			<li style="padding: 2px;"><code>rvs-blue-highlight</code> - <span style="background-color: #0087be; color: #FFF; padding: 3px 6px;">#0087be</span></li>
+			<li style="padding: 2px;"><code>rvs-green-highlight</code> - <span style="background-color: #02874A; color: #FFF; padding: 3px 6px;">#02874A</span></li>
+			<li style="padding: 2px;"><code>rvs-orange-highlight</code> - <span style="background-color: #FF8E31; color: #FFF; padding: 3px 6px;">#FF8E31</span></li>
+			<li style="padding: 2px;"><code>rvs-red-highlight</code> - <span style="background-color: #F12B24; color: #FFF; padding: 3px 6px;">#F12B24</span></li>
+		</ul>
+		<div class="callout callout-info">
+			<h4>Note</h4>
+			<p>Please note only one of the above highlight classes should be applied to the <code>.rvs-container</code> element at a time.</p>
+		</div>
+
+		<h2 class="page-header anchored"><span id="options-js" class="anchor">&nbsp;</span>JavaScript options</h2>
+		<p>
+			The below JavaScript options are generally not meant for end users and are normally left as there default values but are documented here as they
+			can be used to tweak the slider to fit your exact needs.
+		</p>
+		<div class="list-group list-group-detailed">
+			<h3 class="list-group-header">General options</h3>
+
+			<!-- num -->
+			<a href="#num" class="list-group-item anchored">
+				<span id="num" class="anchor">&nbsp;</span>
+				<h4 class="list-group-item-heading">num <small>array</small></h4>
+				<p class="list-group-item-text">An array defining the number of items to display when using the horizontal layout.</p>
+			</a>
+			<div class="list-group-detail">
+				<div class="list-group-detail-inner">
+					<p>
+						This is an array of number arrays where the first number of each child array defines the minimum width of the viewport and the second number specifies the number of
+						nav items to display at the corresponding widths.
+					</p>
+
+					<div class="examples">
+
+						<div class="example default">
+							<p><code>null</code></p>
+							<p>If no array is supplied the plugin falls back to the below default configuration.</p>
+						</div>
+						<pre class="language-javascript" data-lang="javascript"><code>[
+	[320, 2], // Width less than 320 equals 2 items
+	[480, 3], // W &gt; 320 &amp;&amp; W &lt; 480 = 3 items
+	[768, 4], // W &gt; 480 &amp;&amp; W &lt; 768 = 4 items
+	[992, 4], // W &gt; 768 &amp;&amp; W &lt; 992 = 4 items
+	[1200, 5] // Effectively anything greater than 992 will equal 5 items as this last value is used for any widths larger than itself.
+]</code></pre>
+
+					</div>
+
+					<div class="examples">
+
+						<div class="example javascript">
+							<p>The below shows how to supply the num array directly through the options.</p>
+						</div>
+						<pre class="language-javascript" data-lang="javascript"><code>$(&quot;.rvs-container&quot;).rvslider({
+	&quot;num&quot;: [
+		[320, 2],
+		[480, 3],
+		[768, 4],
+		[992, 4],
+		[1200, 5]
+	]
+});</code></pre>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<!-- selected -->
+			<a href="#selected" class="list-group-item anchored">
+				<span id="selected" class="anchor">&nbsp;</span>
+				<h4 class="list-group-item-heading">selected <small>number</small></h4>
+				<p class="list-group-item-text">The index of the item to be selected when the plugin initializes.</p>
+			</a>
+			<div class="list-group-detail">
+				<div class="list-group-detail-inner">
+					<p>
+						This is the zero based index used by the plugin on initialize to determine which item will be selected. Setting this to a number larger than the available number of items
+						will result in the last item being selected. Similarly specifying a number smaller than zero will result in the first item being selected.
+					</p>
+
+					<div class="examples">
+
+						<div class="example default">
+							<p><code>0</code></p>
+							<p>If no selected index is supplied the plugin falls back to starting with zero.</p>
+						</div>
+
+					</div>
+
+					<div class="examples">
+
+						<div class="example javascript">
+							<p>The below shows how to supply the selected index directly through the options.</p>
+						</div>
+						<pre class="language-javascript" data-lang="javascript"><code>$(&quot;.rvs-container&quot;).rvslider({
+	&quot;selected&quot;: 3
+});</code></pre>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="list-group list-group-detailed child">
+			<h3 class="list-group-header">Swipe options</h3>
+
+			<!-- deadzone -->
+			<a href="#deadzone" class="list-group-item anchored">
+				<span id="deadzone" class="anchor">&nbsp;</span>
+				<h4 class="list-group-item-heading">deadzone <small>number</small></h4>
+				<p class="list-group-item-text">The minimum distance a swipe must travel before being registered by the plugin.</p>
+			</a>
+			<div class="list-group-detail">
+				<div class="list-group-detail-inner">
+					<p>
+						This is the minimum distance in pixels that a swipe must travel before it is registered by the plugin as a legitimate swipe. A smaller number means the
+						plugin is more sensitive to swipes.
+					</p>
+
+					<div class="examples">
+
+						<div class="example default">
+							<p><code>20</code></p>
+							<p>If no deadzone is supplied the plugin falls back to a starting value of 20px.</p>
+						</div>
+
+					</div>
+
+					<div class="examples">
+
+						<div class="example javascript">
+							<p>The below shows how to supply the deadzone directly through the options.</p>
+						</div>
+						<pre class="language-javascript" data-lang="javascript"><code>$(&quot;.rvs-container&quot;).rvslider({
+	&quot;swipe&quot;: {
+		&quot;deadzone&quot;: 30
+	}
+});</code></pre>
+
+					</div>
+
+				</div>
+			</div>
+
+			<!-- items -->
+			<a href="#items" class="list-group-item anchored">
+				<span id="items" class="anchor">&nbsp;</span>
+				<h4 class="list-group-item-heading">items <small>number</small></h4>
+				<p class="list-group-item-text">The minimum distance a swipe must travel before the plugin switches items.</p>
+			</a>
+			<div class="list-group-detail">
+				<div class="list-group-detail-inner">
+					<p>
+						This is the minimum distance, as a percent of the width of the item being swiped, that a swipe must travel before it is registered by the plugin as a legitimate swipe.
+						A smaller number means the plugin is more sensitive to swipes.
+					</p>
+
+					<div class="examples">
+
+						<div class="example default">
+							<p><code>0.15</code></p>
+							<p>If no value is supplied the plugin falls back to a starting value of 15% of an items width.</p>
+						</div>
+
+					</div>
+
+					<div class="examples">
+
+						<div class="example javascript">
+							<p>The below shows how to supply the items value directly through the options.</p>
+						</div>
+						<pre class="language-javascript" data-lang="javascript"><code>$(&quot;.rvs-container&quot;).rvslider({
+	&quot;swipe&quot;: {
+		&quot;items&quot;: 0.25 // swipe must travel 25% of the items width
+	}
+});</code></pre>
+
+					</div>
+
+				</div>
+			</div>
+
+			<!-- nav -->
+			<a href="#nav" class="list-group-item anchored">
+				<span id="nav" class="anchor">&nbsp;</span>
+				<h4 class="list-group-item-heading">nav <small>number</small></h4>
+				<p class="list-group-item-text">The minimum distance a swipe must travel before the plugin scrolls the nav items.</p>
+			</a>
+			<div class="list-group-detail">
+				<div class="list-group-detail-inner">
+					<p>
+						This is the minimum distance, as a percent of either the width (horizontal slider) or height (vertical slider) of the nav item being swiped, that a swipe
+						must travel before it is registered by the plugin as a legitimate swipe. A smaller number means the plugin is more sensitive to swipes.
+					</p>
+
+					<div class="examples">
+
+						<div class="example default">
+							<p><code>0.4</code></p>
+							<p>
+								If no value is supplied the plugin falls back to a starting value of 40% of a nav items width or height depending on whether the slider is in its
+								horizontal or vertical layout.
+							</p>
+						</div>
+
+					</div>
+
+					<div class="examples">
+
+						<div class="example javascript">
+							<p>The below shows how to supply the nav value directly through the options.</p>
+						</div>
+						<pre class="language-javascript" data-lang="javascript"><code>$(&quot;.rvs-container&quot;).rvslider({
+	&quot;swipe&quot;: {
+		&quot;nav&quot;: 0.5 // swipe must travel 50% of the items width or height
+	}
+});</code></pre>
+
+					</div>
+
+				</div>
+			</div>
+
+			<!-- touches -->
+			<a href="#touches" class="list-group-item anchored">
+				<span id="touches" class="anchor">&nbsp;</span>
+				<h4 class="list-group-item-heading">touches <small>number</small></h4>
+				<p class="list-group-item-text">The number of touch points required for swiping.</p>
+			</a>
+			<div class="list-group-detail">
+				<div class="list-group-detail-inner">
+					<p>
+						This is the number of touch points required for the plugin to register the swipe and act accordingly. This is an exact number of touches to allow additional
+						gestures to be added or existing ones to not be interfered with.
+					</p>
+
+					<div class="examples">
+
+						<div class="example default">
+							<p><code>1</code></p>
+							<p>
+								If no value is supplied the plugin falls back to using a single touch point to register swipe gestures.
+							</p>
+						</div>
+
+					</div>
+
+					<div class="examples">
+
+						<div class="example javascript">
+							<p>The below shows how to supply the touches value directly through the options.</p>
+						</div>
+						<pre class="language-javascript" data-lang="javascript"><code>$(&quot;.rvs-container&quot;).rvslider({
+	&quot;swipe&quot;: {
+		&quot;touches&quot;: 2 // swipe requires 2 touch points on the screen to be registered
+	}
+});</code></pre>
+
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+		<div class="list-group list-group-detailed child">
+			<h3 class="list-group-header">MediaElement.js options</h3>
+
+			<!-- enabled -->
+			<a href="#enabled" class="list-group-item anchored">
+				<span id="enabled" class="anchor">&nbsp;</span>
+				<h4 class="list-group-item-heading">enabled <small>boolean</small></h4>
+				<p class="list-group-item-text">Whether or not the plugin should use MediaElement.js to play videos.</p>
+			</a>
+			<div class="list-group-detail">
+				<div class="list-group-detail-inner">
+					<p>
+						While this option does specify whether or not the plugin will use MediaElement.js to play videos you must include the actual MediaElement.js files in the page yourself
+						otherwise this option does nothing as there's nothing to work with!
+					</p>
+
+					<div class="examples">
+
+						<div class="example default">
+							<p><code>true</code></p>
+							<p>By default the plugin will auto-detect MediaElement.js in the page and use it as required to play videos.</p>
+						</div>
+
+					</div>
+
+					<div class="examples">
+
+						<div class="example javascript">
+							<p>The below shows how to supply the enabled value directly through the options.</p>
+						</div>
+						<pre class="language-javascript" data-lang="javascript"><code>$(&quot;.rvs-container&quot;).rvslider({
+	&quot;mejs&quot;: {
+		&quot;enabled&quot;: false
+	}
+});</code></pre>
+
+					</div>
+
+				</div>
+			</div>
+
+			<!-- youtube -->
+			<a href="#youtube" class="list-group-item anchored">
+				<span id="youtube" class="anchor">&nbsp;</span>
+				<h4 class="list-group-item-heading">youtube <small>boolean</small></h4>
+				<p class="list-group-item-text">Whether or not to play YouTube videos using MediaElement.js.</p>
+			</a>
+			<div class="list-group-detail">
+				<div class="list-group-detail-inner">
+					<p>
+						MediaElement.js has implemented support for playing YouTube videos using its player to provide a more consistent experience on your site when viewing videos from multiple
+						sources like locally hosted files mixed in with YouTube clips.
+					</p>
+
+					<div class="examples">
+
+						<div class="example default">
+							<p><code>false</code></p>
+							<p>If no value is supplied the plugin falls back to using YouTubes iframe embed player.</p>
+						</div>
+
+					</div>
+
+					<div class="examples">
+
+						<div class="example javascript">
+							<p>The below shows how to supply the youtube value directly through the options.</p>
+						</div>
+						<pre class="language-javascript" data-lang="javascript"><code>$(&quot;.rvs-container&quot;).rvslider({
+	&quot;mejs&quot;: {
+		&quot;youtube&quot;: true
+	}
+});</code></pre>
+
+					</div>
+
+				</div>
+			</div>
+
+			<!--&lt;!&ndash; vimeo &ndash;&gt;-->
+			<!--<a href="#vimeo" class="list-group-item anchored">-->
+				<!--<span id="vimeo" class="anchor">&nbsp;</span>-->
+				<!--<h4 class="list-group-item-heading">vimeo <small>boolean</small></h4>-->
+				<!--<p class="list-group-item-text">Whether or not to play Vimeo videos using MediaElement.js.</p>-->
+			<!--</a>-->
+			<!--<div class="list-group-detail">-->
+				<!--<div class="list-group-detail-inner">-->
+					<!--<p>-->
+						<!--MediaElement.js has implemented support for playing Vimeo videos using its player to provide a more consistent experience on your site when viewing videos from multiple-->
+						<!--sources like locally hosted files mixed in with Vimeo clips.-->
+					<!--</p>-->
+					<!--<p>-->
+						<!--There are however a few issues regarding Vimeo support, most notably that there is no way to remove the default player controls like you can do with YouTubes chromeless-->
+						<!--option. The only way to hide the Vimeo player controls is by being a Vimeo Pro user and configuring the video options to always hide controls.-->
+					<!--</p>-->
+
+					<!--<div class="examples">-->
+
+						<!--<div class="example default">-->
+							<!--<p><code>false</code></p>-->
+							<!--<p>If no value is supplied the plugin falls back to using YouTubes iframe embed player.</p>-->
+						<!--</div>-->
+
+					<!--</div>-->
+
+					<!--<div class="examples">-->
+
+						<!--<div class="example javascript">-->
+							<!--<p>The below shows how to supply the youtube value directly through the options.</p>-->
+						<!--</div>-->
+						<!--<pre class="language-javascript" data-lang="javascript"><code>$(&quot;.rvs-container&quot;).rvslider({-->
+	<!--&quot;mejs&quot;: {-->
+		<!--&quot;youtube&quot;: true-->
+	<!--}-->
+<!--});</code></pre>-->
+
+					<!--</div>-->
+
+				<!--</div>-->
+			<!--</div>-->
+
+			<!-- additional -->
+			<a href="#additional" class="list-group-item anchored">
+				<span id="additional" class="anchor">&nbsp;</span>
+				<h4 class="list-group-item-heading">additional</h4>
+				<p class="list-group-item-text">Any additional MediaElement.js options.</p>
+			</a>
+			<div class="list-group-detail">
+				<div class="list-group-detail-inner">
+					<p>
+						Along with the three custom options (enabled, youtube and vimeo) the plugin allows you to supply any <a href="http://mediaelementjs.com/#api" target="_blank">MediaElement.js option</a>
+						by simply adding it to the <code>mejs</code> options object.
+					</p>
+
+					<div class="examples">
+
+						<div class="example javascript">
+							<p>The below shows how to supply any additional MediaElement.js options.</p>
+						</div>
+						<pre class="language-javascript" data-lang="javascript"><code>$(&quot;.rvs-container&quot;).rvslider({
+	&quot;mejs&quot;: {
+		&quot;enablePluginDebug&quot;: false, // shows debug errors on screen
+		&quot;plugins&quot;: [&quot;flash&quot;,&quot;silverlight&quot;], // remove or reorder to change plugin priority
+		...
+	}
+});</code></pre>
+
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+	<!-- Examples -->
+	<div class="docs-section">
+		<h1 class="page-header anchored"><span id="examples" class="anchor">&nbsp;</span>Examples</h1>
+		<p class="lead">
+			The below lists various examples to help you get started using Responsive Video Slider in your projects. Keep in mind the plugin provides the CSS
+			and JavaScript while you need to supply the HTML.
+		</p>
+
+		<div class="list-group">
+			<a href="examples/youtube.html" class="list-group-item anchored">
+				<span id="basic-no-header" class="anchor">&nbsp;</span>
+				<h4 class="list-group-item-heading">YouTube</h4>
+				<p class="list-group-item-text">Shows how to create a YouTube slider.</p>
+			</a>
+			<a href="examples/vimeo.html" class="list-group-item anchored">
+				<span id="basic-single-header" class="anchor">&nbsp;</span>
+				<h4 class="list-group-item-heading">Vimeo</h4>
+				<p class="list-group-item-text">Shows how to create a Vimeo slider.</p>
+			</a>
+			<a href="examples/wistia.html" class="list-group-item anchored">
+				<span id="basic-row-toggle" class="anchor">&nbsp;</span>
+				<h4 class="list-group-item-heading">Wistia</h4>
+				<p class="list-group-item-text">Shows how to create a Wistia slider.</p>
+			</a>
+			<a href="examples/supported.html" class="list-group-item anchored">
+				<span id="basic-hiding-columns" class="anchor">&nbsp;</span>
+				<h4 class="list-group-item-heading">Other supported videos</h4>
+				<p class="list-group-item-text">Shows how to create a slider using .mp4, .ogv or .webm videos.</p>
+			</a>
+		</div>
+	</div>
+</div> <!-- /container -->
+
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="js/prism.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="js/ie10-viewport-bug-workaround.js"></script>
+<script src="js/docs.js"></script>
+<!-- Responsive Video Slider JS -->
+<script src="../compiled/rvslider.min.js"></script>
+<!-- Initialize Responsive Video Slider -->
+<script>
+	jQuery(function($){
+		$('.nav-tabs a').click(function (e) {
+			e.preventDefault();
+			$(this).tab('show');
+		});
+	});
+</script>
+</body>
+</html>

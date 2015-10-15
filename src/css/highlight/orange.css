@@ -1,0 +1,24 @@
+.rvs-orange-highlight .rvs-close:active,
+.rvs-orange-highlight .rvs-close:focus,
+.rvs-orange-highlight .rvs-close:hover,
+.rvs-orange-highlight .rvs-play-video:active,
+.rvs-orange-highlight .rvs-play-video:focus,
+.rvs-orange-highlight .rvs-play-video:hover,
+.rvs-orange-highlight .rvs-nav-item.rvs-active,
+.rvs-orange-highlight .rvs-nav-item.rvs-active:active,
+.rvs-orange-highlight .rvs-nav-item.rvs-active:focus,
+.rvs-orange-highlight .rvs-nav-item.rvs-active:hover,
+.rvs-orange-highlight.rvs-thumb-play .rvs-nav-item-thumb:hover:before,
+.rvs-orange-highlight.rvs-thumb-play .rvs-video-active .rvs-nav-item-thumb:before {
+	background-color: #FF8E31;
+}
+.rvs-orange-highlight .rvs-nav-item.rvs-active,
+.rvs-orange-highlight .rvs-nav-item.rvs-active:active,
+.rvs-orange-highlight .rvs-nav-item.rvs-active:focus,
+.rvs-orange-highlight .rvs-nav-item.rvs-active:hover,
+.rvs-orange-highlight .rvs-nav-item.rvs-active:first-child,
+.rvs-orange-highlight .rvs-nav-item.rvs-active:first-child:active,
+.rvs-orange-highlight .rvs-nav-item.rvs-active:first-child:focus,
+.rvs-orange-highlight .rvs-nav-item.rvs-active:first-child:hover {
+	border-color: #FF8E31;
+}
