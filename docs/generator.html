@@ -124,148 +124,6 @@
 							<input id="custom-thumbnail" type="url" class="form-control" />
 						</div>
 					</div>
-					<div id="supported-urls" class="modal fade">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-									<h4 class="modal-title">Supported Urls</h4>
-								</div>
-								<div class="modal-body">
-									<ul class="nav nav-tabs" role="tablist">
-										<li role="presentation" class="active"><a href="#vimeo" aria-controls="home" role="tab" data-toggle="tab">Vimeo</a></li>
-										<li role="presentation"><a href="#youtube" aria-controls="profile" role="tab" data-toggle="tab">YouTube</a></li>
-										<li role="presentation"><a href="#wistia" aria-controls="messages" role="tab" data-toggle="tab">Wistia</a></li>
-										<li role="presentation"><a href="#custom" aria-controls="settings" role="tab" data-toggle="tab">Custom</a></li>
-									</ul>
-									<div class="tab-content">
-										<div role="tabpanel" class="tab-pane active" id="vimeo">
-											<ul>
-												<li>
-													<code>http[s]://vimeo.com/<strong>VIDEO_ID</strong></code>
-													<button type="button" class="btn btn-xs btn-default" data-url="https://vimeo.com/132038125">Preview</button>
-												</li>
-												<li>
-													<code>http[s]://vimeo.com/channels/<strong>CHANNEL</strong>/<strong>VIDEO_ID</strong></code>
-													<button type="button" class="btn btn-xs btn-default" data-url="https://vimeo.com/channels/480431/140311923">Preview</button>
-												</li>
-												<li>
-													<code>http[s]://vimeo.com/album/<strong>ALBUM</strong>/video/<strong>VIDEO_ID</strong></code>
-													<button type="button" class="btn btn-xs btn-default" data-url="https://vimeo.com/album/3573473/video/124194551">Preview</button>
-												</li>
-												<li>
-													<code>http[s]://player.vimeo.com/video/<strong>VIDEO_ID</strong></code>
-													<button type="button" class="btn btn-xs btn-default" data-url="https://player.vimeo.com/video/140125209">Preview</button>
-												</li>
-											</ul>
-										</div>
-										<div role="tabpanel" class="tab-pane" id="youtube">
-											<ul>
-												<li>
-													<code>http[s]://www.youtube.com/watch?v=<strong>VIDEO_ID</strong></code>
-													<button type="button" class="btn btn-xs btn-default" data-url="https://www.youtube.com/watch?v=YqeW9_5kURI">Preview</button>
-												</li>
-												<li>
-													<code>http[s]://youtu.be/<strong>VIDEO_ID</strong></code>
-													<button type="button" class="btn btn-xs btn-default" data-url="https://youtu.be/KWZGAExj-es">Preview</button>
-												</li>
-												<li>
-													<code>http[s]://www.youtube.com/embed/<strong>VIDEO_ID</strong></code>
-													<button type="button" class="btn btn-xs btn-default" data-url="https://www.youtube.com/embed/09R8_2nJtjg">Preview</button>
-												</li>
-											</ul>
-										</div>
-										<div role="tabpanel" class="tab-pane" id="wistia">
-											<ul>
-												<li>
-													<code>http[s]://*.wistia.com/medias/<strong>VIDEO_ID</strong></code>
-													<button type="button" class="btn btn-xs btn-default" data-url="https://home.wistia.com/medias/e4a27b971d">Preview</button>
-												</li>
-												<li>
-													<code>http[s]://*.wistia.net/embed/iframe/<strong>VIDEO_ID</strong></code>
-													<button type="button" class="btn btn-xs btn-default" data-url="https://fast.wistia.net/embed/iframe/g5pnf59ala">Preview</button>
-												</li>
-											</ul>
-											<div class="callout callout-info">
-												<h4>Notes</h4>
-												<ul>
-													<li>
-														As per the <a href="http://wistia.com/doc/working-with-images#the_parameters" target="_blank">Wistia documentation</a>, if the image size requested
-														for a video is not available the server will respond with a 202 Accepted header and queue up the image to be created. This should only ever happen
-														once as the next time it is requested it should exist. <strong>Please keep this in mind when using the generator to add a Wistia video as the images
-														may not load the first time!</strong>
-													</li>
-													<li>
-														As per the <a href="http://wistia.com/doc/oembed#an_example" target="_blank">Wistia documentation</a> a videos author/credits are not returned along
-														with the rest of the details when using its API. At present the generator uses the <code>provider_name</code> returned which by default is
-														<code>Wistia, Inc.</code>. Either update these values in the generated HTML or use the advanced option to hide nav item credits.
-													</li>
-												</ul>
-											</div>
-										</div>
-										<div role="tabpanel" class="tab-pane" id="custom">
-											<ul>
-												<li>
-													<code>http[s]://*<strong>.mp4</strong></code>
-													<button type="button" class="btn btn-xs btn-default"
-																	data-url="https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.mp4"
-																	data-title="Fish Frenzy - Oceans Clip (.mp4)"
-																	data-credits="DisneyNature"
-																	data-thumb-large="https://s3.amazonaws.com/fooplugins/rvs/default.jpg"
-																	data-thumb-small="https://s3.amazonaws.com/fooplugins/rvs/thumb.jpg">
-														Preview
-													</button>
-												</li>
-												<li>
-													<code>http[s]://*<strong>.webm</strong></code>
-													<button type="button" class="btn btn-xs btn-default"
-																	data-url="https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.webm"
-																	data-title="Fish Frenzy - Oceans Clip (.webm)"
-																	data-credits="DisneyNature"
-																	data-thumb-large="https://s3.amazonaws.com/fooplugins/rvs/default.jpg"
-																	data-thumb-small="https://s3.amazonaws.com/fooplugins/rvs/thumb.jpg">
-														Preview
-													</button>
-												</li>
-												<li>
-													<code>http[s]://*<strong>.ogv</strong></code>
-													<button type="button" class="btn btn-xs btn-default"
-																	data-url="https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.ogv"
-																	data-title="Fish Frenzy - Oceans Clip (.ogv)"
-																	data-credits="DisneyNature"
-																	data-thumb-large="https://s3.amazonaws.com/fooplugins/rvs/default.jpg"
-																	data-thumb-small="https://s3.amazonaws.com/fooplugins/rvs/thumb.jpg">
-														Preview
-													</button>
-												</li>
-											</ul>
-											<p>Use a comma separated string to supply multiple formats for cross browser support.</p>
-											<ul>
-												<li>
-													<code>http[s]://*<strong>.mp4</strong>, http[s]://*<strong>.webm</strong>, http[s]://*<strong>.ogv</strong></code>
-													<button type="button" class="btn btn-xs btn-default"
-																	data-url="https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.mp4, https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.webm, https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.ogv"
-																	data-title="Fish Frenzy - Oceans Clip (.mp4, .webm, .ogv)"
-																	data-credits="DisneyNature"
-																	data-thumb-large="https://s3.amazonaws.com/fooplugins/rvs/default.jpg"
-																	data-thumb-small="https://s3.amazonaws.com/fooplugins/rvs/thumb.jpg">
-														Preview
-													</button>
-												</li>
-											</ul>
-											<div class="callout callout-info">
-												<h4>Note</h4>
-												<p>When the generator detects a supported custom url, inputs to supply a title, credits and the necessary image urls to create the item will be made accessible.</p>
-											</div>
-										</div>
-									</div>
-									</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								</div>
-							</div><!-- /.modal-content -->
-						</div><!-- /.modal-dialog -->
-					</div><!-- /.modal -->
 				</form>
 				<div class="callout callout-info">
 					<h4>Note</h4>
@@ -481,6 +339,148 @@
 		</div>
 	</div>
 
+	<div id="supported-urls" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Supported Urls</h4>
+				</div>
+				<div class="modal-body">
+					<ul class="nav nav-tabs" role="tablist">
+						<li role="presentation" class="active"><a href="#vimeo" aria-controls="home" role="tab" data-toggle="tab">Vimeo</a></li>
+						<li role="presentation"><a href="#youtube" aria-controls="profile" role="tab" data-toggle="tab">YouTube</a></li>
+						<li role="presentation"><a href="#wistia" aria-controls="messages" role="tab" data-toggle="tab">Wistia</a></li>
+						<li role="presentation"><a href="#custom" aria-controls="settings" role="tab" data-toggle="tab">Custom</a></li>
+					</ul>
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active" id="vimeo">
+							<ul>
+								<li>
+									<code>http[s]://vimeo.com/<strong>VIDEO_ID</strong></code>
+									<button type="button" class="btn btn-xs btn-default" data-url="https://vimeo.com/132038125">Preview</button>
+								</li>
+								<li>
+									<code>http[s]://vimeo.com/channels/<strong>CHANNEL</strong>/<strong>VIDEO_ID</strong></code>
+									<button type="button" class="btn btn-xs btn-default" data-url="https://vimeo.com/channels/480431/140311923">Preview</button>
+								</li>
+								<li>
+									<code>http[s]://vimeo.com/album/<strong>ALBUM</strong>/video/<strong>VIDEO_ID</strong></code>
+									<button type="button" class="btn btn-xs btn-default" data-url="https://vimeo.com/album/3573473/video/124194551">Preview</button>
+								</li>
+								<li>
+									<code>http[s]://player.vimeo.com/video/<strong>VIDEO_ID</strong></code>
+									<button type="button" class="btn btn-xs btn-default" data-url="https://player.vimeo.com/video/140125209">Preview</button>
+								</li>
+							</ul>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="youtube">
+							<ul>
+								<li>
+									<code>http[s]://www.youtube.com/watch?v=<strong>VIDEO_ID</strong></code>
+									<button type="button" class="btn btn-xs btn-default" data-url="https://www.youtube.com/watch?v=YqeW9_5kURI">Preview</button>
+								</li>
+								<li>
+									<code>http[s]://youtu.be/<strong>VIDEO_ID</strong></code>
+									<button type="button" class="btn btn-xs btn-default" data-url="https://youtu.be/KWZGAExj-es">Preview</button>
+								</li>
+								<li>
+									<code>http[s]://www.youtube.com/embed/<strong>VIDEO_ID</strong></code>
+									<button type="button" class="btn btn-xs btn-default" data-url="https://www.youtube.com/embed/09R8_2nJtjg">Preview</button>
+								</li>
+							</ul>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="wistia">
+							<ul>
+								<li>
+									<code>http[s]://*.wistia.com/medias/<strong>VIDEO_ID</strong></code>
+									<button type="button" class="btn btn-xs btn-default" data-url="https://home.wistia.com/medias/e4a27b971d">Preview</button>
+								</li>
+								<li>
+									<code>http[s]://*.wistia.net/embed/iframe/<strong>VIDEO_ID</strong></code>
+									<button type="button" class="btn btn-xs btn-default" data-url="https://fast.wistia.net/embed/iframe/g5pnf59ala">Preview</button>
+								</li>
+							</ul>
+							<div class="callout callout-info">
+								<h4>Notes</h4>
+								<ul>
+									<li>
+										As per the <a href="http://wistia.com/doc/working-with-images#the_parameters" target="_blank">Wistia documentation</a>, if the image size requested
+										for a video is not available the server will respond with a 202 Accepted header and queue up the image to be created. This should only ever happen
+										once as the next time it is requested it should exist. <strong>Please keep this in mind when using the generator to add a Wistia video as the images
+										may not load the first time!</strong>
+									</li>
+									<li>
+										As per the <a href="http://wistia.com/doc/oembed#an_example" target="_blank">Wistia documentation</a> a videos author/credits are not returned along
+										with the rest of the details when using its API. At present the generator uses the <code>provider_name</code> returned which by default is
+										<code>Wistia, Inc.</code>. Either update these values in the generated HTML or use the advanced option to hide nav item credits.
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="custom">
+							<ul>
+								<li>
+									<code>http[s]://*<strong>.mp4</strong></code>
+									<button type="button" class="btn btn-xs btn-default"
+													data-url="https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.mp4"
+													data-title="Fish Frenzy - Oceans Clip (.mp4)"
+													data-credits="DisneyNature"
+													data-thumb-large="https://s3.amazonaws.com/fooplugins/rvs/default.jpg"
+													data-thumb-small="https://s3.amazonaws.com/fooplugins/rvs/thumb.jpg">
+										Preview
+									</button>
+								</li>
+								<li>
+									<code>http[s]://*<strong>.webm</strong></code>
+									<button type="button" class="btn btn-xs btn-default"
+													data-url="https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.webm"
+													data-title="Fish Frenzy - Oceans Clip (.webm)"
+													data-credits="DisneyNature"
+													data-thumb-large="https://s3.amazonaws.com/fooplugins/rvs/default.jpg"
+													data-thumb-small="https://s3.amazonaws.com/fooplugins/rvs/thumb.jpg">
+										Preview
+									</button>
+								</li>
+								<li>
+									<code>http[s]://*<strong>.ogv</strong></code>
+									<button type="button" class="btn btn-xs btn-default"
+													data-url="https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.ogv"
+													data-title="Fish Frenzy - Oceans Clip (.ogv)"
+													data-credits="DisneyNature"
+													data-thumb-large="https://s3.amazonaws.com/fooplugins/rvs/default.jpg"
+													data-thumb-small="https://s3.amazonaws.com/fooplugins/rvs/thumb.jpg">
+										Preview
+									</button>
+								</li>
+							</ul>
+							<p>Use a comma separated string to supply multiple formats for cross browser support.</p>
+							<ul>
+								<li>
+									<code>http[s]://*<strong>.mp4</strong>, http[s]://*<strong>.webm</strong>, http[s]://*<strong>.ogv</strong></code>
+									<button type="button" class="btn btn-xs btn-default"
+													data-url="https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.mp4, https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.webm, https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.ogv"
+													data-title="Fish Frenzy - Oceans Clip (.mp4, .webm, .ogv)"
+													data-credits="DisneyNature"
+													data-thumb-large="https://s3.amazonaws.com/fooplugins/rvs/default.jpg"
+													data-thumb-small="https://s3.amazonaws.com/fooplugins/rvs/thumb.jpg">
+										Preview
+									</button>
+								</li>
+							</ul>
+							<div class="callout callout-info">
+								<h4>Note</h4>
+								<p>When the generator detects a supported custom url, inputs to supply a title, credits and the necessary image urls to create the item will be made accessible.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 </div> <!-- /container -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
