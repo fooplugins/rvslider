@@ -88,7 +88,7 @@
 					<div id="video-group" class="form-group">
 						<div class="col-sm-12">
 							<div class="input-group">
-								<input id="video-url" type="text" class="form-control" placeholder="Enter a Vimeo, Wistia, YouTube or other supported video url">
+								<input id="video-url" type="text" class="form-control" placeholder="Enter a Vimeo, Wistia, YouTube, Dailymotion or other supported video url">
 								<span class="input-group-btn">
 									<button class="btn btn-default" type="button" data-toggle="modal" data-target="#supported-urls">
 										<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
@@ -351,6 +351,7 @@
 						<li role="presentation" class="active"><a href="#vimeo" aria-controls="home" role="tab" data-toggle="tab">Vimeo</a></li>
 						<li role="presentation"><a href="#youtube" aria-controls="profile" role="tab" data-toggle="tab">YouTube</a></li>
 						<li role="presentation"><a href="#wistia" aria-controls="messages" role="tab" data-toggle="tab">Wistia</a></li>
+						<li role="presentation"><a href="#daily" aria-controls="messages" role="tab" data-toggle="tab">Dailymotion</a></li>
 						<li role="presentation"><a href="#custom" aria-controls="settings" role="tab" data-toggle="tab">Custom</a></li>
 					</ul>
 					<div class="tab-content">
@@ -416,6 +417,29 @@
 										<code>Wistia, Inc.</code>. Either update these values in the generated HTML or use the advanced option to hide nav item credits.
 									</li>
 								</ul>
+							</div>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="daily">
+							<ul>
+								<li>
+									<code>http[s]://dai.ly/<strong>VIDEO_ID</strong></code>
+									<button type="button" class="btn btn-xs btn-default" data-url="http://dai.ly/x2ioxg8">Preview</button>
+								</li>
+								<li>
+									<code>http[s]://*.dailymotion.com/video/<strong>VIDEO_ID</strong>_*</code>
+									<button type="button" class="btn btn-xs btn-default" data-url="http://www.dailymotion.com/video/x2yjjhu_deep-danny-leon-gris-feat-astghik-safaryan-today-official-music-video_music">Preview</button>
+								</li>
+								<li>
+									<code>http[s]://*.dailymotion.com/embed/video/<strong>VIDEO_ID</strong></code>
+									<button type="button" class="btn btn-xs btn-default" data-url="//www.dailymotion.com/embed/video/x2ioxee">Preview</button>
+								</li>
+							</ul>
+							<div class="callout callout-info">
+								<h4>Note</h4>
+								<p>
+									The <a href="https://developer.dailymotion.com/player#player-oembed">Dailymotion API</a> response only contains a single image to use as a thumbnail so videos may
+									display a low quality image for the large background in the slider.
+								</p>
 							</div>
 						</div>
 						<div role="tabpanel" class="tab-pane" id="custom">
@@ -531,12 +555,13 @@
 <script id="rvs-empty-template" type="text/x-handlebars-template">
 <div class="rvs-empty">
 	<div class="rvs-empty-inner">
-		<p>Enter a Vimeo, Wistia, YouTube or other supported video url below to get started or simply click the button to add some examples!</p>
+		<p>Enter a Vimeo, Wistia, YouTube, Dailymotion or other supported video url below to get started or simply click the button to add some examples!</p>
 		<button type="button" class="btn btn-lg btn-default btn-block"
 						data-videos='[
 						"https://vimeo.com/132038125", "https://vimeo.com/channels/480431/140311923", "https://vimeo.com/album/3573473/video/124194551", "https://player.vimeo.com/video/140125209",
 						"https://home.wistia.com/medias/e4a27b971d", "https://fast.wistia.net/embed/iframe/g5pnf59ala",
 						"https://www.youtube.com/watch?v=YqeW9_5kURI", "https://youtu.be/KWZGAExj-es", "https://www.youtube.com/embed/09R8_2nJtjg",
+						"http://dai.ly/x2ioxg8","//www.dailymotion.com/embed/video/x2ioxee","http://www.dailymotion.com/video/x2yjjhu_deep-danny-leon-gris-feat-astghik-safaryan-today-official-music-video_music",
 						{
 							"url": "https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.mp4, https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.webm, https://s3.amazonaws.com/fooplugins/rvs/oceans-clip.ogv",
 							"title": "Fish Frenzy - Oceans Clip (.mp4, .webm, .ogv)",
