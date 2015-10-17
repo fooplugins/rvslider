@@ -44,6 +44,7 @@
 			vimeo: /(player\.)?vimeo\.com/i,
 			youtube: /(www\.)?youtube|youtu\.be/i,
 			wistia: /(.+)?(wistia\.(com|net)|wi\.st)\/.*/i,
+			daily: /(www.)?dailymotion\.com|dai\.ly/i,
 			supported: /.\.mp4|.\.webm|.\.wmv|.\.ogv|.\.flv/i
 		};
 		this.templates = {
@@ -229,6 +230,12 @@
 						video.thumb_small = tmp.thumb_small.toString();
 						video.thumb_large = tmp.thumb_large.toString();
 						success = true;
+					} else if (info.type == 'daily' && response){
+						video.title = response.title;
+						video.credits = response.author_name;
+						video.thumb_small = response.thumbnail_url;
+						video.thumb_large = response.thumbnail_url;
+						success = true;
 					}
 					if (success){
 						d.resolve(video);
@@ -241,6 +248,7 @@
 	};
 
 	Generator.prototype.parse = function(url){
+		url = url.substring(0, 2) == '//' ? location.protocol + url : url;
 		var result = {url: url, id: false, type: null, api_url: null};
 		if (this.regex.vimeo.test(url)){
 			result.id = url.substr(url.lastIndexOf('/')+1);
@@ -258,6 +266,12 @@
 				: url.split(/medias\//)[1].split(/[?&]/)[0];
 			result.type = 'wistia';
 			result.api_url = 'http://fast.wistia.net/oembed.json?url=' + result.url;
+		} else if (this.regex.daily.test(url)){
+			result.id = /\/video\//i.test(url)
+				? url.split(/\/video\//i)[1].split(/[?&]/)[0].split(/[_]/)[0]
+				: url.split(/dai\.ly/i)[1].split(/[?&]/)[0];
+			result.type = 'daily';
+			result.api_url = 'http://www.dailymotion.com/services/oembed?url=' + result.url;
 		} else if (this.regex.supported.test(url)){
 			result.id = result.type = 'custom';
 		}
@@ -339,6 +353,7 @@
 			if (self.regex.vimeo.test(val)
 				|| self.regex.youtube.test(val)
 				|| self.regex.wistia.test(val)
+				|| self.regex.daily.test(val)
 				|| self.regex.supported.test(val)){
 				self._.video.add.prop('disabled', false);
 				if (self.regex.supported.test(val)){

@@ -6,6 +6,8 @@
 		this.hash = parts.length == 2 ? '#'+parts[1] : '';
 		parts = parts[0].split('?');
 		this.url = parts[0];
+		var match = this.url.match(/.*\/(.*)$/);
+		this.id = match && match.length >= 2 ? match[1] : null;
 		this.protocol = url.substring(0,5) == 'https' ? 'https:' : 'http:';
 		this.params = [];
 		var params = (parts.length == 2 ? parts[1] : '').split(/[&;]/g);
@@ -19,11 +21,11 @@
 			'video/youtube': /(www.)?youtube|youtu\.be/i,
 			'video/vimeo': /(player.)?vimeo\.com/i,
 			'video/wistia': /(.+)?(wistia\.(com|net)|wi\.st)\/.*/i,
+			'video/daily': /(www.)?dailymotion\.com|dai\.ly/i,
 			'video/mp4': /\.mp4/i,
 			'video/webm': /\.webm/i,
 			'video/wmv': /\.wmv/i,
-			'video/ogg': /\.ogv/i,
-			'video/flv': /\.flv/i
+			'video/ogg': /\.ogv/i
 		};
 		this.mimeType = null;
 		for (var name in this.mimeTypes){
@@ -31,35 +33,41 @@
 				this.mimeType = name;
 		}
 
-		var id;
-		if (this.mimeType == 'video/youtube' || this.mimeType == 'video/vimeo'){
+		if (this.mimeType == 'video/youtube'){
+			this.id = /embed\//i.test(this.url)
+				? this.url.split(/embed\//i)[1].split(/[?&]/)[0]
+				: url.split(/v\/|v=|youtu\.be\//i)[1].split(/[?&]/)[0];
+			this.url = this.protocol + '//www.youtube.com/embed/' + this.id;
 			this.param('autoplay', '1');
-			if (this.mimeType == 'video/youtube'){
-				id = /embed\//i.test(this.url)
-					? this.url.split(/embed\//i)[1].split(/[?&]/)[0]
-					: url.split(/v\/|v=|youtu\.be\//i)[1].split(/[?&]/)[0];
-				this.url = this.protocol + '//www.youtube.com/embed/' + id;
-				this.param('modestbranding', '1');
-				this.param('rel', '0');
-				this.param('wmode', 'transparent');
-				this.param('showinfo', '0');
-			}
-			if (this.mimeType == 'video/vimeo'){
-				id = this.url.substr(this.url.lastIndexOf('/')+1);
-				this.url = this.protocol + '//player.vimeo.com/video/' + id;
-				this.param('badge', '0');
-				this.param('portrait', '0');
-			}
-		}
-		if (this.mimeType == 'video/wistia'){
-			id = /embed\//i.test(this.url) ? this.url.split(/embed\/.*?\//i)[1].split(/[?&]/)[0]
+			this.param('modestbranding', '1');
+			this.param('rel', '0');
+			this.param('wmode', 'transparent');
+			this.param('showinfo', '0');
+		} else if (this.mimeType == 'video/vimeo'){
+			this.id = this.url.substr(this.url.lastIndexOf('/')+1);
+			this.url = this.protocol + '//player.vimeo.com/video/' + this.id;
+			this.param('autoplay', '1');
+			this.param('badge', '0');
+			this.param('portrait', '0');
+		} else if (this.mimeType == 'video/wistia'){
+			this.id = /embed\//i.test(this.url)
+				? this.url.split(/embed\/.*?\//i)[1].split(/[?&]/)[0]
 				: this.url.split(/medias\//)[1].split(/[?&]/)[0];
-
 			var playlist = /playlists\//i.test(this.url);
-			this.url = this.protocol + '//fast.wistia.net/embed/'+(playlist ? 'playlists' : 'iframe')+'/'+id;
+			this.url = this.protocol + '//fast.wistia.net/embed/'+(playlist ? 'playlists' : 'iframe')+'/'+this.id;
 			if (playlist) this.param('media_0_0[autoPlay]', '1');
 			else this.param('autoPlay', '1');
 			this.param('theme', '');
+		} else if (this.mimeType == 'video/daily'){
+			this.id = /\/video\//i.test(this.url)
+				? this.url.split(/\/video\//i)[1].split(/[?&]/)[0].split(/[_]/)[0]
+				: url.split(/dai\.ly/i)[1].split(/[?&]/)[0];
+			this.url = this.protocol + '//www.dailymotion.com/embed/video/' + this.id;
+			this.param('autoplay', '1');
+			this.param('wmode', 'opaque');
+			this.param('info', '0');
+			this.param('logo', '0');
+			this.param('related', '0');
 		}
 	};
 

@@ -9,7 +9,12 @@
 
 	FP.RVSliderMediaElement.prototype.handles = function(urls){
 		for (var i = 0, len = urls.length; i < len; i++){
-			if (this.enabled && !(!this.rvs.o.mejs.youtube && urls[i].mimeType === 'video/youtube' || !this.rvs.o.mejs.vimeo && urls[i].mimeType === 'video/vimeo' || urls[i].mimeType === 'video/wistia')) return true;
+			if (this.enabled && !(
+				!this.rvs.o.mejs.youtube && urls[i].mimeType === 'video/youtube'
+				|| !this.rvs.o.mejs.vimeo && urls[i].mimeType === 'video/vimeo'
+				|| urls[i].mimeType === 'video/wistia'
+				|| urls[i].mimeType === 'video/daily'
+				)) return true;
 		}
 		return false;
 	};
@@ -21,7 +26,7 @@
 		}).css({ width: '100%', height: '100%' });
 
 		for (var i = 0, len = urls.length; i < len; i++){
-			if (this.enabled && !(!this.rvs.o.mejs.youtube && urls[i].mimeType === 'video/youtube' || !this.rvs.o.mejs.vimeo && urls[i].mimeType === 'video/vimeo' || urls[i].mimeType === 'video/wistia')){
+			if (this.enabled && !(!this.rvs.o.mejs.youtube && urls[i].mimeType === 'video/youtube' || !this.rvs.o.mejs.vimeo && urls[i].mimeType === 'video/vimeo' || urls[i].mimeType === 'video/wistia' || urls[i].mimeType === 'video/daily')){
 				this.player.$.player.append($('<source/>',{ type: urls[i].mimeType, src: urls[i] }));
 			}
 		}
