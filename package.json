@@ -1,9 +1,9 @@
 {
   "name": "rvslider",
   "title": "Responsive Video Gallery",
-  "description": "Responsive Video Slider is a jQuery plugin for FooGallery that provides a slider with horizontal and vertical thumb layouts for video galleries.",
-  "version": "1.0.1",
-  "homepage": "http://fooplugins.com",
+  "description": "A jQuery plugin that provides a slider with horizontal and vertical thumb layouts for video galleries.",
+  "version": "1.0.2",
+  "homepage": "http://fooplugins.github.io/rvslider/",
   "author": {
     "name": "FooPlugins",
     "url": "http://fooplugins.com"
@@ -22,7 +22,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/fooplugins/rvslider"
+    "url": "https://github.com/fooplugins/rvslider"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

@@ -82,6 +82,7 @@
 	background-size: cover;
 }
 .rvs-nav-item-title {
+	display: block;
 	max-height: 34px;
 	line-height: 17px;
 	font-size: 14px;
@@ -89,6 +90,7 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	clear: none;
 }
 .rvs-nav-item-credits {
 	display: block;
@@ -99,6 +101,7 @@
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	clear: none;
 }
 /* Thumb Play */
 .rvs-thumb-play .rvs-nav-item-thumb:before {
