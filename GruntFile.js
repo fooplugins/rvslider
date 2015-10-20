@@ -6,9 +6,21 @@ module.exports = function (grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 		clean: {
 			compiled: ['compiled'],
-			releases: ['releases/*.v<%= pkg.version %>.zip']
+			releases: [
+				'releases/*.v<%= pkg.version %>.zip',
+				'releases/latest.zip'
+			]
 		},
 		concat: {
+			options: {
+				banner: '/*!\n' +
+				'* <%= pkg.title %> - <%= pkg.description %>\n' +
+				'* @version <%= pkg.version %>\n' +
+				'* @link <%= pkg.homepage %>\n' +
+				'* @copyright Steven Usher & Brad Vincent 2015\n' +
+				'* @license Released under the MIT license.\n' +
+				'*/\n'
+			},
 			js: {
 				src: [
 					"src/js/rvslider.js",
@@ -57,6 +69,9 @@ module.exports = function (grunt) {
 		},
 		cssmin: {
 			minify: {
+				options: {
+					keepSpecialComments: 1
+				},
 				files: {
 					'compiled/rvslider.min.css': [ "compiled/rvslider.css" ]
 				}
@@ -73,9 +88,37 @@ module.exports = function (grunt) {
 			}
 		},
 		compress: {
-			bootstrap: {
+			version: {
 				options: {
 					archive: 'releases/rvslider.v<%= pkg.version %>.zip'
+				},
+				files: [{
+					expand: true,
+					cwd: 'compiled/',
+					src: [
+						'rvslider.css',
+						'rvslider.min.css'
+					],
+					dest: 'css/'
+				},{
+					expand: true,
+					cwd: 'compiled/',
+					src: [
+						'rvslider.js',
+						'rvslider.min.js'
+					],
+					dest: 'js/'
+				},{
+					expand: true,
+					cwd: 'compiled/',
+					src: [
+						'starter-template.html'
+					]
+				}]
+			},
+			latest: {
+				options: {
+					archive: 'releases/rvslider.latest.zip'
 				},
 				files: [{
 					expand: true,
