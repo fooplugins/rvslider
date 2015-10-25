@@ -1,6 +1,6 @@
 /*!
 * Responsive Video Gallery - A jQuery plugin that provides a slider with horizontal and vertical thumb layouts for video galleries.
-* @version 1.0.2
+* @version 1.0.3
 * @link http://fooplugins.github.io/rvslider/
 * @copyright Steven Usher & Brad Vincent 2015
 * @license Released under the MIT license.
@@ -40,6 +40,15 @@
 		};
 		this.o = $.extend(true, {}, def, options);
 		this.index = this.o.selected;
+		this.breakpoints = '[object Array]' === Object.prototype.toString.call(this.o.breakpoints) ? this.o.breakpoints : [ // number of items to display at various widths and the classes to apply
+			[320, 'rvs-xs', 2], // Width less than 320 equals 2 items
+			[768, 'rvs-xs rvs-sm', 3], // W > 320 && W < 768 = 3 items
+			[1024, 'rvs-xs rvs-sm rvs-md', 4], // W > 768 && W < 1024 = 4 items
+			[1280, 'rvs-xs rvs-sm rvs-md rvs-lg', 5], // W > 1024 && W < 1280 = 5 items
+			[1600, 'rvs-xs rvs-sm rvs-md rvs-lg rvs-xl', 6] // Effectively anything greater than 1280 will equal 6 items as this last value is used for anything larger.
+		];
+		this.breakpoint = null;
+		this.useViewport = this.$.el.hasClass('rvs-use-viewport');
 		this.items = new FP.RVSliderItems(this);
 		this.nav = new FP.RVSliderNav(this);
 		this.player = new FP.RVSliderPlayer(this);
@@ -57,11 +66,31 @@
 		this.items.destroy();
 	};
 
+	FP.RVSlider.prototype._breakpoint = function(){
+		var ratio = 'devicePixelRatio' in window && typeof window.devicePixelRatio === 'number' ? window.devicePixelRatio : 1,
+			i = 0, len = this.breakpoints.length, current,
+			ww = this.useViewport
+				? (window.innerWidth || document.documentElement.clientWidth || (document.body ? document.body.offsetWidth : 0)) / ratio
+				: this.$.el.parent().innerWidth();
+
+		this.breakpoints.sort(function(a,b){ return a[0] - b[0]; });
+		for (; i < len; i++){
+			if (this.breakpoints[i][0] >= ww){
+				current = this.breakpoints[i];
+				break;
+			}
+		}
+		if (!current) current = this.breakpoints[len - 1];
+		return current;
+	};
+
 	FP.RVSlider.prototype.preresize = function(){
 		this.$.el.removeClass('rvs-animate');
 	};
 
 	FP.RVSlider.prototype.resize = function(){
+		this.breakpoint = this._breakpoint();
+		this.$.el.removeClass(this.breakpoints[this.breakpoints.length - 1][1]).addClass(this.breakpoint[1]);
 		this.items.resize();
 		this.nav.resize();
 		this.$.el.addClass('rvs-animate');
@@ -110,9 +139,9 @@
 	};
 
 	FP.RVSliderItems.prototype.destroy = function(){
-		this.$.stage.off('touchstart.rvs', self.onTouchStart)
-			.off('touchmove.rvs', self.onTouchMove)
-			.off('touchend.rvs', self.onTouchEnd);
+		this.$.stage.off('touchstart.rvs', this.onTouchStart)
+			.off('touchmove.rvs', this.onTouchMove)
+			.off('touchend.rvs', this.onTouchEnd);
 		this.$.stage.css({width: '', transform: ''});
 		this.$.items.css({width: '', left: ''}).removeClass('rvs-active');
 	};
@@ -204,46 +233,24 @@
 			first: 0,
 			last: 0
 		};
-		this.breakpoints = '[object Array]' === Object.prototype.toString.call(self.rvs.o.breakpoints) ? self.rvs.o.breakpoints : [ // number of items to display at various widths
-			[320, 2], // Width less than 320 equals 2 items
-			[480, 3], // W > 320 && W < 480 = 3 items
-			[768, 4], // W > 480 && W < 768 = 4 items
-			[992, 4], // W > 768 && W < 992 = 4 items
-			[1200, 5] // Effectively anything greater than 992 will equal 5 items as this last value is used for anything larger.
-		];
 	};
 
 	FP.RVSliderNav.prototype.destroy = function(){
-		this.$.stage.off('touchstart.rvs', self.onTouchStart)
-			.off('touchmove.rvs', self.onTouchMove)
-			.off('touchend.rvs', self.onTouchEnd)
-			.off('DOMMouseScroll.rvs mousewheel.rvs', self.onMouseWheel);
-		this.$.items.off('click.rvs', self.onItemClick);
-		this.$.prev.off('click.rvs', self.onPrevClick);
-		this.$.next.off('click.rvs', self.onNextClick);
+		this.$.stage.off('touchstart.rvs', this.onTouchStart)
+			.off('touchmove.rvs', this.onTouchMove)
+			.off('touchend.rvs', this.onTouchEnd)
+			.off('DOMMouseScroll.rvs mousewheel.rvs', this.onMouseWheel);
+		this.$.items.off('click.rvs', this.onItemClick);
+		this.$.prev.off('click.rvs', this.onPrevClick);
+		this.$.next.off('click.rvs', this.onNextClick);
 		this.$.stage.css({width: '', transform: ''});
 		this.$.items.css({width: '', left: ''}).removeClass('rvs-active');
-	};
-
-	FP.RVSliderNav.prototype._maximum = function(){
-		var ratio = 'devicePixelRatio' in window && typeof window.devicePixelRatio === 'number' ? window.devicePixelRatio : 1,
-			ww = (window.innerWidth || document.documentElement.clientWidth || (document.body ? document.body.offsetWidth : 0)) / ratio,
-			i = 0, len = this.breakpoints.length, current;
-		this.breakpoints.sort(function(a,b){ return a[0] - b[0]; });
-		for (; i < len; i++){
-			if (this.breakpoints[i][0] > ww){
-				current = this.breakpoints[i][1];
-				break;
-			}
-		}
-		if (!current) current = this.breakpoints[len - 1][1];
-		return current;
 	};
 
 	FP.RVSliderNav.prototype.resize = function(){
 		var self = this;
 		if (self.horizontal){
-			self.visible.max = self._maximum();
+			self.visible.max = self.rvs.breakpoint[2];
 			self.width = Math.floor(self.rvs.items.width / self.visible.max) + 1;
 			self.$.stage.css('width', self.width * self.count);
 			self.$.items.each(function(i){

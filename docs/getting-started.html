@@ -241,6 +241,7 @@
 			<li><code>rvs-horizontal</code> - Switch the thumbnail layout from the default vertical on the right side to a horizontal layout along the bottom.</li>
 			<li><code>rvs-light</code> - Switch the theme from the default dark to the alternate light theme.</li>
 			<li><code>rvs-thumb-play</code> - Allow videos to be played by clicking on the thumbnail of the nav item.</li>
+			<li><code>rvs-use-viewport</code> - Use the viewport width when determining layout instead of the parent elements width.</li>
 			<li><code>rvs-continuous-play</code> - Allow videos to continue to play while navigating items.</li>
 			<li><code>rvs-large-thumbs</code> - Use large thumbnails (Not supported when using <code>rvs-horizontal</code>).</li>
 		</ul>
@@ -268,16 +269,16 @@
 			<h3 class="list-group-header">General options</h3>
 
 			<!-- num -->
-			<a href="#num" class="list-group-item anchored">
-				<span id="num" class="anchor">&nbsp;</span>
-				<h4 class="list-group-item-heading">num <small>array</small></h4>
-				<p class="list-group-item-text">An array defining the number of items to display when using the horizontal layout.</p>
+			<a href="#breakpoints" class="list-group-item anchored">
+				<span id="breakpoints" class="anchor">&nbsp;</span>
+				<h4 class="list-group-item-heading">breakpoints <small>array</small></h4>
+				<p class="list-group-item-text">An array defining the breakpoints, their classes, and the number of items to display when using the horizontal layout.</p>
 			</a>
 			<div class="list-group-detail">
 				<div class="list-group-detail-inner">
 					<p>
-						This is an array of number arrays where the first number of each child array defines the minimum width of the viewport and the second number specifies the number of
-						nav items to display at the corresponding widths.
+						This is an array of arrays where the first item of each child array defines the minimum width of the parent or viewport. The second item specifies the
+						CSS classes to apply at the breakpoint. The third item is the number of nav items to display at the breakpoint when using the horizontal layout.
 					</p>
 
 					<div class="examples">
@@ -286,12 +287,12 @@
 							<p><code>null</code></p>
 							<p>If no array is supplied the plugin falls back to the below default configuration.</p>
 						</div>
-						<pre class="language-javascript" data-lang="javascript"><code>[
-	[320, 2], // Width less than 320 equals 2 items
-	[480, 3], // W &gt; 320 &amp;&amp; W &lt; 480 = 3 items
-	[768, 4], // W &gt; 480 &amp;&amp; W &lt; 768 = 4 items
-	[992, 4], // W &gt; 768 &amp;&amp; W &lt; 992 = 4 items
-	[1200, 5] // Effectively anything greater than 992 will equal 5 items as this last value is used for any widths larger than itself.
+						<pre class="language-javascript" data-lang="javascript"><code>[ // number of items to display at various widths and the classes to apply
+	[320, 'rvs-xs', 2], // Width less than 320 equals 2 items
+	[768, 'rvs-xs rvs-sm', 3], // W > 320 && W < 768 = 3 items
+	[1024, 'rvs-xs rvs-sm rvs-md', 4], // W > 768 && W < 1024 = 4 items
+	[1280, 'rvs-xs rvs-sm rvs-md rvs-lg', 5], // W > 1024 && W < 1280 = 5 items
+	[1600, 'rvs-xs rvs-sm rvs-md rvs-lg rvs-xl', 6] // Effectively anything greater than 1280 will equal 6 items as this last value is used for anything larger.
 ]</code></pre>
 
 					</div>
@@ -299,15 +300,15 @@
 					<div class="examples">
 
 						<div class="example javascript">
-							<p>The below shows how to supply the num array directly through the options.</p>
+							<p>The below shows how to supply the breakpoints array directly through the options.</p>
 						</div>
 						<pre class="language-javascript" data-lang="javascript"><code>$(&quot;.rvs-container&quot;).rvslider({
 	&quot;num&quot;: [
-		[320, 2],
-		[480, 3],
-		[768, 4],
-		[992, 4],
-		[1200, 5]
+		[320, 'rvs-xs', 2],
+		[768, 'rvs-xs rvs-sm', 3],
+		[1024, 'rvs-xs rvs-sm rvs-md', 4],
+		[1280, 'rvs-xs rvs-sm rvs-md rvs-lg', 5],
+		[1600, 'rvs-xs rvs-sm rvs-md rvs-lg rvs-xl', 6]
 	]
 });</code></pre>
 

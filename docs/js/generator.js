@@ -74,6 +74,7 @@
 			hide_overlay: $('#hide_overlay').on('change', {self: this}, this.onOptionChange),
 			hide_thumb: $('#hide_thumb').on('change', {self: this}, this.onOptionChange),
 			hide_credits: $('#hide_credits').on('change', {self: this}, this.onOptionChange),
+			use_viewport: $('#use_viewport').on('change', {self: this}, this.onOptionChange),
 			thumb_play: $('#thumb_play').on('change', {self: this}, this.onOptionChange),
 			continuous_play: $('#continuous_play').on('change', {self: this}, this.onOptionChange),
 			theme: {
@@ -134,6 +135,7 @@
 				hide_overlay: this._.hide_overlay.prop('checked'),
 				hide_thumb: this._.hide_thumb.prop('checked'),
 				hide_credits: this._.hide_credits.prop('checked'),
+				use_viewport: this._.use_viewport.prop('checked'),
 				thumb_play: this._.thumb_play.prop('checked'),
 				continuous_play: this._.continuous_play.prop('checked'),
 				theme: this._.theme.radios.filter(':checked').val(),

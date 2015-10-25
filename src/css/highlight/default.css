@@ -8,8 +8,8 @@
 .rvs-container .rvs-nav-item.rvs-active:active,
 .rvs-container .rvs-nav-item.rvs-active:focus,
 .rvs-container .rvs-nav-item.rvs-active:hover,
-.rvs-container.rvs-thumb-play .rvs-nav-item-thumb:hover:before,
-.rvs-container.rvs-thumb-play .rvs-video-active .rvs-nav-item-thumb:before {
+.rvs-container.rvs-thumb-play .rvs-nav-container span.rvs-nav-item-thumb:hover:before,
+.rvs-container.rvs-thumb-play .rvs-nav-container .rvs-video-active span.rvs-nav-item-thumb:before {
 	background-color: #7816D6;
 }
 .rvs-container .rvs-nav-item.rvs-active,

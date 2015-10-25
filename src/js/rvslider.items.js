@@ -18,9 +18,9 @@
 	};
 
 	FP.RVSliderItems.prototype.destroy = function(){
-		this.$.stage.off('touchstart.rvs', self.onTouchStart)
-			.off('touchmove.rvs', self.onTouchMove)
-			.off('touchend.rvs', self.onTouchEnd);
+		this.$.stage.off('touchstart.rvs', this.onTouchStart)
+			.off('touchmove.rvs', this.onTouchMove)
+			.off('touchend.rvs', this.onTouchEnd);
 		this.$.stage.css({width: '', transform: ''});
 		this.$.items.css({width: '', left: ''}).removeClass('rvs-active');
 	};

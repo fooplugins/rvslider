@@ -29,8 +29,8 @@
 }
 .rvs-close,
 .rvs-play-video,
-.rvs-nav-item-thumb,
-.rvs-thumb-play .rvs-nav-item-thumb:before {
+.rvs-nav-container span.rvs-nav-item-thumb,
+.rvs-thumb-play .rvs-nav-container span.rvs-nav-item-thumb:before {
 	background-color: rgba(23, 35, 34, 0.75);
 }
 .rvs-container,

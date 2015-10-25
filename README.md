@@ -45,4 +45,15 @@ Once that is setup all that is left to do is provide the plugin with [the HTML i
 </ul>
 </td>
 </tr>
+<tr>
+<td>1.0.3</td>
+<td>
+<ul>
+<li>Changed the plugin to use the parent width instead of the viewport to determine layout.</li>
+<li>Switched CSS media queries to JS breakpoints to be able to use parent width.</li>
+<li>Added additional CSS hardening.</li>
+<li>Minor bug fixes.</li>
+</ul>
+</td>
+</tr>
 </table>
