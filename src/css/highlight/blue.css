@@ -8,8 +8,8 @@
 .rvs-blue-highlight .rvs-nav-item.rvs-active:active,
 .rvs-blue-highlight .rvs-nav-item.rvs-active:focus,
 .rvs-blue-highlight .rvs-nav-item.rvs-active:hover,
-.rvs-blue-highlight.rvs-thumb-play .rvs-nav-item-thumb:hover:before,
-.rvs-blue-highlight.rvs-thumb-play .rvs-video-active .rvs-nav-item-thumb:before {
+.rvs-blue-highlight.rvs-thumb-play .rvs-nav-container span.rvs-nav-item-thumb:hover:before,
+.rvs-blue-highlight.rvs-thumb-play .rvs-nav-container .rvs-video-active span.rvs-nav-item-thumb:before {
 	background-color: #0087be;
 }
 .rvs-blue-highlight .rvs-nav-item.rvs-active,

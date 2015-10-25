@@ -33,6 +33,15 @@
 		};
 		this.o = $.extend(true, {}, def, options);
 		this.index = this.o.selected;
+		this.breakpoints = '[object Array]' === Object.prototype.toString.call(this.o.breakpoints) ? this.o.breakpoints : [ // number of items to display at various widths and the classes to apply
+			[320, 'rvs-xs', 2], // Width less than 320 equals 2 items
+			[768, 'rvs-xs rvs-sm', 3], // W > 320 && W < 768 = 3 items
+			[1024, 'rvs-xs rvs-sm rvs-md', 4], // W > 768 && W < 1024 = 4 items
+			[1280, 'rvs-xs rvs-sm rvs-md rvs-lg', 5], // W > 1024 && W < 1280 = 5 items
+			[1600, 'rvs-xs rvs-sm rvs-md rvs-lg rvs-xl', 6] // Effectively anything greater than 1280 will equal 6 items as this last value is used for anything larger.
+		];
+		this.breakpoint = null;
+		this.useViewport = this.$.el.hasClass('rvs-use-viewport');
 		this.items = new FP.RVSliderItems(this);
 		this.nav = new FP.RVSliderNav(this);
 		this.player = new FP.RVSliderPlayer(this);
@@ -50,11 +59,31 @@
 		this.items.destroy();
 	};
 
+	FP.RVSlider.prototype._breakpoint = function(){
+		var ratio = 'devicePixelRatio' in window && typeof window.devicePixelRatio === 'number' ? window.devicePixelRatio : 1,
+			i = 0, len = this.breakpoints.length, current,
+			ww = this.useViewport
+				? (window.innerWidth || document.documentElement.clientWidth || (document.body ? document.body.offsetWidth : 0)) / ratio
+				: this.$.el.parent().innerWidth();
+
+		this.breakpoints.sort(function(a,b){ return a[0] - b[0]; });
+		for (; i < len; i++){
+			if (this.breakpoints[i][0] >= ww){
+				current = this.breakpoints[i];
+				break;
+			}
+		}
+		if (!current) current = this.breakpoints[len - 1];
+		return current;
+	};
+
 	FP.RVSlider.prototype.preresize = function(){
 		this.$.el.removeClass('rvs-animate');
 	};
 
 	FP.RVSlider.prototype.resize = function(){
+		this.breakpoint = this._breakpoint();
+		this.$.el.removeClass(this.breakpoints[this.breakpoints.length - 1][1]).addClass(this.breakpoint[1]);
 		this.items.resize();
 		this.nav.resize();
 		this.$.el.addClass('rvs-animate');

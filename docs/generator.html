@@ -259,6 +259,11 @@
 							</div>
 							<div class="checkbox">
 								<label>
+									<input type="checkbox" id="use_viewport" value=""> Use the viewport width instead of the parent element width
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
 									<input type="checkbox" id="thumb_play" value=""> Allow videos to be played by clicking on the thumbnail
 								</label>
 							</div>
@@ -524,7 +529,7 @@
 
 <!-- HTML Template - This template provides the entire HTML for the actual slider. -->
 <script id="rvs-html-template" type="text/x-handlebars-template">
-<div class="rvs-container{{#if layout}} {{layout}}{{/if}}{{#if theme}} {{theme}}{{/if}}{{#if highlight}} {{highlight}}{{/if}}{{#if large_thumbs}} rvs-large-thumbs{{/if}}{{#if thumb_play}} rvs-thumb-play{{/if}}{{#if continuous_play}} rvs-continuous-play{{/if}}{{#if hide_credits}} rvs-hide-credits{{/if}}">
+<div class="rvs-container{{#if layout}} {{layout}}{{/if}}{{#if theme}} {{theme}}{{/if}}{{#if highlight}} {{highlight}}{{/if}}{{#if large_thumbs}} rvs-large-thumbs{{/if}}{{#if thumb_play}} rvs-thumb-play{{/if}}{{#if continuous_play}} rvs-continuous-play{{/if}}{{#if hide_credits}} rvs-hide-credits{{/if}}{{#if use_viewport}} rvs-use-viewport{{/if}}">
 	<div class="rvs-item-container">
 		<div class="rvs-item-stage">
 			{{#each videos}}
@@ -642,7 +647,7 @@
 	.rvs-custom-highlight .rvs-nav-item.rvs-active:active,
 	.rvs-custom-highlight .rvs-nav-item.rvs-active:focus,
 	.rvs-custom-highlight .rvs-nav-item.rvs-active:hover,
-	.rvs-custom-highlight.rvs-thumb-play .rvs-nav-item-thumb:hover:before {
+	.rvs-custom-highlight.rvs-thumb-play .rvs-nav-container span.rvs-nav-item-thumb:hover:before {
 		background-color: {{highlight.background}};
 	}
 	.rvs-custom-highlight .rvs-nav-item.rvs-active,

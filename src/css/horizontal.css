@@ -14,8 +14,8 @@
 	bottom: 0;
 }
 
-.rvs-horizontal .rvs-nav-prev,
-.rvs-horizontal .rvs-nav-next {
+.rvs-horizontal .rvs-nav-container a.rvs-nav-prev,
+.rvs-horizontal .rvs-nav-container a.rvs-nav-next {
 	left: auto;
 	top: 0;
 	width: auto;
@@ -24,25 +24,25 @@
 	border-top: none;
 	border-bottom: none;
 }
-.rvs-horizontal .rvs-nav-prev {
+.rvs-horizontal .rvs-nav-container a.rvs-nav-prev {
 	top: auto;
 	left: 0;
 	border-right-style: solid;
 	border-right-width: 1px;
 }
-.rvs-horizontal .rvs-nav-next {
+.rvs-horizontal .rvs-nav-container a.rvs-nav-next {
 	bottom: auto;
 	right: 0;
 	border-left-style: solid;
 	border-left-width: 1px;
 }
-.rvs-horizontal .rvs-nav-stage {
+.rvs-horizontal .rvs-nav-container .rvs-nav-stage {
 	-webkit-transform: translateX(0px) translateY(0px);
 	-ms-transform: translateX(0px) translateY(0px);
 	transform: translateX(0px) translateY(0px);
 	height: 100%;
 }
-.rvs-horizontal .rvs-nav-item {
+.rvs-horizontal .rvs-nav-container a.rvs-nav-item {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -52,61 +52,50 @@
 	border-left-style: solid;
 	border-left-width: 1px;
 }
-.rvs-horizontal .rvs-nav-item:first-child {
+.rvs-horizontal .rvs-nav-container a.rvs-nav-item:first-child {
 	border-left-color: transparent;
 	border-left-width: 2px;
 }
 
 /* Make sure to override the large thumbs in horizontal mode */
-.rvs-large-thumbs.rvs-horizontal .rvs-nav-item-thumb {
+.rvs-large-thumbs.rvs-horizontal .rvs-nav-container span.rvs-nav-item-thumb {
 	width: 60px;
 	height: 60px;
 }
 
-/* Extra Small Devices, Phones */
-@media only screen and (min-width: 480px) {
-	.rvs-container.rvs-horizontal {
-		padding-right: 0;
-	}
-	.rvs-horizontal .rvs-nav-container {
-		width: 100%;
-	}
+/* rvs-xs - Custom, iPhone Retina */
+/* rvs-sm - Small Devices, Phones */
+.rvs-container.rvs-horizontal.rvs-xs.rvs-sm {
+	padding-right: 0;
+	height: 420px;
 }
-/* Small Devices, Tablets */
-@media only screen and (min-width: 768px) {
-	.rvs-container.rvs-horizontal {
-		padding-right: 0;
-		padding-bottom: 78px;
-	}
-	.rvs-horizontal .rvs-nav-prev,
-	.rvs-horizontal .rvs-nav-next {
-		height: 100%;
-		line-height: 78px;
-	}
-	.rvs-horizontal .rvs-nav-container {
-		width: 100%;
-		height: 78px;
-	}
-	.rvs-horizontal .rvs-nav-item {
-		height: 100%;
-	}
+.rvs-horizontal.rvs-xs.rvs-sm .rvs-nav-container {
+	width: 100%;
 }
-/* Chrome hack - for some reason Chrome displays the icon within the button with additional top padding, this is to counter that */
-@media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
-	@media only screen and (min-width: 768px) {
-		.rvs-horizontal .rvs-nav-prev,
-		.rvs-horizontal .rvs-nav-next {
-			line-height: 74px;
-		}
-	}
+/* rvs-md - Small Devices, Tablets */
+.rvs-container.rvs-horizontal.rvs-xs.rvs-sm.rvs-md {
+	padding-right: 0;
+	padding-bottom: 78px;
+	height: 520px;
 }
-/* Medium Devices, Desktops */
-@media only screen and (min-width: 992px) {
-	.rvs-container.rvs-horizontal {
-		height: 546px;
-		padding-right: 0;
-	}
-	.rvs-horizontal .rvs-nav-container {
-		width: 100%;
-	}
+.rvs-horizontal.rvs-xs.rvs-sm.rvs-md .rvs-nav-container a.rvs-nav-prev,
+.rvs-horizontal.rvs-xs.rvs-sm.rvs-md .rvs-nav-container a.rvs-nav-next {
+	height: 100%;
+	line-height: 78px;
 }
+.rvs-horizontal.rvs-xs.rvs-sm.rvs-md .rvs-nav-container {
+	width: 100%;
+	height: 78px;
+}
+.rvs-horizontal.rvs-xs.rvs-sm.rvs-md .rvs-nav-container a.rvs-nav-item {
+	height: 100%;
+}
+/* rvs-lg - Medium Devices, Desktops */
+.rvs-container.rvs-horizontal.rvs-xs.rvs-sm.rvs-md.rvs-lg {
+	height: 546px;
+	padding-right: 0;
+}
+.rvs-horizontal.rvs-xs.rvs-sm.rvs-md.rvs-lg .rvs-nav-container {
+	width: 100%;
+}
+/* rvs-xl - Large Devices, Wide Screens */

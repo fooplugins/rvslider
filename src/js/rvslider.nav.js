@@ -26,46 +26,24 @@
 			first: 0,
 			last: 0
 		};
-		this.breakpoints = '[object Array]' === Object.prototype.toString.call(self.rvs.o.breakpoints) ? self.rvs.o.breakpoints : [ // number of items to display at various widths
-			[320, 2], // Width less than 320 equals 2 items
-			[480, 3], // W > 320 && W < 480 = 3 items
-			[768, 4], // W > 480 && W < 768 = 4 items
-			[992, 4], // W > 768 && W < 992 = 4 items
-			[1200, 5] // Effectively anything greater than 992 will equal 5 items as this last value is used for anything larger.
-		];
 	};
 
 	FP.RVSliderNav.prototype.destroy = function(){
-		this.$.stage.off('touchstart.rvs', self.onTouchStart)
-			.off('touchmove.rvs', self.onTouchMove)
-			.off('touchend.rvs', self.onTouchEnd)
-			.off('DOMMouseScroll.rvs mousewheel.rvs', self.onMouseWheel);
-		this.$.items.off('click.rvs', self.onItemClick);
-		this.$.prev.off('click.rvs', self.onPrevClick);
-		this.$.next.off('click.rvs', self.onNextClick);
+		this.$.stage.off('touchstart.rvs', this.onTouchStart)
+			.off('touchmove.rvs', this.onTouchMove)
+			.off('touchend.rvs', this.onTouchEnd)
+			.off('DOMMouseScroll.rvs mousewheel.rvs', this.onMouseWheel);
+		this.$.items.off('click.rvs', this.onItemClick);
+		this.$.prev.off('click.rvs', this.onPrevClick);
+		this.$.next.off('click.rvs', this.onNextClick);
 		this.$.stage.css({width: '', transform: ''});
 		this.$.items.css({width: '', left: ''}).removeClass('rvs-active');
-	};
-
-	FP.RVSliderNav.prototype._maximum = function(){
-		var ratio = 'devicePixelRatio' in window && typeof window.devicePixelRatio === 'number' ? window.devicePixelRatio : 1,
-			ww = (window.innerWidth || document.documentElement.clientWidth || (document.body ? document.body.offsetWidth : 0)) / ratio,
-			i = 0, len = this.breakpoints.length, current;
-		this.breakpoints.sort(function(a,b){ return a[0] - b[0]; });
-		for (; i < len; i++){
-			if (this.breakpoints[i][0] > ww){
-				current = this.breakpoints[i][1];
-				break;
-			}
-		}
-		if (!current) current = this.breakpoints[len - 1][1];
-		return current;
 	};
 
 	FP.RVSliderNav.prototype.resize = function(){
 		var self = this;
 		if (self.horizontal){
-			self.visible.max = self._maximum();
+			self.visible.max = self.rvs.breakpoint[2];
 			self.width = Math.floor(self.rvs.items.width / self.visible.max) + 1;
 			self.$.stage.css('width', self.width * self.count);
 			self.$.items.each(function(i){
