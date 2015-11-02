@@ -1,6 +1,6 @@
 /*!
 * Responsive Video Gallery - A jQuery plugin that provides a slider with horizontal and vertical thumb layouts for video galleries.
-* @version 1.0.3
+* @version 1.0.4
 * @link http://fooplugins.github.io/rvslider/
 * @copyright Steven Usher & Brad Vincent 2015
 * @license Released under the MIT license.
@@ -50,6 +50,7 @@
 }
 .rvs-item-container {
 	height: 100%;
+	background-color: inherit;
 }
 .rvs-item-stage {
 	height: 100%;
@@ -58,6 +59,7 @@
 	-webkit-transform: translateX(0px);
 	-moz-transform: translateX(0px);
 	transform: translateX(0px);
+	background-color: inherit;
 }
 .rvs-item {
 	display: block;
@@ -66,6 +68,7 @@
 	top: 0;
 	background: no-repeat center center;
 	background-size: cover;
+	background-color: inherit;
 }
 .rvs-item-content,
 .rvs-item-text {
@@ -135,6 +138,10 @@
 	right: 0;
 	width: 100%;
 	height: 100%;
+	background-color: inherit;
+}
+.rvs-player > video {
+	background-color: #000;
 }
 .rvs-close,
 .rvs-play-video {
@@ -182,16 +189,30 @@
 .rvs-video-active .rvs-play-video {
 	display: none;
 }
-.rvs-player .mejs-container,
-.rvs-player .mejs-inner,
-.rvs-player .mejs-layers,
-.rvs-player .mejs-layer {
-	width: 100% !important;
-	height: 100% !important;
-}
 
-.rvs-player .mejs-overlay-play .mejs-overlay-button {
-	display: none;
+.rvs-player-error {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	background-color: inherit;
+}
+.rvs-error-icon {
+	display: inline-block;
+	position: relative;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	border-style: solid;
+	border-radius: 50%;
+	background-color: #CA3030;
+	border-width: 12px;
+	width: 140px;
+	height: 140px;
+	font-size: 180px;
 }
 .rvs-nav-container {
 	width: 100px;
@@ -253,10 +274,16 @@
 	overflow: hidden;
 	outline: none;
 	text-decoration: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 .rvs-nav-container a.rvs-nav-item:hover {
 	color: inherit;
 	text-decoration: none;
+	outline: none;
 }
 .rvs-nav-container a.rvs-nav-item:before {
 	display: table;
@@ -411,6 +438,12 @@
 .rvs-xs.rvs-sm.rvs-md .rvs-nav-container span.rvs-nav-item-thumb {
 	display: block;
 }
+.rvs-xs.rvs-sm.rvs-md .rvs-error-icon {
+	border-width: 18px;
+	width: 200px;
+	height: 200px;
+	font-size: 250px;
+}
 /* rvs-lg - Medium Devices, Desktops */
 .rvs-container.rvs-xs.rvs-sm.rvs-md.rvs-lg {
 	height: 545px;
@@ -528,6 +561,7 @@
 /* rvs-xl - Large Devices, Wide Screens */
 .rvs-close,
 .rvs-play-video,
+.rvs-error-icon,
 .rvs-nav-prev,
 .rvs-nav-next,
 .rvs-thumb-play .rvs-nav-item-thumb {
@@ -537,6 +571,7 @@
 }
 .rvs-close:before,
 .rvs-play-video:before,
+.rvs-error-icon:before,
 .rvs-horizontal .rvs-nav-prev:before,
 .rvs-horizontal .rvs-nav-next:before,
 .rvs-thumb-play .rvs-nav-item-thumb:before {
@@ -552,7 +587,8 @@
 	width: auto;
 	height: 78px;
 }
-.rvs-close:before {
+.rvs-close:before,
+.rvs-error-icon:before {
 	content: '\00D7';
 }
 .rvs-play-video:before,
