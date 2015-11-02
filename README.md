@@ -55,5 +55,15 @@ Once that is setup all that is left to do is provide the plugin with [the HTML i
 <li>Minor bug fixes.</li>
 </ul>
 </td>
+<td>1.0.4</td>
+<td>
+<ul>
+<li>Removed mediaelement.js dependency and instead rely on HTML5's VIDEO element for direct video urls (.mp4,.ogv,.webm).</li>
+<li>Added error handling for direct video urls (.mp4,.ogv,.webm)</li>
+<li>Changed xs breakpoint from 320 to 480.</li>
+<li>Disabled text selection on nav items</li>
+<li>Added additional CSS hardening.</li>
+</ul>
+</td>
 </tr>
 </table>

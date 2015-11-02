@@ -33,6 +33,10 @@
 				this.mimeType = name;
 		}
 
+		var ua = navigator.userAgent.toLowerCase(), ie = ua.indexOf('msie ') > -1 || ua.indexOf('trident/') > -1 || ua.indexOf('edge/') > -1, ie8orless = !document.addEventListener;
+		this.isDirectLink = $.inArray(this.mimeType, ['video/mp4','video/wmv','video/ogg','video/webm']) !== -1;
+		this.isBrowserSupported = this.isDirectLink ? $.inArray(this.mimeType, ie ? ie8orless ? [] : ['video/mp4','video/wmv'] : ['video/mp4','video/ogg','video/webm']) !== -1 : true;
+
 		if (this.mimeType == 'video/youtube'){
 			this.id = /embed\//i.test(this.url)
 				? this.url.split(/embed\//i)[1].split(/[?&]/)[0]

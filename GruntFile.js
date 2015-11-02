@@ -27,8 +27,7 @@ module.exports = function (grunt) {
 					"src/js/rvslider.items.js",
 					"src/js/rvslider.nav.js",
 					"src/js/rvslider.url.js",
-					"src/js/rvslider.player.js",
-					"src/js/rvslider.mediaelement.js"
+					"src/js/rvslider.player.js"
 				],
 				dest: "compiled/rvslider.js"
 			},
@@ -37,7 +36,6 @@ module.exports = function (grunt) {
 					"src/css/rvslider.css",
 					"src/css/items.css",
 					"src/css/player.css",
-					"src/css/mediaelement.css",
 					"src/css/nav.css",
 					"src/css/transitions.css",
 					"src/css/responsive.css",

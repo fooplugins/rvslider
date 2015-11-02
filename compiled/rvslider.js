@@ -1,6 +1,6 @@
 /*!
 * Responsive Video Gallery - A jQuery plugin that provides a slider with horizontal and vertical thumb layouts for video galleries.
-* @version 1.0.3
+* @version 1.0.4
 * @link http://fooplugins.github.io/rvslider/
 * @copyright Steven Usher & Brad Vincent 2015
 * @license Released under the MIT license.
@@ -23,12 +23,7 @@
 			nav: 0.1, // in percent - this is the percent of a nav items height a swipe must travel before it scrolls the nav items.
 			touches: 1 // the minimum number of touches that must be registered in order to swipe
 		},
-		breakpoints: null, // number of items to display at various widths when using the horizontal layout
-		mejs: { // any base MediaElement.js options
-			enabled: true, // when enabled this allows for local files as well as youtube/vimeo to be played
-			youtube: false, // set to true to override the default YouTube player
-			vimeo: false // vimeo is not currently supported/bugged this is here for when it works
-		}
+		breakpoints: null // number of items to display at various widths when using the horizontal layout
 	};
 
 	FP.RVSlider = function(el, options){
@@ -41,7 +36,7 @@
 		this.o = $.extend(true, {}, def, options);
 		this.index = this.o.selected;
 		this.breakpoints = '[object Array]' === Object.prototype.toString.call(this.o.breakpoints) ? this.o.breakpoints : [ // number of items to display at various widths and the classes to apply
-			[320, 'rvs-xs', 2], // Width less than 320 equals 2 items
+			[480, 'rvs-xs', 2], // Width less than 320 equals 2 items
 			[768, 'rvs-xs rvs-sm', 3], // W > 320 && W < 768 = 3 items
 			[1024, 'rvs-xs rvs-sm rvs-md', 4], // W > 768 && W < 1024 = 4 items
 			[1280, 'rvs-xs rvs-sm rvs-md rvs-lg', 5], // W > 1024 && W < 1280 = 5 items
@@ -69,13 +64,13 @@
 	FP.RVSlider.prototype._breakpoint = function(){
 		var ratio = 'devicePixelRatio' in window && typeof window.devicePixelRatio === 'number' ? window.devicePixelRatio : 1,
 			i = 0, len = this.breakpoints.length, current,
-			ww = this.useViewport
+			width = this.useViewport
 				? (window.innerWidth || document.documentElement.clientWidth || (document.body ? document.body.offsetWidth : 0)) / ratio
 				: this.$.el.parent().innerWidth();
 
 		this.breakpoints.sort(function(a,b){ return a[0] - b[0]; });
 		for (; i < len; i++){
-			if (this.breakpoints[i][0] >= ww){
+			if (this.breakpoints[i][0] >= width){
 				current = this.breakpoints[i];
 				break;
 			}
@@ -394,6 +389,10 @@
 				this.mimeType = name;
 		}
 
+		var ua = navigator.userAgent.toLowerCase(), ie = ua.indexOf('msie ') > -1 || ua.indexOf('trident/') > -1 || ua.indexOf('edge/') > -1, ie8orless = !document.addEventListener;
+		this.isDirectLink = $.inArray(this.mimeType, ['video/mp4','video/wmv','video/ogg','video/webm']) !== -1;
+		this.isBrowserSupported = this.isDirectLink ? $.inArray(this.mimeType, ie ? ie8orless ? [] : ['video/mp4','video/wmv'] : ['video/mp4','video/ogg','video/webm']) !== -1 : true;
+
 		if (this.mimeType == 'video/youtube'){
 			this.id = /embed\//i.test(this.url)
 				? this.url.split(/embed\//i)[1].split(/[?&]/)[0]
@@ -465,12 +464,11 @@
 		this.$ = {
 			container: $('<div/>', {'class': 'rvs-player'}),
 			close: $('<a/>', {'class': 'rvs-close'}).on('click.rvs', {self: self}, self.onCloseClick),
-			iframe: null
+			player: null
 		};
 		this.$.close.appendTo(self.$.container);
 		this.continuousPlay = self.rvs.$.el.hasClass('rvs-continuous-play');
 		this.attached = false;
-		this.mejs = new FP.RVSliderMediaElement(rvs, this);
 	};
 
 	FP.RVSliderPlayer.prototype.destroy = function(){
@@ -491,7 +489,58 @@
 		return [];
 	};
 
-	FP.RVSliderPlayer.prototype._play = function(url){
+	FP.RVSliderPlayer.prototype._error = function(){
+		if (this.$.player instanceof jQuery) this.$.player.remove();
+		this.$.player = $('<div/>', {'class': 'rvs-player-error'}).append($('<span/>', {'class': 'rvs-error-icon'}));
+		this.$.container.append(this.$.player).appendTo(this.rvs.items.$.items.filter('.rvs-active'));
+		this.$.close.detach();
+		this.$.container.empty().append(this.$.player);
+		this.$.close.appendTo(this.$.container);
+	};
+
+	FP.RVSliderPlayer.prototype._direct = function(urls){
+		this.$.player = $('<video/>', {
+			controls: true,
+			preload: false
+		}).css({ width: '100%', height: '100%' });
+
+		var self = this, player = this.$.player[0], srcs = [];
+		function onerror(){
+			for (var i = 0, len = srcs.length; i < len; i++){
+				srcs[0].removeEventListener('error', onerror, false);
+			}
+			player.removeEventListener('error', onerror, false);
+			player.removeEventListener('loadeddata', onloadeddata, false);
+			self._error();
+		}
+
+		for (var i = 0, len = urls.length, $src; i < len; i++){
+			if (urls[i].isDirectLink){
+				$src = $('<source/>', { type: urls[i].mimeType, src: urls[i].toString() });
+				$src[0].addEventListener('error', onerror, false);
+				srcs.push($src[0]);
+				this.$.player.append($src);
+			}
+		}
+
+		function onloadeddata(){
+			for (var i = 0, len = srcs.length; i < len; i++){
+				srcs[0].removeEventListener('error', onerror, false);
+			}
+			player.removeEventListener('loadeddata', onloadeddata, false);
+			player.removeEventListener('error', onerror, false);
+			player.play();
+		}
+		player.addEventListener('error', onerror, false);
+		player.addEventListener('loadeddata', onloadeddata, false);
+
+		this.$.container.append(this.$.player).appendTo(this.rvs.items.$.items.filter('.rvs-active'));
+
+		if (player.readyState < 4) player.load();
+		else onloadeddata();
+	};
+
+	FP.RVSliderPlayer.prototype._embed = function(url){
 		this.$.player = $('<iframe/>', {
 			src: url, frameborder: 'no',
 			width: this.rvs.items.width, height: this.rvs.items.height,
@@ -504,14 +553,24 @@
 		if (!this.continuousPlay && this.rvs.index != index && this.attached) this.close();
 	};
 
+	FP.RVSliderPlayer.prototype.isDirectLink = function(urls){
+		if (!document.addEventListener) return false;
+		for (var i = 0, len = urls.length; i < len; i++){
+			if (urls[i].isDirectLink && urls[i].isBrowserSupported) return true;
+		}
+		return false;
+	};
+
 	FP.RVSliderPlayer.prototype.play = function(urls, options){
 		if (!urls.length) return;
 		if (this.attached) this.close();
-		if (this.mejs.handles(urls)){
-			this.mejs.play(urls, options);
-		} else {
+		if (this.isDirectLink(urls)){
+			this._direct(urls, options);
+		} else if (urls.length > 0 && !urls[0].isDirectLink) {
 			// the iframe method used to display YouTube and Vimeo only supports a single url so we only use the url at index 0
-			this._play(urls[0]);
+			this._embed(urls[0]);
+		} else {
+			this._error();
 		}
 		this.rvs.items.$.items.add(this.rvs.nav.$.items).filter('.rvs-active').addClass('rvs-video-active');
 		this.attached = true;
@@ -544,73 +603,6 @@
 	FP.RVSliderPlayer.prototype.onCloseClick = function(e){
 		e.preventDefault();
 		e.data.self.close();
-	};
-
-})(jQuery, window.FooPlugins = window.FooPlugins || {});
-(function($, FP){
-
-	FP.RVSliderMediaElement = function(rvs, player){
-		if (!(this instanceof FP.RVSliderMediaElement)) return new FP.RVSliderMediaElement(rvs, player);
-		this.rvs = rvs;
-		this.player = player;
-		this.enabled = 'MediaElementPlayer' in window && this.rvs.o.mejs.enabled;
-	};
-
-	FP.RVSliderMediaElement.prototype.handles = function(urls){
-		for (var i = 0, len = urls.length; i < len; i++){
-			if (this.enabled && !(
-				!this.rvs.o.mejs.youtube && urls[i].mimeType === 'video/youtube'
-				|| !this.rvs.o.mejs.vimeo && urls[i].mimeType === 'video/vimeo'
-				|| urls[i].mimeType === 'video/wistia'
-				|| urls[i].mimeType === 'video/daily'
-				)) return true;
-		}
-		return false;
-	};
-
-	FP.RVSliderMediaElement.prototype.play = function(urls, options){
-		this.player.$.player = $('<video/>', {
-			width: this.rvs.items.width, height: this.rvs.items.height,
-			controls: true, preload: 'none'
-		}).css({ width: '100%', height: '100%' });
-
-		for (var i = 0, len = urls.length; i < len; i++){
-			if (this.enabled && !(!this.rvs.o.mejs.youtube && urls[i].mimeType === 'video/youtube' || !this.rvs.o.mejs.vimeo && urls[i].mimeType === 'video/vimeo' || urls[i].mimeType === 'video/wistia' || urls[i].mimeType === 'video/daily')){
-				this.player.$.player.append($('<source/>',{ type: urls[i].mimeType, src: urls[i] }));
-			}
-		}
-
-		if (this.player.$.player.find('source').length > 0){
-			this.player.$.container.append(this.player.$.player).appendTo(this.rvs.items.$.items.filter('.rvs-active').addClass('rvs-video-active'));
-			var self = this;
-			this.player.$.player.mediaelementplayer($.extend(true, {}, this.o, options, {
-				videoWidth: this.rvs.items.width,
-				videoHeight: this.rvs.items.height,
-				success: function(mediaElement, domObject){
-					// the below is to enable MediaElement.js to autoplay any video once it is loaded
-					function canplay(){
-						mediaElement.play();
-						mediaElement.removeEventListener('canplay', canplay, false);
-					}
-					function playing(){
-						mediaElement.removeEventListener('canplay', canplay, false);
-						mediaElement.removeEventListener('playing', playing, false);
-					}
-					mediaElement.addEventListener('canplay', canplay, false);
-					mediaElement.addEventListener('playing', playing, false);
-					mediaElement.load();
-					mediaElement.play();
-					// in case we have overridden a supplied function call it
-					if ($.isFunction(options.success)) options.success(mediaElement, domObject);
-				},
-				error: function(err, a, b, c, d){
-					console.log('The video ' + urls + ' is not supported.', err, a, b, c, d);
-					self.player.close();
-					// in case we have overridden a supplied function call it
-					if ($.isFunction(options.error)) options.error(err);
-				}
-			}));
-		}
 	};
 
 })(jQuery, window.FooPlugins = window.FooPlugins || {});

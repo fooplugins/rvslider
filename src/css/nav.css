@@ -58,10 +58,16 @@
 	overflow: hidden;
 	outline: none;
 	text-decoration: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 .rvs-nav-container a.rvs-nav-item:hover {
 	color: inherit;
 	text-decoration: none;
+	outline: none;
 }
 .rvs-nav-container a.rvs-nav-item:before {
 	display: table;
