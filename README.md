@@ -55,6 +55,8 @@ Once that is setup all that is left to do is provide the plugin with [the HTML i
 <li>Minor bug fixes.</li>
 </ul>
 </td>
+</tr>
+<tr>
 <td>1.0.4</td>
 <td>
 <ul>
