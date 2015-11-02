@@ -1,5 +1,6 @@
 .rvs-item-container {
 	height: 100%;
+	background-color: inherit;
 }
 .rvs-item-stage {
 	height: 100%;
@@ -8,6 +9,7 @@
 	-webkit-transform: translateX(0px);
 	-moz-transform: translateX(0px);
 	transform: translateX(0px);
+	background-color: inherit;
 }
 .rvs-item {
 	display: block;
@@ -16,6 +18,7 @@
 	top: 0;
 	background: no-repeat center center;
 	background-size: cover;
+	background-color: inherit;
 }
 .rvs-item-content,
 .rvs-item-text {

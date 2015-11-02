@@ -1,5 +1,6 @@
 .rvs-close,
 .rvs-play-video,
+.rvs-error-icon,
 .rvs-nav-prev,
 .rvs-nav-next,
 .rvs-thumb-play .rvs-nav-item-thumb {
@@ -9,6 +10,7 @@
 }
 .rvs-close:before,
 .rvs-play-video:before,
+.rvs-error-icon:before,
 .rvs-horizontal .rvs-nav-prev:before,
 .rvs-horizontal .rvs-nav-next:before,
 .rvs-thumb-play .rvs-nav-item-thumb:before {
@@ -24,7 +26,8 @@
 	width: auto;
 	height: 78px;
 }
-.rvs-close:before {
+.rvs-close:before,
+.rvs-error-icon:before {
 	content: '\00D7';
 }
 .rvs-play-video:before,

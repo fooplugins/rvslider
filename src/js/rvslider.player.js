@@ -8,12 +8,11 @@
 		this.$ = {
 			container: $('<div/>', {'class': 'rvs-player'}),
 			close: $('<a/>', {'class': 'rvs-close'}).on('click.rvs', {self: self}, self.onCloseClick),
-			iframe: null
+			player: null
 		};
 		this.$.close.appendTo(self.$.container);
 		this.continuousPlay = self.rvs.$.el.hasClass('rvs-continuous-play');
 		this.attached = false;
-		this.mejs = new FP.RVSliderMediaElement(rvs, this);
 	};
 
 	FP.RVSliderPlayer.prototype.destroy = function(){
@@ -34,7 +33,58 @@
 		return [];
 	};
 
-	FP.RVSliderPlayer.prototype._play = function(url){
+	FP.RVSliderPlayer.prototype._error = function(){
+		if (this.$.player instanceof jQuery) this.$.player.remove();
+		this.$.player = $('<div/>', {'class': 'rvs-player-error'}).append($('<span/>', {'class': 'rvs-error-icon'}));
+		this.$.container.append(this.$.player).appendTo(this.rvs.items.$.items.filter('.rvs-active'));
+		this.$.close.detach();
+		this.$.container.empty().append(this.$.player);
+		this.$.close.appendTo(this.$.container);
+	};
+
+	FP.RVSliderPlayer.prototype._direct = function(urls){
+		this.$.player = $('<video/>', {
+			controls: true,
+			preload: false
+		}).css({ width: '100%', height: '100%' });
+
+		var self = this, player = this.$.player[0], srcs = [];
+		function onerror(){
+			for (var i = 0, len = srcs.length; i < len; i++){
+				srcs[0].removeEventListener('error', onerror, false);
+			}
+			player.removeEventListener('error', onerror, false);
+			player.removeEventListener('loadeddata', onloadeddata, false);
+			self._error();
+		}
+
+		for (var i = 0, len = urls.length, $src; i < len; i++){
+			if (urls[i].isDirectLink){
+				$src = $('<source/>', { type: urls[i].mimeType, src: urls[i].toString() });
+				$src[0].addEventListener('error', onerror, false);
+				srcs.push($src[0]);
+				this.$.player.append($src);
+			}
+		}
+
+		function onloadeddata(){
+			for (var i = 0, len = srcs.length; i < len; i++){
+				srcs[0].removeEventListener('error', onerror, false);
+			}
+			player.removeEventListener('loadeddata', onloadeddata, false);
+			player.removeEventListener('error', onerror, false);
+			player.play();
+		}
+		player.addEventListener('error', onerror, false);
+		player.addEventListener('loadeddata', onloadeddata, false);
+
+		this.$.container.append(this.$.player).appendTo(this.rvs.items.$.items.filter('.rvs-active'));
+
+		if (player.readyState < 4) player.load();
+		else onloadeddata();
+	};
+
+	FP.RVSliderPlayer.prototype._embed = function(url){
 		this.$.player = $('<iframe/>', {
 			src: url, frameborder: 'no',
 			width: this.rvs.items.width, height: this.rvs.items.height,
@@ -47,14 +97,24 @@
 		if (!this.continuousPlay && this.rvs.index != index && this.attached) this.close();
 	};
 
+	FP.RVSliderPlayer.prototype.isDirectLink = function(urls){
+		if (!document.addEventListener) return false;
+		for (var i = 0, len = urls.length; i < len; i++){
+			if (urls[i].isDirectLink && urls[i].isBrowserSupported) return true;
+		}
+		return false;
+	};
+
 	FP.RVSliderPlayer.prototype.play = function(urls, options){
 		if (!urls.length) return;
 		if (this.attached) this.close();
-		if (this.mejs.handles(urls)){
-			this.mejs.play(urls, options);
-		} else {
+		if (this.isDirectLink(urls)){
+			this._direct(urls, options);
+		} else if (urls.length > 0 && !urls[0].isDirectLink) {
 			// the iframe method used to display YouTube and Vimeo only supports a single url so we only use the url at index 0
-			this._play(urls[0]);
+			this._embed(urls[0]);
+		} else {
+			this._error();
 		}
 		this.rvs.items.$.items.add(this.rvs.nav.$.items).filter('.rvs-active').addClass('rvs-video-active');
 		this.attached = true;

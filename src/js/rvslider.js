@@ -16,12 +16,7 @@
 			nav: 0.1, // in percent - this is the percent of a nav items height a swipe must travel before it scrolls the nav items.
 			touches: 1 // the minimum number of touches that must be registered in order to swipe
 		},
-		breakpoints: null, // number of items to display at various widths when using the horizontal layout
-		mejs: { // any base MediaElement.js options
-			enabled: true, // when enabled this allows for local files as well as youtube/vimeo to be played
-			youtube: false, // set to true to override the default YouTube player
-			vimeo: false // vimeo is not currently supported/bugged this is here for when it works
-		}
+		breakpoints: null // number of items to display at various widths when using the horizontal layout
 	};
 
 	FP.RVSlider = function(el, options){
@@ -34,7 +29,7 @@
 		this.o = $.extend(true, {}, def, options);
 		this.index = this.o.selected;
 		this.breakpoints = '[object Array]' === Object.prototype.toString.call(this.o.breakpoints) ? this.o.breakpoints : [ // number of items to display at various widths and the classes to apply
-			[320, 'rvs-xs', 2], // Width less than 320 equals 2 items
+			[480, 'rvs-xs', 2], // Width less than 320 equals 2 items
 			[768, 'rvs-xs rvs-sm', 3], // W > 320 && W < 768 = 3 items
 			[1024, 'rvs-xs rvs-sm rvs-md', 4], // W > 768 && W < 1024 = 4 items
 			[1280, 'rvs-xs rvs-sm rvs-md rvs-lg', 5], // W > 1024 && W < 1280 = 5 items
@@ -62,13 +57,13 @@
 	FP.RVSlider.prototype._breakpoint = function(){
 		var ratio = 'devicePixelRatio' in window && typeof window.devicePixelRatio === 'number' ? window.devicePixelRatio : 1,
 			i = 0, len = this.breakpoints.length, current,
-			ww = this.useViewport
+			width = this.useViewport
 				? (window.innerWidth || document.documentElement.clientWidth || (document.body ? document.body.offsetWidth : 0)) / ratio
 				: this.$.el.parent().innerWidth();
 
 		this.breakpoints.sort(function(a,b){ return a[0] - b[0]; });
 		for (; i < len; i++){
-			if (this.breakpoints[i][0] >= ww){
+			if (this.breakpoints[i][0] >= width){
 				current = this.breakpoints[i];
 				break;
 			}

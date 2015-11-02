@@ -97,11 +97,8 @@
 		<p class="lead">Within the downloaded zip, you'll find the following directories and files, logically grouping common resources and providing both compiled and minified variations.</p>
 
 		<div class="callout callout-warning">
-			<h4>Required files</h4>
-			<ul>
-				<li>The plugin <strong>requires <a href="http://jquery.com/">jQuery</a> to be included</strong>.</li>
-				<li>The plugin <strong>requires <a href="http://mediaelementjs.com/">MediaElement.js</a> to be included for .mp4, .ogv and .webm support</strong>.</li>
-			</ul>
+			<h4>jQuery required</h4>
+			<p>The plugin <strong>requires <a href="http://jquery.com/">jQuery</a> to be included</strong> in your page.</p>
 		</div>
 
 		<p>Once downloaded and unzipped, you will see something like the below structure:</p>
@@ -288,8 +285,8 @@
 							<p>If no array is supplied the plugin falls back to the below default configuration.</p>
 						</div>
 						<pre class="language-javascript" data-lang="javascript"><code>[ // number of items to display at various widths and the classes to apply
-	[320, 'rvs-xs', 2], // Width less than 320 equals 2 items
-	[768, 'rvs-xs rvs-sm', 3], // W > 320 && W < 768 = 3 items
+	[480, 'rvs-xs', 2], // Width less than 480 equals 2 items
+	[768, 'rvs-xs rvs-sm', 3], // W > 480 && W < 768 = 3 items
 	[1024, 'rvs-xs rvs-sm rvs-md', 4], // W > 768 && W < 1024 = 4 items
 	[1280, 'rvs-xs rvs-sm rvs-md rvs-lg', 5], // W > 1024 && W < 1280 = 5 items
 	[1600, 'rvs-xs rvs-sm rvs-md rvs-lg rvs-xl', 6] // Effectively anything greater than 1280 will equal 6 items as this last value is used for anything larger.
@@ -304,7 +301,7 @@
 						</div>
 						<pre class="language-javascript" data-lang="javascript"><code>$(&quot;.rvs-container&quot;).rvslider({
 	&quot;num&quot;: [
-		[320, 'rvs-xs', 2],
+		[480, 'rvs-xs', 2],
 		[768, 'rvs-xs rvs-sm', 3],
 		[1024, 'rvs-xs rvs-sm rvs-md', 4],
 		[1280, 'rvs-xs rvs-sm rvs-md rvs-lg', 5],
@@ -509,160 +506,6 @@
 						<pre class="language-javascript" data-lang="javascript"><code>$(&quot;.rvs-container&quot;).rvslider({
 	&quot;swipe&quot;: {
 		&quot;touches&quot;: 2 // swipe requires 2 touch points on the screen to be registered
-	}
-});</code></pre>
-
-					</div>
-
-				</div>
-			</div>
-
-		</div>
-
-		<div class="list-group list-group-detailed child">
-			<h3 class="list-group-header">MediaElement.js options</h3>
-
-			<!-- enabled -->
-			<a href="#enabled" class="list-group-item anchored">
-				<span id="enabled" class="anchor">&nbsp;</span>
-				<h4 class="list-group-item-heading">enabled <small>boolean</small></h4>
-				<p class="list-group-item-text">Whether or not the plugin should use MediaElement.js to play videos.</p>
-			</a>
-			<div class="list-group-detail">
-				<div class="list-group-detail-inner">
-					<p>
-						While this option does specify whether or not the plugin will use MediaElement.js to play videos, you must include the actual MediaElement.js files in the page yourself
-						otherwise this option does nothing as there's nothing to work with!
-					</p>
-
-					<div class="examples">
-
-						<div class="example default">
-							<p><code>true</code></p>
-							<p>By default the plugin will auto-detect MediaElement.js in the page and use it as required to play videos.</p>
-						</div>
-
-					</div>
-
-					<div class="examples">
-
-						<div class="example javascript">
-							<p>The below shows how to supply the enabled value directly through the options.</p>
-						</div>
-						<pre class="language-javascript" data-lang="javascript"><code>$(&quot;.rvs-container&quot;).rvslider({
-	&quot;mejs&quot;: {
-		&quot;enabled&quot;: false
-	}
-});</code></pre>
-
-					</div>
-
-				</div>
-			</div>
-
-			<!-- youtube -->
-			<a href="#youtube" class="list-group-item anchored">
-				<span id="youtube" class="anchor">&nbsp;</span>
-				<h4 class="list-group-item-heading">youtube <small>boolean</small></h4>
-				<p class="list-group-item-text">Whether or not to play YouTube videos using MediaElement.js.</p>
-			</a>
-			<div class="list-group-detail">
-				<div class="list-group-detail-inner">
-					<p>
-						MediaElement.js has implemented support for playing YouTube videos using its player to provide a more consistent experience on your site when viewing videos from multiple
-						sources like locally hosted files mixed in with YouTube clips.
-					</p>
-
-					<div class="examples">
-
-						<div class="example default">
-							<p><code>false</code></p>
-							<p>If no value is supplied, the plugin falls back to using YouTubes iframe embed player.</p>
-						</div>
-
-					</div>
-
-					<div class="examples">
-
-						<div class="example javascript">
-							<p>The below shows how to supply the youtube value directly through the options.</p>
-						</div>
-						<pre class="language-javascript" data-lang="javascript"><code>$(&quot;.rvs-container&quot;).rvslider({
-	&quot;mejs&quot;: {
-		&quot;youtube&quot;: true
-	}
-});</code></pre>
-
-					</div>
-
-				</div>
-			</div>
-
-			<!--&lt;!&ndash; vimeo &ndash;&gt;-->
-			<!--<a href="#vimeo" class="list-group-item anchored">-->
-				<!--<span id="vimeo" class="anchor">&nbsp;</span>-->
-				<!--<h4 class="list-group-item-heading">vimeo <small>boolean</small></h4>-->
-				<!--<p class="list-group-item-text">Whether or not to play Vimeo videos using MediaElement.js.</p>-->
-			<!--</a>-->
-			<!--<div class="list-group-detail">-->
-				<!--<div class="list-group-detail-inner">-->
-					<!--<p>-->
-						<!--MediaElement.js has implemented support for playing Vimeo videos using its player to provide a more consistent experience on your site when viewing videos from multiple-->
-						<!--sources like locally hosted files mixed in with Vimeo clips.-->
-					<!--</p>-->
-					<!--<p>-->
-						<!--There are however a few issues regarding Vimeo support, most notably that there is no way to remove the default player controls like you can do with YouTubes chromeless-->
-						<!--option. The only way to hide the Vimeo player controls is by being a Vimeo Pro user and configuring the video options to always hide controls.-->
-					<!--</p>-->
-
-					<!--<div class="examples">-->
-
-						<!--<div class="example default">-->
-							<!--<p><code>false</code></p>-->
-							<!--<p>If no value is supplied the plugin falls back to using YouTubes iframe embed player.</p>-->
-						<!--</div>-->
-
-					<!--</div>-->
-
-					<!--<div class="examples">-->
-
-						<!--<div class="example javascript">-->
-							<!--<p>The below shows how to supply the youtube value directly through the options.</p>-->
-						<!--</div>-->
-						<!--<pre class="language-javascript" data-lang="javascript"><code>$(&quot;.rvs-container&quot;).rvslider({-->
-	<!--&quot;mejs&quot;: {-->
-		<!--&quot;youtube&quot;: true-->
-	<!--}-->
-<!--});</code></pre>-->
-
-					<!--</div>-->
-
-				<!--</div>-->
-			<!--</div>-->
-
-			<!-- additional -->
-			<a href="#additional" class="list-group-item anchored">
-				<span id="additional" class="anchor">&nbsp;</span>
-				<h4 class="list-group-item-heading">additional</h4>
-				<p class="list-group-item-text">Any additional MediaElement.js options.</p>
-			</a>
-			<div class="list-group-detail">
-				<div class="list-group-detail-inner">
-					<p>
-						Along with the two custom options (enabled, youtube) the plugin allows you to supply any <a href="http://mediaelementjs.com/#api" target="_blank">MediaElement.js option</a>
-						by simply adding it to the <code>mejs</code> options object.
-					</p>
-
-					<div class="examples">
-
-						<div class="example javascript">
-							<p>The below shows how to supply any additional MediaElement.js options.</p>
-						</div>
-						<pre class="language-javascript" data-lang="javascript"><code>$(&quot;.rvs-container&quot;).rvslider({
-	&quot;mejs&quot;: {
-		&quot;enablePluginDebug&quot;: false, // shows debug errors on screen
-		&quot;plugins&quot;: [&quot;flash&quot;,&quot;silverlight&quot;], // remove or reorder to change plugin priority
-		...
 	}
 });</code></pre>
 

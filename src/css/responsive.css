@@ -39,6 +39,12 @@
 .rvs-xs.rvs-sm.rvs-md .rvs-nav-container span.rvs-nav-item-thumb {
 	display: block;
 }
+.rvs-xs.rvs-sm.rvs-md .rvs-error-icon {
+	border-width: 18px;
+	width: 200px;
+	height: 200px;
+	font-size: 250px;
+}
 /* rvs-lg - Medium Devices, Desktops */
 .rvs-container.rvs-xs.rvs-sm.rvs-md.rvs-lg {
 	height: 545px;
