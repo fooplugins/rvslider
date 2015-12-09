@@ -68,4 +68,8 @@ Once that is setup all that is left to do is provide the plugin with [the HTML i
 </ul>
 </td>
 </tr>
+<tr>
+<td>1.0.5</td>
+<td>Changed to GPLv3 license</td>
+</tr>
 </table>

@@ -18,7 +18,7 @@ module.exports = function (grunt) {
 				'* @version <%= pkg.version %>\n' +
 				'* @link <%= pkg.homepage %>\n' +
 				'* @copyright Steven Usher & Brad Vincent 2015\n' +
-				'* @license Released under the MIT license.\n' +
+				'* @license Released under the GPLv3 license.\n' +
 				'*/\n'
 			},
 			js: {
