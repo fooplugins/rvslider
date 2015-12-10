@@ -83,40 +83,23 @@ module.exports = function (grunt) {
 					src: ['starter-template.html'],
 					dest: 'compiled/'
 				}]
+			},
+			latest: {
+				files: [{
+					expand: true,
+					cwd: 'releases/',
+					src: ['rvslider.v<%= pkg.version %>.zip'],
+					dest: 'releases/',
+					rename: function(dest, src){
+						return dest + src.replace('v'+grunt.config('pkg.version'), 'latest');
+					}
+				}]
 			}
 		},
 		compress: {
 			version: {
 				options: {
 					archive: 'releases/rvslider.v<%= pkg.version %>.zip'
-				},
-				files: [{
-					expand: true,
-					cwd: 'compiled/',
-					src: [
-						'rvslider.css',
-						'rvslider.min.css'
-					],
-					dest: 'css/'
-				},{
-					expand: true,
-					cwd: 'compiled/',
-					src: [
-						'rvslider.js',
-						'rvslider.min.js'
-					],
-					dest: 'js/'
-				},{
-					expand: true,
-					cwd: 'compiled/',
-					src: [
-						'starter-template.html'
-					]
-				}]
-			},
-			latest: {
-				options: {
-					archive: 'releases/rvslider.latest.zip'
 				},
 				files: [{
 					expand: true,
@@ -152,6 +135,6 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-compress');
 	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.registerTask('default', ['clean:compiled', 'concat', 'uglify', 'cssmin', 'copy']);
-	grunt.registerTask('package', ['default', 'clean:releases', 'compress']);
+	grunt.registerTask('default', ['clean:compiled', 'concat', 'uglify', 'cssmin', 'copy:template']);
+	grunt.registerTask('package', ['default', 'clean:releases', 'compress', 'copy:latest']);
 };
