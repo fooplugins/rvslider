@@ -72,4 +72,8 @@ Once that is setup all that is left to do is provide the plugin with [the HTML i
 <td>1.0.5</td>
 <td>Changed to GPLv3 license</td>
 </tr>
+<tr>
+<td>1.0.6</td>
+<td>Removed transition-delay from rvs-item-text and rvs-item-content transitions as it was causing PageSpeed Insights parsing engine to fail. Changed things around a little to achieve the same effect using the trnasitionend event in JS.</td>
+</tr>
 </table>

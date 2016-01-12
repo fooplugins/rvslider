@@ -43,8 +43,22 @@
 		this.resize();
 		this.setActive(this.index);
 		this.$.el.addClass('rvs-animate').data('__RVSlider__', this);
-		jQuery(window).on('resize.rvs', {self: this}, this.onWindowResize);
+		$(window).on('resize.rvs', {self: this}, this.onWindowResize);
 	};
+
+	var prefixes = ['Webkit', 'Moz', 'ms', 'O', 'Khtml'],
+		elem = document.createElement('div');
+
+	function supports(name){
+		if (typeof elem.style[name] !== 'undefined') return true;
+		for (var i = 0, len = prefixes.length; i < len; i++){
+			var n = prefixes[i] + name.charAt(0).toUpperCase() + name.substr(1);
+			if (typeof elem.style[n] !== 'undefined') return true;
+		}
+		return false;
+	}
+
+	FP.RVSlider.supportsTransitions = supports('transition');
 
 	FP.RVSlider.prototype.destroy = function(){
 		$(window).off('resize.rvs', this.onWindowResize);

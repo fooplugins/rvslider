@@ -41,10 +41,21 @@
 		});
 	};
 
+	var $elem = $('<div/>').css({position: 'absolute',top: -9999,left: -9999,visibility: 'hidden'}),
+		matrix = function(index, width){
+			$elem.appendTo('body').css('transform', 'translateX(-'+(index * width)+'px)');
+			return $elem.css('transform');
+		};
+
 	FP.RVSliderItems.prototype.setActive = function(index){
 		if (index >= 0 && index < this.count){
-			this.$.stage.css('transform', 'translateX(-'+(index * this.width)+'px)');
-			this.$.items.removeClass('rvs-active').eq(index).addClass('rvs-active');
+			var self = this, before = this.$.stage.css('transform'), after = matrix(index, this.width);
+			this.$.stage.one('transitionend', function(){
+				self.$.items.removeClass('rvs-active').eq(index).addClass('rvs-active');
+			}).css('transform', 'translateX(-'+(index * this.width)+'px)');
+			if (!FP.RVSlider.supportsTransitions || before === after){
+				this.$.stage.trigger('transitionend');
+			}
 		} else {
 			this.$.stage.css('transform', 'translateX(-'+(this.rvs.index * this.width)+'px)');
 		}
