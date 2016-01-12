@@ -1,6 +1,6 @@
 /*!
 * Responsive Video Gallery - A jQuery plugin that provides a slider with horizontal and vertical thumb layouts for video galleries.
-* @version 1.0.5
+* @version 1.0.6
 * @link http://fooplugins.github.io/rvslider/
 * @copyright Steven Usher & Brad Vincent 2015
 * @license Released under the GPLv3 license.
@@ -50,8 +50,22 @@
 		this.resize();
 		this.setActive(this.index);
 		this.$.el.addClass('rvs-animate').data('__RVSlider__', this);
-		jQuery(window).on('resize.rvs', {self: this}, this.onWindowResize);
+		$(window).on('resize.rvs', {self: this}, this.onWindowResize);
 	};
+
+	var prefixes = ['Webkit', 'Moz', 'ms', 'O', 'Khtml'],
+		elem = document.createElement('div');
+
+	function supports(name){
+		if (typeof elem.style[name] !== 'undefined') return true;
+		for (var i = 0, len = prefixes.length; i < len; i++){
+			var n = prefixes[i] + name.charAt(0).toUpperCase() + name.substr(1);
+			if (typeof elem.style[n] !== 'undefined') return true;
+		}
+		return false;
+	}
+
+	FP.RVSlider.supportsTransitions = supports('transition');
 
 	FP.RVSlider.prototype.destroy = function(){
 		$(window).off('resize.rvs', this.onWindowResize);
@@ -157,10 +171,21 @@
 		});
 	};
 
+	var $elem = $('<div/>').css({position: 'absolute',top: -9999,left: -9999,visibility: 'hidden'}),
+		matrix = function(index, width){
+			$elem.appendTo('body').css('transform', 'translateX(-'+(index * width)+'px)');
+			return $elem.css('transform');
+		};
+
 	FP.RVSliderItems.prototype.setActive = function(index){
 		if (index >= 0 && index < this.count){
-			this.$.stage.css('transform', 'translateX(-'+(index * this.width)+'px)');
-			this.$.items.removeClass('rvs-active').eq(index).addClass('rvs-active');
+			var self = this, before = this.$.stage.css('transform'), after = matrix(index, this.width);
+			this.$.stage.one('transitionend', function(){
+				self.$.items.removeClass('rvs-active').eq(index).addClass('rvs-active');
+			}).css('transform', 'translateX(-'+(index * this.width)+'px)');
+			if (!FP.RVSlider.supportsTransitions || before === after){
+				this.$.stage.trigger('transitionend');
+			}
 		} else {
 			this.$.stage.css('transform', 'translateX(-'+(this.rvs.index * this.width)+'px)');
 		}
