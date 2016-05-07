@@ -76,4 +76,13 @@ Once that is setup all that is left to do is provide the plugin with [the HTML i
 <td>1.0.6</td>
 <td>Removed transition-delay from rvs-item-text and rvs-item-content transitions as it was causing PageSpeed Insights parsing engine to fail. Changed things around a little to achieve the same effect using the trnasitionend event in JS.</td>
 </tr>
+<tr>
+<td>1.0.7</td>
+<td>
+<ul>
+<li>Added in some additional play icon styles.</li>
+<li>Changed the navigation mouse wheel behaviour so that if there are no items to scroll to the event is not captured.</li>
+</ul>
+</td>
+</tr>
 </table>
