@@ -99,6 +99,7 @@
 					background: $('#highlight-background-color').on('change', {self: this}, this.onOptionChange)
 				}
 			},
+			play_icon: $('[name="play_icon"]').on('change', {self: this}, this.onOptionChange),
 			output: {
 				preview: $('#output-preview'),
 				html: $('#output-html'),
@@ -140,6 +141,7 @@
 				continuous_play: this._.continuous_play.prop('checked'),
 				theme: this._.theme.radios.filter(':checked').val(),
 				highlight: this._.highlight.radios.filter(':checked').val(),
+				play_icon: this._.play_icon.filter(':checked').val(),
 				videos: JSON.parse(JSON.stringify(this.videos))
 			},
 			css_ctx = {
