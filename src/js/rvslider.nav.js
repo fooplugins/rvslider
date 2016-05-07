@@ -103,9 +103,15 @@
 	};
 
 	FP.RVSliderNav.prototype.onMouseWheel = function(e){
-		e.preventDefault();
-		if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) e.data.self.setVisible(e.data.self.visible.first-1);
-		else e.data.self.setVisible(e.data.self.visible.first+1);
+		var self = e.data.self, index;
+		if (self.count > self.visible.max){
+			if ((e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) && self.visible.first !== 0) index = self.visible.first-1;
+			else if ((e.originalEvent.wheelDelta < 0 || e.originalEvent.detail < 0) && self.visible.last !== self.count - 1) index = self.visible.first+1;
+			if (typeof index === 'number' && !isNaN(index)){
+				e.preventDefault();
+				self.setVisible(index);
+			}
+		}
 	};
 
 	FP.RVSliderNav.prototype.onTouchStart = function(e){
