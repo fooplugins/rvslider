@@ -1,6 +1,6 @@
 /*!
 * Responsive Video Gallery - A jQuery plugin that provides a slider with horizontal and vertical thumb layouts for video galleries.
-* @version 1.0.6
+* @version 1.0.7
 * @link http://fooplugins.github.io/rvslider/
 * @copyright Steven Usher & Brad Vincent 2015
 * @license Released under the GPLv3 license.
@@ -330,9 +330,15 @@
 	};
 
 	FP.RVSliderNav.prototype.onMouseWheel = function(e){
-		e.preventDefault();
-		if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) e.data.self.setVisible(e.data.self.visible.first-1);
-		else e.data.self.setVisible(e.data.self.visible.first+1);
+		var self = e.data.self, index;
+		if (self.count > self.visible.max){
+			if ((e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) && self.visible.first !== 0) index = self.visible.first-1;
+			else if ((e.originalEvent.wheelDelta < 0 || e.originalEvent.detail < 0) && self.visible.last !== self.count - 1) index = self.visible.first+1;
+			if (typeof index === 'number' && !isNaN(index)){
+				e.preventDefault();
+				self.setVisible(index);
+			}
+		}
 	};
 
 	FP.RVSliderNav.prototype.onTouchStart = function(e){

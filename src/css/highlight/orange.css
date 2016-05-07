@@ -12,6 +12,9 @@
 .rvs-orange-highlight.rvs-thumb-play .rvs-nav-container .rvs-video-active span.rvs-nav-item-thumb:before {
 	background-color: #FF8E31;
 }
+.rvs-orange-highlight .rvs-play-video:active,
+.rvs-orange-highlight .rvs-play-video:focus,
+.rvs-orange-highlight .rvs-play-video:hover,
 .rvs-orange-highlight .rvs-nav-item.rvs-active,
 .rvs-orange-highlight .rvs-nav-item.rvs-active:active,
 .rvs-orange-highlight .rvs-nav-item.rvs-active:focus,

@@ -49,3 +49,28 @@
 .rvs-horizontal .rvs-nav-next:before {
 	content: '\25b6';
 }
+
+.rvs-container.rvs-flat-circle-play a.rvs-play-video {
+	border-radius: 50%;
+}
+.rvs-container.rvs-flat-circle-play a.rvs-play-video:before {
+	padding-left: 4px;
+}
+.rvs-container.rvs-plain-arrow-play a.rvs-play-video {
+	background-color: transparent;
+	font-size: 50px;
+}
+.rvs-container.rvs-youtube-play a.rvs-play-video {
+	border-radius: 50% 50% 50% 50% / 15% 15% 15% 15%;
+	font-size: 24px;
+	height: 42px;
+}
+.rvs-container.rvs-bordered-circle-play a.rvs-play-video {
+	background-color: transparent;
+	border-radius: 50%;
+	border-width: 4px;
+	border-style: solid;
+}
+.rvs-container.rvs-bordered-circle-play a.rvs-play-video:before {
+	padding-left: 4px;
+}

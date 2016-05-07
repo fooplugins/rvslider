@@ -55,7 +55,7 @@ module.exports = function (grunt) {
 		uglify: {
 			prod: {
 				options: {
-					preserveComments: 'some',
+					preserveComments: /(?:^!|@(?:license|preserve|cc_on))/,
 					mangle: {
 						except: [ "undefined" ]
 					}
