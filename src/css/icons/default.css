@@ -56,7 +56,10 @@
 .rvs-container.rvs-flat-circle-play a.rvs-play-video:before {
 	padding-left: 4px;
 }
-.rvs-container.rvs-plain-arrow-play a.rvs-play-video {
+.rvs-container.rvs-plain-arrow-play .rvs-item a.rvs-play-video,
+.rvs-container.rvs-plain-arrow-play .rvs-item a.rvs-play-video:active,
+.rvs-container.rvs-plain-arrow-play .rvs-item a.rvs-play-video:hover,
+.rvs-container.rvs-plain-arrow-play .rvs-item a.rvs-play-video:focus {
 	background-color: transparent;
 	font-size: 50px;
 }
@@ -65,7 +68,10 @@
 	font-size: 24px;
 	height: 42px;
 }
-.rvs-container.rvs-bordered-circle-play a.rvs-play-video {
+.rvs-container.rvs-bordered-circle-play .rvs-item a.rvs-play-video,
+.rvs-container.rvs-bordered-circle-play .rvs-item a.rvs-play-video:active,
+.rvs-container.rvs-bordered-circle-play .rvs-item a.rvs-play-video:hover,
+.rvs-container.rvs-bordered-circle-play .rvs-item a.rvs-play-video:focus {
 	background-color: transparent;
 	border-radius: 50%;
 	border-width: 4px;

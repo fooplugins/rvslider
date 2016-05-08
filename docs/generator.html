@@ -256,6 +256,13 @@
 								<input type="radio" name="play_icon" value="rvs-bordered-circle-play"> Bordered circle
 							</label>
 						</div>
+						<div class="col-sm-offset-2 col-sm-10">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" id="show_play_on_hover" value="rvs-show-play-on-hover"> <em>Only show the icon on hover</em>
+								</label>
+							</div>
+						</div>
 					</div>
 
 					<div class="form-group advanced-option">
@@ -542,7 +549,7 @@
 
 <!-- HTML Template - This template provides the entire HTML for the actual slider. -->
 <script id="rvs-html-template" type="text/x-handlebars-template">
-<div class="rvs-container{{#if layout}} {{layout}}{{/if}}{{#if theme}} {{theme}}{{/if}}{{#if highlight}} {{highlight}}{{/if}}{{#if play_icon}} {{play_icon}}{{/if}}{{#if large_thumbs}} rvs-large-thumbs{{/if}}{{#if thumb_play}} rvs-thumb-play{{/if}}{{#if continuous_play}} rvs-continuous-play{{/if}}{{#if hide_credits}} rvs-hide-credits{{/if}}{{#if use_viewport}} rvs-use-viewport{{/if}}">
+<div class="rvs-container{{#if layout}} {{layout}}{{/if}}{{#if theme}} {{theme}}{{/if}}{{#if highlight}} {{highlight}}{{/if}}{{#if play_icon}} {{play_icon}}{{/if}}{{#if show_play_on_hover}} {{show_play_on_hover}}{{/if}}{{#if large_thumbs}} rvs-large-thumbs{{/if}}{{#if thumb_play}} rvs-thumb-play{{/if}}{{#if continuous_play}} rvs-continuous-play{{/if}}{{#if hide_credits}} rvs-hide-credits{{/if}}{{#if use_viewport}} rvs-use-viewport{{/if}}">
 	<div class="rvs-item-container">
 		<div class="rvs-item-stage">
 			{{#each videos}}
@@ -603,14 +610,14 @@
 {{#if theme.enabled}}
 	/* Custom Theme */
 	.rvs-custom.rvs-container,
-	.rvs-custom .rvs-nav-prev,
-	.rvs-custom .rvs-nav-prev:active,
-	.rvs-custom .rvs-nav-prev:focus,
-	.rvs-custom .rvs-nav-prev:hover,
-	.rvs-custom .rvs-nav-next,
-	.rvs-custom .rvs-nav-next:active,
-	.rvs-custom .rvs-nav-next:focus,
-	.rvs-custom .rvs-nav-next:hover,
+	.rvs-custom.rvs-container a.rvs-nav-prev,
+	.rvs-custom.rvs-container a.rvs-nav-prev:active,
+	.rvs-custom.rvs-container a.rvs-nav-prev:focus,
+	.rvs-custom.rvs-container a.rvs-nav-prev:hover,
+	.rvs-custom.rvs-container a.rvs-nav-next,
+	.rvs-custom.rvs-container a.rvs-nav-next:active,
+	.rvs-custom.rvs-container a.rvs-nav-next:focus,
+	.rvs-custom.rvs-container a.rvs-nav-next:hover,
 	.rvs-custom .rvs-nav-item-title {
 		color: {{theme.text}};
 	}
@@ -618,70 +625,79 @@
 		color: {{theme.muted}};
 	}
 	.rvs-custom.rvs-container,
-	.rvs-custom .rvs-nav-prev,
-	.rvs-custom .rvs-nav-next,
+	.rvs-custom.rvs-container a.rvs-nav-prev,
+	.rvs-custom.rvs-container a.rvs-nav-next,
 	.rvs-custom .rvs-player {
 		background-color: {{theme.background}};
 	}
-	.rvs-custom .rvs-nav-item:active,
-	.rvs-custom .rvs-nav-item:focus,
-	.rvs-custom .rvs-nav-item:hover,
-	.rvs-custom .rvs-nav-prev:active,
-	.rvs-custom .rvs-nav-prev:focus,
-	.rvs-custom .rvs-nav-prev:hover,
-	.rvs-custom .rvs-nav-next:active,
-	.rvs-custom .rvs-nav-next:focus,
-	.rvs-custom .rvs-nav-next:hover {
+	.rvs-custom.rvs-container a.rvs-nav-item:active,
+	.rvs-custom.rvs-container a.rvs-nav-item:focus,
+	.rvs-custom.rvs-container a.rvs-nav-item:hover,
+	.rvs-custom.rvs-container a.rvs-nav-prev:active,
+	.rvs-custom.rvs-container a.rvs-nav-prev:focus,
+	.rvs-custom.rvs-container a.rvs-nav-prev:hover,
+	.rvs-custom.rvs-container a.rvs-nav-next:active,
+	.rvs-custom.rvs-container a.rvs-nav-next:focus,
+	.rvs-custom.rvs-container a.rvs-nav-next:hover {
 		background-color: {{theme.item.hover_background}};
 	}
 	.rvs-custom .rvs-nav-container,
-	.rvs-custom .rvs-nav-item,
-	.rvs-custom .rvs-nav-prev,
-	.rvs-custom .rvs-nav-next {
+	.rvs-custom.rvs-container a.rvs-nav-item,
+	.rvs-custom.rvs-container a.rvs-nav-item:active,
+	.rvs-custom.rvs-container a.rvs-nav-item:focus,
+	.rvs-custom.rvs-container a.rvs-nav-item:hover,
+	.rvs-custom.rvs-container a.rvs-nav-prev,
+	.rvs-custom.rvs-container a.rvs-nav-prev:active,
+	.rvs-custom.rvs-container a.rvs-nav-prev:focus,
+	.rvs-custom.rvs-container a.rvs-nav-prev:hover,
+	.rvs-custom.rvs-container a.rvs-nav-next,
+	.rvs-custom.rvs-container a.rvs-nav-next:active,
+	.rvs-custom.rvs-container a.rvs-nav-next:focus,
+	.rvs-custom.rvs-container a.rvs-nav-next:hover {
 		border-color: {{theme.item.divider}};
 	}
-	.rvs-custom .rvs-nav-item:first-child {
+	.rvs-custom.rvs-container a.rvs-nav-item:first-child {
 		border-color: {{theme.background}};
 	}
-	.rvs-custom .rvs-nav-item:first-child:focus,
-	.rvs-custom .rvs-nav-item:first-child:hover {
+	.rvs-custom.rvs-container a.rvs-nav-item:first-child:focus,
+	.rvs-custom.rvs-container a.rvs-nav-item:first-child:hover {
 		border-color: {{theme.item.hover_background}};
 	}
 {{/if}}
 {{#if highlight.enabled}}
 	/* Custom Highlight */
-	.rvs-custom-highlight .rvs-close:active,
-	.rvs-custom-highlight .rvs-close:focus,
-	.rvs-custom-highlight .rvs-close:hover,
-	.rvs-custom-highlight .rvs-play-video:active,
-	.rvs-custom-highlight .rvs-play-video:focus,
-	.rvs-custom-highlight .rvs-play-video:hover,
-	.rvs-custom-highlight .rvs-nav-item.rvs-active,
-	.rvs-custom-highlight .rvs-nav-item.rvs-active:active,
-	.rvs-custom-highlight .rvs-nav-item.rvs-active:focus,
-	.rvs-custom-highlight .rvs-nav-item.rvs-active:hover,
+	.rvs-custom-highlight.rvs-container a.rvs-close:active,
+	.rvs-custom-highlight.rvs-container a.rvs-close:focus,
+	.rvs-custom-highlight.rvs-container a.rvs-close:hover,
+	.rvs-custom-highlight.rvs-container a.rvs-play-video:active,
+	.rvs-custom-highlight.rvs-container a.rvs-play-video:focus,
+	.rvs-custom-highlight.rvs-container a.rvs-play-video:hover,
+	.rvs-custom-highlight.rvs-container a.rvs-nav-item.rvs-active,
+	.rvs-custom-highlight.rvs-container a.rvs-nav-item.rvs-active:active,
+	.rvs-custom-highlight.rvs-container a.rvs-nav-item.rvs-active:focus,
+	.rvs-custom-highlight.rvs-container a.rvs-nav-item.rvs-active:hover,
 	.rvs-custom-highlight.rvs-thumb-play .rvs-nav-container span.rvs-nav-item-thumb:hover:before {
 		background-color: {{highlight.background}};
 	}
-	.rvs-custom-highlight .rvs-play-video:active,
-	.rvs-custom-highlight .rvs-play-video:focus,
-	.rvs-custom-highlight .rvs-play-video:hover,
-	.rvs-custom-highlight .rvs-nav-item.rvs-active,
-	.rvs-custom-highlight .rvs-nav-item.rvs-active:active,
-	.rvs-custom-highlight .rvs-nav-item.rvs-active:focus,
-	.rvs-custom-highlight .rvs-nav-item.rvs-active:hover,
-	.rvs-custom-highlight .rvs-nav-item.rvs-active:first-child,
-	.rvs-custom-highlight .rvs-nav-item.rvs-active:first-child:active,
-	.rvs-custom-highlight .rvs-nav-item.rvs-active:first-child:focus,
-	.rvs-custom-highlight .rvs-nav-item.rvs-active:first-child:hover {
+	.rvs-custom-highlight.rvs-container a.rvs-play-video:active,
+	.rvs-custom-highlight.rvs-container a.rvs-play-video:focus,
+	.rvs-custom-highlight.rvs-container a.rvs-play-video:hover,
+	.rvs-custom-highlight.rvs-container a.rvs-nav-item.rvs-active,
+	.rvs-custom-highlight.rvs-container a.rvs-nav-item.rvs-active:active,
+	.rvs-custom-highlight.rvs-container a.rvs-nav-item.rvs-active:focus,
+	.rvs-custom-highlight.rvs-container a.rvs-nav-item.rvs-active:hover,
+	.rvs-custom-highlight.rvs-container a.rvs-nav-item.rvs-active:first-child,
+	.rvs-custom-highlight.rvs-container a.rvs-nav-item.rvs-active:first-child:active,
+	.rvs-custom-highlight.rvs-container a.rvs-nav-item.rvs-active:first-child:focus,
+	.rvs-custom-highlight.rvs-container a.rvs-nav-item.rvs-active:first-child:hover {
 		border-color: {{highlight.background}};
 	}
-	.rvs-custom-highlight .rvs-close:active,
-	.rvs-custom-highlight .rvs-close:focus,
-	.rvs-custom-highlight .rvs-close:hover,
-	.rvs-custom-highlight .rvs-play-video:active,
-	.rvs-custom-highlight .rvs-play-video:focus,
-	.rvs-custom-highlight .rvs-play-video:hover,
+	.rvs-custom-highlight.rvs-container a.rvs-close:active,
+	.rvs-custom-highlight.rvs-container a.rvs-close:focus,
+	.rvs-custom-highlight.rvs-container a.rvs-close:hover,
+	.rvs-custom-highlight.rvs-container a.rvs-play-video:active,
+	.rvs-custom-highlight.rvs-container a.rvs-play-video:focus,
+	.rvs-custom-highlight.rvs-container a.rvs-play-video:hover,
 	.rvs-custom-highlight .rvs-active .rvs-nav-item-title {
 		color: {{highlight.text}};
 	}
