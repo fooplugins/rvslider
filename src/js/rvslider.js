@@ -8,17 +8,6 @@
 		});
 	};
 
-	var def = {
-		selected: 0,
-		swipe: {
-			deadzone: 10, // in pixels - the swipe must travel further than this value before it is registered and the plugin takes control of the touch move event
-			items: 0.05, // in percent - this is the percent of an items width a swipe must travel before it switches to the next item
-			nav: 0.1, // in percent - this is the percent of a nav items height a swipe must travel before it scrolls the nav items.
-			touches: 1 // the minimum number of touches that must be registered in order to swipe
-		},
-		breakpoints: null // number of items to display at various widths when using the horizontal layout
-	};
-
 	FP.RVSlider = function(el, options){
 		if (!(this instanceof FP.RVSlider)) return new FP.RVSlider(el, options);
 		var $el = $(el);
@@ -26,7 +15,7 @@
 			el: $el,
 			empty: $el.find('.rvs-empty')
 		};
-		this.o = $.extend(true, {}, def, options);
+		this.o = $.extend(true, {}, FP.RVSlider.defaults, options);
 		this.index = this.o.selected;
 		this.breakpoints = '[object Array]' === Object.prototype.toString.call(this.o.breakpoints) ? this.o.breakpoints : [ // number of items to display at various widths and the classes to apply
 			[480, 'rvs-xs', 2], // Width less than 320 equals 2 items
@@ -44,6 +33,17 @@
 		this.setActive(this.index);
 		this.$.el.addClass('rvs-animate').data('__RVSlider__', this);
 		$(window).on('resize.rvs', {self: this}, this.onWindowResize);
+	};
+
+	FP.RVSlider.defaults = {
+		selected: 0,
+		swipe: {
+			deadzone: 10, // in pixels - the swipe must travel further than this value before it is registered and the plugin takes control of the touch move event
+			items: 0.05, // in percent - this is the percent of an items width a swipe must travel before it switches to the next item
+			nav: 0.1, // in percent - this is the percent of a nav items height a swipe must travel before it scrolls the nav items.
+			touches: 1 // the minimum number of touches that must be registered in order to swipe
+		},
+		breakpoints: null // number of items to display at various widths when using the horizontal layout
 	};
 
 	var prefixes = ['Webkit', 'Moz', 'ms', 'O', 'Khtml'],
