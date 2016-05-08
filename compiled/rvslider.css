@@ -1,6 +1,6 @@
 /*!
 * Responsive Video Gallery - A jQuery plugin that provides a slider with horizontal and vertical thumb layouts for video galleries.
-* @version 1.0.7
+* @version 1.0.8
 * @link http://fooplugins.github.io/rvslider/
 * @copyright Steven Usher & Brad Vincent 2015
 * @license Released under the GPLv3 license.
@@ -143,27 +143,31 @@
 .rvs-player > video {
 	background-color: #000;
 }
-.rvs-close,
-.rvs-play-video {
+.rvs-container a.rvs-close,
+.rvs-container a.rvs-play-video {
 	position: absolute;
 	display: inline-block;
 	border-radius: 4px;
+	border: none;
 	cursor: pointer;
 	padding: 0;
 	text-decoration: none;
 	outline: none;
 	opacity: 0;
+	box-shadow: none;
 }
-.rvs-close:active,
-.rvs-close:focus,
-.rvs-close:hover,
-.rvs-play-video:active,
-.rvs-play-video:focus,
-.rvs-play-video:hover {
+.rvs-container a.rvs-close:active,
+.rvs-container a.rvs-close:focus,
+.rvs-container a.rvs-close:hover,
+.rvs-container a.rvs-play-video:active,
+.rvs-container a.rvs-play-video:focus,
+.rvs-container a.rvs-play-video:hover {
 	text-decoration: none;
 	outline: none;
+	border: none;
+	box-shadow: none;
 }
-.rvs-close {
+.rvs-container a.rvs-close {
 	top: 10px;
 	left: 10px;
 	width: 36px;
@@ -172,7 +176,7 @@
 	font-weight: bold;
 	z-index: 2;
 }
-.rvs-play-video {
+.rvs-container a.rvs-play-video {
 	top: 50%;
 	left: 50%;
 	width: 60px;
@@ -182,11 +186,17 @@
 	-ms-transform: translateX(-50%) translateY(-50%);
 	transform: translateX(-50%) translateY(-50%);
 }
-.rvs-player:hover .rvs-close,
-.rvs-active .rvs-play-video {
+.rvs-container .rvs-player:hover a.rvs-close,
+.rvs-container .rvs-active a.rvs-play-video {
 	opacity: 1;
 }
-.rvs-video-active .rvs-play-video {
+.rvs-container.rvs-show-play-on-hover .rvs-active a.rvs-play-video {
+	opacity: 0;
+}
+.rvs-container.rvs-show-play-on-hover .rvs-active:hover a.rvs-play-video {
+	opacity: 1;
+}
+.rvs-container .rvs-video-active a.rvs-play-video {
 	display: none;
 }
 
@@ -614,7 +624,10 @@
 .rvs-container.rvs-flat-circle-play a.rvs-play-video:before {
 	padding-left: 4px;
 }
-.rvs-container.rvs-plain-arrow-play a.rvs-play-video {
+.rvs-container.rvs-plain-arrow-play .rvs-item a.rvs-play-video,
+.rvs-container.rvs-plain-arrow-play .rvs-item a.rvs-play-video:active,
+.rvs-container.rvs-plain-arrow-play .rvs-item a.rvs-play-video:hover,
+.rvs-container.rvs-plain-arrow-play .rvs-item a.rvs-play-video:focus {
 	background-color: transparent;
 	font-size: 50px;
 }
@@ -623,7 +636,10 @@
 	font-size: 24px;
 	height: 42px;
 }
-.rvs-container.rvs-bordered-circle-play a.rvs-play-video {
+.rvs-container.rvs-bordered-circle-play .rvs-item a.rvs-play-video,
+.rvs-container.rvs-bordered-circle-play .rvs-item a.rvs-play-video:active,
+.rvs-container.rvs-bordered-circle-play .rvs-item a.rvs-play-video:hover,
+.rvs-container.rvs-bordered-circle-play .rvs-item a.rvs-play-video:focus {
 	background-color: transparent;
 	border-radius: 50%;
 	border-width: 4px;
@@ -634,26 +650,32 @@
 }
 .rvs-container,
 .rvs-item-text,
-.rvs-close,
-.rvs-close:active,
-.rvs-close:focus,
-.rvs-close:hover,
-.rvs-play-video,
-.rvs-play-video:active,
-.rvs-play-video:focus,
-.rvs-play-video:hover,
-.rvs-nav-prev,
-.rvs-nav-prev:active,
-.rvs-nav-prev:focus,
-.rvs-nav-prev:hover,
-.rvs-nav-next,
-.rvs-nav-next:active,
-.rvs-nav-next:focus,
-.rvs-nav-next:hover,
+.rvs-container a.rvs-close,
+.rvs-container a.rvs-close:active,
+.rvs-container a.rvs-close:focus,
+.rvs-container a.rvs-close:hover,
+.rvs-container a.rvs-play-video,
+.rvs-container a.rvs-play-video:active,
+.rvs-container a.rvs-play-video:focus,
+.rvs-container a.rvs-play-video:hover,
+.rvs-container a.rvs-nav-prev,
+.rvs-container a.rvs-nav-prev:active,
+.rvs-container a.rvs-nav-prev:focus,
+.rvs-container a.rvs-nav-prev:hover,
+.rvs-container a.rvs-nav-next,
+.rvs-container a.rvs-nav-next:active,
+.rvs-container a.rvs-nav-next:focus,
+.rvs-container a.rvs-nav-next:hover,
 .rvs-nav-item-title,
 .rvs-thumb-play .rvs-nav-item-thumb:before,
 .rvs-thumb-play .rvs-nav-item-thumb:hover:before {
 	color: #FFF;
+}
+.rvs-container a.rvs-play-video,
+.rvs-container a.rvs-play-video:active,
+.rvs-container a.rvs-play-video:focus,
+.rvs-container a.rvs-play-video:hover {
+	border-color: #FFF;
 }
 .rvs-nav-item-credits {
 	color: #767676;
@@ -661,50 +683,59 @@
 .rvs-item-text {
 	text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
 }
-.rvs-close,
-.rvs-play-video,
+.rvs-container a.rvs-close,
+.rvs-container a.rvs-play-video,
 .rvs-nav-container span.rvs-nav-item-thumb,
 .rvs-thumb-play .rvs-nav-container span.rvs-nav-item-thumb:before {
 	background-color: rgba(23, 35, 34, 0.75);
 }
 .rvs-container,
-.rvs-nav-prev,
-.rvs-nav-next {
+.rvs-container a.rvs-nav-prev,
+.rvs-container a.rvs-nav-next {
 	background-color: #151515;
 }
-.rvs-nav-item:active,
-.rvs-nav-item:focus,
-.rvs-nav-item:hover,
-.rvs-nav-prev:active,
-.rvs-nav-prev:focus,
-.rvs-nav-prev:hover,
-.rvs-nav-next:active,
-.rvs-nav-next:focus,
-.rvs-nav-next:hover {
+.rvs-container a.rvs-nav-item:active,
+.rvs-container a.rvs-nav-item:focus,
+.rvs-container a.rvs-nav-item:hover,
+.rvs-container a.rvs-nav-prev:active,
+.rvs-container a.rvs-nav-prev:focus,
+.rvs-container a.rvs-nav-prev:hover,
+.rvs-container a.rvs-nav-next:active,
+.rvs-container a.rvs-nav-next:focus,
+.rvs-container a.rvs-nav-next:hover {
 	background-color: #000;
 }
 .rvs-nav-container,
-.rvs-nav-item,
-.rvs-nav-prev,
-.rvs-nav-next {
+.rvs-container a.rvs-nav-item,
+.rvs-container a.rvs-nav-item:active,
+.rvs-container a.rvs-nav-item:focus,
+.rvs-container a.rvs-nav-item:hover,
+.rvs-container a.rvs-nav-prev,
+.rvs-container a.rvs-nav-prev:active,
+.rvs-container a.rvs-nav-prev:focus,
+.rvs-container a.rvs-nav-prev:hover,
+.rvs-container a.rvs-nav-next,
+.rvs-container a.rvs-nav-next:active,
+.rvs-container a.rvs-nav-next:focus,
+.rvs-container a.rvs-nav-next:hover {
 	border-color: #2E2E2E;
 }
-.rvs-nav-item:first-child {
+.rvs-container a.rvs-nav-item:first-child {
 	border-color: #151515;
 }
-.rvs-nav-item:first-child:focus,
-.rvs-nav-item:first-child:hover {
+.rvs-container a.rvs-nav-item:first-child:focus,
+.rvs-container a.rvs-nav-item:first-child:hover {
 	border-color: #000;
 }
 .rvs-light.rvs-container,
-.rvs-light .rvs-nav-prev,
-.rvs-light .rvs-nav-prev:active,
-.rvs-light .rvs-nav-prev:focus,
-.rvs-light .rvs-nav-prev:hover,
-.rvs-light .rvs-nav-next,
-.rvs-light .rvs-nav-next:active,
-.rvs-light .rvs-nav-next:focus,
-.rvs-light .rvs-nav-next:hover,
+.rvs-light.rvs-container a.rvs-nav-prev,
+.rvs-light.rvs-container a.rvs-nav-prev:active,
+.rvs-light.rvs-container a.rvs-nav-prev:focus,
+.rvs-light.rvs-container a.rvs-nav-prev:hover,
+.rvs-light.rvs-container a.rvs-nav-next,
+.rvs-light.rvs-container a.rvs-nav-next:active,
+.rvs-light.rvs-container a.rvs-nav-next:focus,
+.rvs-light.rvs-container a.rvs-nav-next:hover,
 .rvs-light .rvs-nav-item-title {
 	color: #333;
 }
@@ -712,170 +743,178 @@
 	color: #767676;
 }
 .rvs-light.rvs-container,
-.rvs-light .rvs-nav-prev,
-.rvs-light .rvs-nav-next {
+.rvs-light.rvs-container a.rvs-nav-prev,
+.rvs-light.rvs-container a.rvs-nav-next {
 	background-color: #FFF;
 }
-.rvs-light .rvs-nav-item:active,
-.rvs-light .rvs-nav-item:focus,
-.rvs-light .rvs-nav-item:hover,
-.rvs-light .rvs-nav-prev:active,
-.rvs-light .rvs-nav-prev:focus,
-.rvs-light .rvs-nav-prev:hover,
-.rvs-light .rvs-nav-next:active,
-.rvs-light .rvs-nav-next:focus,
-.rvs-light .rvs-nav-next:hover {
+.rvs-light.rvs-container a.rvs-nav-item:active,
+.rvs-light.rvs-container a.rvs-nav-item:focus,
+.rvs-light.rvs-container a.rvs-nav-item:hover,
+.rvs-light.rvs-container a.rvs-nav-prev:active,
+.rvs-light.rvs-container a.rvs-nav-prev:focus,
+.rvs-light.rvs-container a.rvs-nav-prev:hover,
+.rvs-light.rvs-container a.rvs-nav-next:active,
+.rvs-light.rvs-container a.rvs-nav-next:focus,
+.rvs-light.rvs-container a.rvs-nav-next:hover {
 	background-color: #F9F9F9;
 }
 .rvs-light .rvs-nav-container,
-.rvs-light .rvs-nav-item,
-.rvs-light .rvs-nav-prev,
-.rvs-light .rvs-nav-next {
+.rvs-light.rvs-container a.rvs-nav-item,
+.rvs-light.rvs-container a.rvs-nav-item:active,
+.rvs-light.rvs-container a.rvs-nav-item:focus,
+.rvs-light.rvs-container a.rvs-nav-item:hover,
+.rvs-light.rvs-container a.rvs-nav-prev,
+.rvs-light.rvs-container a.rvs-nav-prev:active,.rvs-container a.rvs-light .rvs-nav-prev:focus,
+.rvs-light.rvs-container a.rvs-nav-prev:hover,
+.rvs-light.rvs-container a.rvs-nav-next,
+.rvs-light.rvs-container a.rvs-nav-next:active,
+.rvs-light.rvs-container a.rvs-nav-next:focus,
+.rvs-light.rvs-container a.rvs-nav-next:hover {
 	border-color: #e2e2e2;
 }
-.rvs-light .rvs-nav-item:first-child {
+.rvs-light.rvs-container a.rvs-nav-item:first-child {
 	border-color: #FFF;
 }
-.rvs-light .rvs-nav-item:first-child:focus,
-.rvs-light .rvs-nav-item:first-child:hover {
+.rvs-light.rvs-container a.rvs-nav-item:first-child:focus,
+.rvs-light.rvs-container a.rvs-nav-item:first-child:hover {
 	border-color: #F9F9F9;
 }
-.rvs-container .rvs-close:active,
-.rvs-container .rvs-close:focus,
-.rvs-container .rvs-close:hover,
-.rvs-container .rvs-play-video:active,
-.rvs-container .rvs-play-video:focus,
-.rvs-container .rvs-play-video:hover,
-.rvs-container .rvs-nav-item.rvs-active,
-.rvs-container .rvs-nav-item.rvs-active:active,
-.rvs-container .rvs-nav-item.rvs-active:focus,
-.rvs-container .rvs-nav-item.rvs-active:hover,
+.rvs-container a.rvs-close:active,
+.rvs-container a.rvs-close:focus,
+.rvs-container a.rvs-close:hover,
+.rvs-container a.rvs-play-video:active,
+.rvs-container a.rvs-play-video:focus,
+.rvs-container a.rvs-play-video:hover,
+.rvs-container a.rvs-nav-item.rvs-active,
+.rvs-container a.rvs-nav-item.rvs-active:active,
+.rvs-container a.rvs-nav-item.rvs-active:focus,
+.rvs-container a.rvs-nav-item.rvs-active:hover,
 .rvs-container.rvs-thumb-play .rvs-nav-container span.rvs-nav-item-thumb:hover:before,
 .rvs-container.rvs-thumb-play .rvs-nav-container .rvs-video-active span.rvs-nav-item-thumb:before {
 	background-color: #7816D6;
 }
-.rvs-container .rvs-play-video:active,
-.rvs-container .rvs-play-video:focus,
-.rvs-container .rvs-play-video:hover,
-.rvs-container .rvs-nav-item.rvs-active,
-.rvs-container .rvs-nav-item.rvs-active:active,
-.rvs-container .rvs-nav-item.rvs-active:focus,
-.rvs-container .rvs-nav-item.rvs-active:hover,
-.rvs-container .rvs-nav-item.rvs-active:first-child,
-.rvs-container .rvs-nav-item.rvs-active:first-child:active,
-.rvs-container .rvs-nav-item.rvs-active:first-child:focus,
-.rvs-container .rvs-nav-item.rvs-active:first-child:hover {
+.rvs-container a.rvs-play-video:active,
+.rvs-container a.rvs-play-video:focus,
+.rvs-container a.rvs-play-video:hover,
+.rvs-container a.rvs-nav-item.rvs-active,
+.rvs-container a.rvs-nav-item.rvs-active:active,
+.rvs-container a.rvs-nav-item.rvs-active:focus,
+.rvs-container a.rvs-nav-item.rvs-active:hover,
+.rvs-container a.rvs-nav-item.rvs-active:first-child,
+.rvs-container a.rvs-nav-item.rvs-active:first-child:active,
+.rvs-container a.rvs-nav-item.rvs-active:first-child:focus,
+.rvs-container a.rvs-nav-item.rvs-active:first-child:hover {
 	border-color: #7816D6;
 }
 .rvs-container .rvs-active .rvs-nav-item-title,
 .rvs-container .rvs-active .rvs-nav-item-credits {
 	color: #FFF;
 }
-.rvs-green-highlight .rvs-close:active,
-.rvs-green-highlight .rvs-close:focus,
-.rvs-green-highlight .rvs-close:hover,
-.rvs-green-highlight .rvs-play-video:active,
-.rvs-green-highlight .rvs-play-video:focus,
-.rvs-green-highlight .rvs-play-video:hover,
-.rvs-green-highlight .rvs-nav-item.rvs-active,
-.rvs-green-highlight .rvs-nav-item.rvs-active:active,
-.rvs-green-highlight .rvs-nav-item.rvs-active:focus,
-.rvs-green-highlight .rvs-nav-item.rvs-active:hover,
+.rvs-green-highlight.rvs-container a.rvs-close:active,
+.rvs-green-highlight.rvs-container a.rvs-close:focus,
+.rvs-green-highlight.rvs-container a.rvs-close:hover,
+.rvs-green-highlight.rvs-container a.rvs-play-video:active,
+.rvs-green-highlight.rvs-container a.rvs-play-video:focus,
+.rvs-green-highlight.rvs-container a.rvs-play-video:hover,
+.rvs-green-highlight.rvs-container a.rvs-nav-item.rvs-active,
+.rvs-green-highlight.rvs-container a.rvs-nav-item.rvs-active:active,
+.rvs-green-highlight.rvs-container a.rvs-nav-item.rvs-active:focus,
+.rvs-green-highlight.rvs-container a.rvs-nav-item.rvs-active:hover,
 .rvs-green-highlight.rvs-thumb-play .rvs-nav-container span.rvs-nav-item-thumb:hover:before,
 .rvs-green-highlight.rvs-thumb-play .rvs-nav-container .rvs-video-active span.rvs-nav-item-thumb:before {
 	background-color: #02874A;
 }
-.rvs-green-highlight .rvs-play-video:active,
-.rvs-green-highlight .rvs-play-video:focus,
-.rvs-green-highlight .rvs-play-video:hover,
-.rvs-green-highlight .rvs-nav-item.rvs-active,
-.rvs-green-highlight .rvs-nav-item.rvs-active:active,
-.rvs-green-highlight .rvs-nav-item.rvs-active:focus,
-.rvs-green-highlight .rvs-nav-item.rvs-active:hover,
-.rvs-green-highlight .rvs-nav-item.rvs-active:first-child,
-.rvs-green-highlight .rvs-nav-item.rvs-active:first-child:active,
-.rvs-green-highlight .rvs-nav-item.rvs-active:first-child:focus,
-.rvs-green-highlight .rvs-nav-item.rvs-active:first-child:hover {
+.rvs-green-highlight.rvs-container a.rvs-play-video:active,
+.rvs-green-highlight.rvs-container a.rvs-play-video:focus,
+.rvs-green-highlight.rvs-container a.rvs-play-video:hover,
+.rvs-green-highlight.rvs-container a.rvs-nav-item.rvs-active,
+.rvs-green-highlight.rvs-container a.rvs-nav-item.rvs-active:active,
+.rvs-green-highlight.rvs-container a.rvs-nav-item.rvs-active:focus,
+.rvs-green-highlight.rvs-container a.rvs-nav-item.rvs-active:hover,
+.rvs-green-highlight.rvs-container a.rvs-nav-item.rvs-active:first-child,
+.rvs-green-highlight.rvs-container a.rvs-nav-item.rvs-active:first-child:active,
+.rvs-green-highlight.rvs-container a.rvs-nav-item.rvs-active:first-child:focus,
+.rvs-green-highlight.rvs-container a.rvs-nav-item.rvs-active:first-child:hover {
 	border-color: #02874A;
 }
-.rvs-blue-highlight .rvs-close:active,
-.rvs-blue-highlight .rvs-close:focus,
-.rvs-blue-highlight .rvs-close:hover,
-.rvs-blue-highlight .rvs-play-video:active,
-.rvs-blue-highlight .rvs-play-video:focus,
-.rvs-blue-highlight .rvs-play-video:hover,
-.rvs-blue-highlight .rvs-nav-item.rvs-active,
-.rvs-blue-highlight .rvs-nav-item.rvs-active:active,
-.rvs-blue-highlight .rvs-nav-item.rvs-active:focus,
-.rvs-blue-highlight .rvs-nav-item.rvs-active:hover,
+.rvs-blue-highlight.rvs-container a.rvs-close:active,
+.rvs-blue-highlight.rvs-container a.rvs-close:focus,
+.rvs-blue-highlight.rvs-container a.rvs-close:hover,
+.rvs-blue-highlight.rvs-container a.rvs-play-video:active,
+.rvs-blue-highlight.rvs-container a.rvs-play-video:focus,
+.rvs-blue-highlight.rvs-container a.rvs-play-video:hover,
+.rvs-blue-highlight.rvs-container a.rvs-nav-item.rvs-active,
+.rvs-blue-highlight.rvs-container a.rvs-nav-item.rvs-active:active,
+.rvs-blue-highlight.rvs-container a.rvs-nav-item.rvs-active:focus,
+.rvs-blue-highlight.rvs-container a.rvs-nav-item.rvs-active:hover,
 .rvs-blue-highlight.rvs-thumb-play .rvs-nav-container span.rvs-nav-item-thumb:hover:before,
 .rvs-blue-highlight.rvs-thumb-play .rvs-nav-container .rvs-video-active span.rvs-nav-item-thumb:before {
 	background-color: #0087be;
 }
-.rvs-blue-highlight .rvs-play-video:active,
-.rvs-blue-highlight .rvs-play-video:focus,
-.rvs-blue-highlight .rvs-play-video:hover,
-.rvs-blue-highlight .rvs-nav-item.rvs-active,
-.rvs-blue-highlight .rvs-nav-item.rvs-active:active,
-.rvs-blue-highlight .rvs-nav-item.rvs-active:focus,
-.rvs-blue-highlight .rvs-nav-item.rvs-active:hover,
-.rvs-blue-highlight .rvs-nav-item.rvs-active:first-child,
-.rvs-blue-highlight .rvs-nav-item.rvs-active:first-child:active,
-.rvs-blue-highlight .rvs-nav-item.rvs-active:first-child:focus,
-.rvs-blue-highlight .rvs-nav-item.rvs-active:first-child:hover {
+.rvs-blue-highlight.rvs-container a.rvs-play-video:active,
+.rvs-blue-highlight.rvs-container a.rvs-play-video:focus,
+.rvs-blue-highlight.rvs-container a.rvs-play-video:hover,
+.rvs-blue-highlight.rvs-container a.rvs-nav-item.rvs-active,
+.rvs-blue-highlight.rvs-container a.rvs-nav-item.rvs-active:active,
+.rvs-blue-highlight.rvs-container a.rvs-nav-item.rvs-active:focus,
+.rvs-blue-highlight.rvs-container a.rvs-nav-item.rvs-active:hover,
+.rvs-blue-highlight.rvs-container a.rvs-nav-item.rvs-active:first-child,
+.rvs-blue-highlight.rvs-container a.rvs-nav-item.rvs-active:first-child:active,
+.rvs-blue-highlight.rvs-container a.rvs-nav-item.rvs-active:first-child:focus,
+.rvs-blue-highlight.rvs-container a.rvs-nav-item.rvs-active:first-child:hover {
 	border-color: #0087be;
 }
-.rvs-orange-highlight .rvs-close:active,
-.rvs-orange-highlight .rvs-close:focus,
-.rvs-orange-highlight .rvs-close:hover,
-.rvs-orange-highlight .rvs-play-video:active,
-.rvs-orange-highlight .rvs-play-video:focus,
-.rvs-orange-highlight .rvs-play-video:hover,
-.rvs-orange-highlight .rvs-nav-item.rvs-active,
-.rvs-orange-highlight .rvs-nav-item.rvs-active:active,
-.rvs-orange-highlight .rvs-nav-item.rvs-active:focus,
-.rvs-orange-highlight .rvs-nav-item.rvs-active:hover,
+.rvs-orange-highlight.rvs-container a.rvs-close:active,
+.rvs-orange-highlight.rvs-container a.rvs-close:focus,
+.rvs-orange-highlight.rvs-container a.rvs-close:hover,
+.rvs-orange-highlight.rvs-container a.rvs-play-video:active,
+.rvs-orange-highlight.rvs-container a.rvs-play-video:focus,
+.rvs-orange-highlight.rvs-container a.rvs-play-video:hover,
+.rvs-orange-highlight.rvs-container a.rvs-nav-item.rvs-active,
+.rvs-orange-highlight.rvs-container a.rvs-nav-item.rvs-active:active,
+.rvs-orange-highlight.rvs-container a.rvs-nav-item.rvs-active:focus,
+.rvs-orange-highlight.rvs-container a.rvs-nav-item.rvs-active:hover,
 .rvs-orange-highlight.rvs-thumb-play .rvs-nav-container span.rvs-nav-item-thumb:hover:before,
 .rvs-orange-highlight.rvs-thumb-play .rvs-nav-container .rvs-video-active span.rvs-nav-item-thumb:before {
 	background-color: #FF8E31;
 }
-.rvs-orange-highlight .rvs-play-video:active,
-.rvs-orange-highlight .rvs-play-video:focus,
-.rvs-orange-highlight .rvs-play-video:hover,
-.rvs-orange-highlight .rvs-nav-item.rvs-active,
-.rvs-orange-highlight .rvs-nav-item.rvs-active:active,
-.rvs-orange-highlight .rvs-nav-item.rvs-active:focus,
-.rvs-orange-highlight .rvs-nav-item.rvs-active:hover,
-.rvs-orange-highlight .rvs-nav-item.rvs-active:first-child,
-.rvs-orange-highlight .rvs-nav-item.rvs-active:first-child:active,
-.rvs-orange-highlight .rvs-nav-item.rvs-active:first-child:focus,
-.rvs-orange-highlight .rvs-nav-item.rvs-active:first-child:hover {
+.rvs-orange-highlight.rvs-container a.rvs-play-video:active,
+.rvs-orange-highlight.rvs-container a.rvs-play-video:focus,
+.rvs-orange-highlight.rvs-container a.rvs-play-video:hover,
+.rvs-orange-highlight.rvs-container a.rvs-nav-item.rvs-active,
+.rvs-orange-highlight.rvs-container a.rvs-nav-item.rvs-active:active,
+.rvs-orange-highlight.rvs-container a.rvs-nav-item.rvs-active:focus,
+.rvs-orange-highlight.rvs-container a.rvs-nav-item.rvs-active:hover,
+.rvs-orange-highlight.rvs-container a.rvs-nav-item.rvs-active:first-child,
+.rvs-orange-highlight.rvs-container a.rvs-nav-item.rvs-active:first-child:active,
+.rvs-orange-highlight.rvs-container a.rvs-nav-item.rvs-active:first-child:focus,
+.rvs-orange-highlight.rvs-container a.rvs-nav-item.rvs-active:first-child:hover {
 	border-color: #FF8E31;
 }
-.rvs-red-highlight .rvs-close:active,
-.rvs-red-highlight .rvs-close:focus,
-.rvs-red-highlight .rvs-close:hover,
-.rvs-red-highlight .rvs-play-video:active,
-.rvs-red-highlight .rvs-play-video:focus,
-.rvs-red-highlight .rvs-play-video:hover,
-.rvs-red-highlight .rvs-nav-item.rvs-active,
-.rvs-red-highlight .rvs-nav-item.rvs-active:active,
-.rvs-red-highlight .rvs-nav-item.rvs-active:focus,
-.rvs-red-highlight .rvs-nav-item.rvs-active:hover,
+.rvs-red-highlight.rvs-container a.rvs-close:active,
+.rvs-red-highlight.rvs-container a.rvs-close:focus,
+.rvs-red-highlight.rvs-container a.rvs-close:hover,
+.rvs-red-highlight.rvs-container a.rvs-play-video:active,
+.rvs-red-highlight.rvs-container a.rvs-play-video:focus,
+.rvs-red-highlight.rvs-container a.rvs-play-video:hover,
+.rvs-red-highlight.rvs-container a.rvs-nav-item.rvs-active,
+.rvs-red-highlight.rvs-container a.rvs-nav-item.rvs-active:active,
+.rvs-red-highlight.rvs-container a.rvs-nav-item.rvs-active:focus,
+.rvs-red-highlight.rvs-container a.rvs-nav-item.rvs-active:hover,
 .rvs-red-highlight.rvs-thumb-play .rvs-nav-container span.rvs-nav-item-thumb:hover:before,
 .rvs-red-highlight.rvs-thumb-play .rvs-nav-container .rvs-video-active span.rvs-nav-item-thumb:before {
 	background-color: #F12B24;
 }
-.rvs-red-highlight .rvs-play-video:active,
-.rvs-red-highlight .rvs-play-video:focus,
-.rvs-red-highlight .rvs-play-video:hover,
-.rvs-red-highlight .rvs-nav-item.rvs-active,
-.rvs-red-highlight .rvs-nav-item.rvs-active:active,
-.rvs-red-highlight .rvs-nav-item.rvs-active:focus,
-.rvs-red-highlight .rvs-nav-item.rvs-active:hover,
-.rvs-red-highlight .rvs-nav-item.rvs-active:first-child,
-.rvs-red-highlight .rvs-nav-item.rvs-active:first-child:active,
-.rvs-red-highlight .rvs-nav-item.rvs-active:first-child:focus,
-.rvs-red-highlight .rvs-nav-item.rvs-active:first-child:hover {
+.rvs-red-highlight.rvs-container a.rvs-play-video:active,
+.rvs-red-highlight.rvs-container a.rvs-play-video:focus,
+.rvs-red-highlight.rvs-container a.rvs-play-video:hover,
+.rvs-red-highlight.rvs-container a.rvs-nav-item.rvs-active,
+.rvs-red-highlight.rvs-container a.rvs-nav-item.rvs-active:active,
+.rvs-red-highlight.rvs-container a.rvs-nav-item.rvs-active:focus,
+.rvs-red-highlight.rvs-container a.rvs-nav-item.rvs-active:hover,
+.rvs-red-highlight.rvs-container a.rvs-nav-item.rvs-active:first-child,
+.rvs-red-highlight.rvs-container a.rvs-nav-item.rvs-active:first-child:active,
+.rvs-red-highlight.rvs-container a.rvs-nav-item.rvs-active:first-child:focus,
+.rvs-red-highlight.rvs-container a.rvs-nav-item.rvs-active:first-child:hover {
 	border-color: #F12B24;
 }
