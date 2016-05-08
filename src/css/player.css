@@ -9,27 +9,31 @@
 .rvs-player > video {
 	background-color: #000;
 }
-.rvs-close,
-.rvs-play-video {
+.rvs-container a.rvs-close,
+.rvs-container a.rvs-play-video {
 	position: absolute;
 	display: inline-block;
 	border-radius: 4px;
+	border: none;
 	cursor: pointer;
 	padding: 0;
 	text-decoration: none;
 	outline: none;
 	opacity: 0;
+	box-shadow: none;
 }
-.rvs-close:active,
-.rvs-close:focus,
-.rvs-close:hover,
-.rvs-play-video:active,
-.rvs-play-video:focus,
-.rvs-play-video:hover {
+.rvs-container a.rvs-close:active,
+.rvs-container a.rvs-close:focus,
+.rvs-container a.rvs-close:hover,
+.rvs-container a.rvs-play-video:active,
+.rvs-container a.rvs-play-video:focus,
+.rvs-container a.rvs-play-video:hover {
 	text-decoration: none;
 	outline: none;
+	border: none;
+	box-shadow: none;
 }
-.rvs-close {
+.rvs-container a.rvs-close {
 	top: 10px;
 	left: 10px;
 	width: 36px;
@@ -38,7 +42,7 @@
 	font-weight: bold;
 	z-index: 2;
 }
-.rvs-play-video {
+.rvs-container a.rvs-play-video {
 	top: 50%;
 	left: 50%;
 	width: 60px;
@@ -48,11 +52,17 @@
 	-ms-transform: translateX(-50%) translateY(-50%);
 	transform: translateX(-50%) translateY(-50%);
 }
-.rvs-player:hover .rvs-close,
-.rvs-active .rvs-play-video {
+.rvs-container .rvs-player:hover a.rvs-close,
+.rvs-container .rvs-active a.rvs-play-video {
 	opacity: 1;
 }
-.rvs-video-active .rvs-play-video {
+.rvs-container.rvs-show-play-on-hover .rvs-active a.rvs-play-video {
+	opacity: 0;
+}
+.rvs-container.rvs-show-play-on-hover .rvs-active:hover a.rvs-play-video {
+	opacity: 1;
+}
+.rvs-container .rvs-video-active a.rvs-play-video {
 	display: none;
 }
 
