@@ -100,6 +100,7 @@
 				}
 			},
 			play_icon: $('[name="play_icon"]').on('change', {self: this}, this.onOptionChange),
+			show_play_on_hover: $('#show_play_on_hover').on('change', {self: this}, this.onOptionChange),
 			output: {
 				preview: $('#output-preview'),
 				html: $('#output-html'),
@@ -142,6 +143,7 @@
 				theme: this._.theme.radios.filter(':checked').val(),
 				highlight: this._.highlight.radios.filter(':checked').val(),
 				play_icon: this._.play_icon.filter(':checked').val(),
+				show_play_on_hover: this._.show_play_on_hover.prop('checked') ? this._.show_play_on_hover.val() : null,
 				videos: JSON.parse(JSON.stringify(this.videos))
 			},
 			css_ctx = {
