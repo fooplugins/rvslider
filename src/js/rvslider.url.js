@@ -8,7 +8,7 @@
 		this.url = parts[0];
 		var match = this.url.match(/.*\/(.*)$/);
 		this.id = match && match.length >= 2 ? match[1] : null;
-		this.protocol = url.substring(0,5) == 'https' ? 'https:' : 'http:';
+		this.protocol = window.location.protocol === 'https:' ? 'https:' : (url.substring(0,5) == 'https' ? 'https:' : 'http:');
 		this.params = [];
 		var params = (parts.length == 2 ? parts[1] : '').split(/[&;]/g);
 		for (var i = 0, len = params.length, pair; i < len; i++){
